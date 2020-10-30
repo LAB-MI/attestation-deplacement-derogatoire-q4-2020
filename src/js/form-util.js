@@ -124,13 +124,12 @@ export function getReasons (reasonInputs) {
 }
 
 export function getReasonsObject (reasonInputs) {
-  const reasons = reasonInputs
+  return reasonInputs
     .filter((reason) => reason.checked)
-    .reduce(function (map, reason) {
+    .reduce((map, reason) => {
       map[reason.value] = reason.checked
       return map
     }, {})
-  return reasons
 }
 
 export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput, releaseTimeInput) {
