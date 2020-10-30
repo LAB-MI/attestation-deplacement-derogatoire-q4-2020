@@ -13,6 +13,9 @@ window.location.hash.substr(1).split(';').forEach(elem => {
   elem = decodeURI(elem)
   const I = elem.indexOf(':')
   const parts = [elem.slice(0, I), elem.slice(I + 1)]
+  if (parts[0] === 'raisons') {
+    parts[1] = parts[1].split(',')
+  }
   hashParams[parts[0]] = parts[1]
 })
 
@@ -96,7 +99,8 @@ const createReasonField = (reasonData) => {
     value: reasonData.code,
   }
   const inputReason = createElement('input', inputReasonAttrs)
-
+  const reasonName = reasonData.alias || reasonData.code
+  if (hashParams.raisons?.includes(reasonName) && !inputReason.checked) inputReason.click()
   const labelAttrs = { innerHTML: reasonData.label, className: 'form-checkbox-label', for: id }
   const label = createElement('label', labelAttrs)
 
