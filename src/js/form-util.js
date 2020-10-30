@@ -114,7 +114,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     })
   })
 
-  const generateBtns = $$('.generate-btn');
+  const generateBtns = $$('.generate-btn')
   for (const generateBtn of generateBtns) {
     generateBtn.addEventListener('click', async (event) => {
       event.preventDefault()
@@ -146,8 +146,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
       setPreviousFormValue('reasons', reasons)
 
       // Store the 3 latest reasons set used
-      const latestReasons =
-        (getPreviousFormValue('latest-reasons') || '')
+      const latestReasons = (getPreviousFormValue('latest-reasons') || '')
         .split('|')
         .filter(r => !!r)
         // Remove currently selected reason

@@ -3,10 +3,10 @@ const localStorage = window.localStorage || {
   setItem: () => undefined,
 }
 
-export function getPreviousFormValue(name) {
+export function getPreviousFormValue (name) {
   return localStorage.getItem(`form-value-${name}`)
 }
 
-export function setPreviousFormValue(name, value) {
+export function setPreviousFormValue (name, value) {
   localStorage.setItem(`form-value-${name}`, value)
 }
