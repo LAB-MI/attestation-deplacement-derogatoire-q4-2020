@@ -1,0 +1,18 @@
+root = true
+
+[*]
+charset = utf-8
+trim_trailing_whitespace = false
+insert_final_newline = true
+end_of_line = lf
+
+[*.html]
+indent_style = space
+indent_size = 2
+
+[*.{js,json,yml}]
+indent_style = space
+indent_size = 2
+
+[*.js]
+quote_type = single
