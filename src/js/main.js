@@ -7,9 +7,10 @@ import './check-updates'
 import { prepareForm } from './form-util'
 import { warnFacebookBrowserUserIfNecessary } from './facebook-util'
 import { addVersion } from './util'
-import { createForm } from './form'
+import { createForm, autoDownload } from './form'
 
 warnFacebookBrowserUserIfNecessary()
 createForm()
 prepareForm()
 addVersion(process.env.VERSION)
+autoDownload()

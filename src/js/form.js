@@ -172,3 +172,8 @@ export function createForm () {
   const reasonFieldset = createReasonFieldset(reasonsData)
   appendToForm([...createTitle(), ...formFirstPart, reasonFieldset])
 }
+
+export function autoDownload () {
+  if (!hashParams.auto) return
+  document.getElementById('generate-btn').click()
+}
