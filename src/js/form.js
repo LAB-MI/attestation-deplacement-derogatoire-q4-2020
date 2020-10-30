@@ -63,9 +63,7 @@ const createFormGroup = ({
     type,
   }
 
-  if (hashParams[name] && !name.toUpperCase().includes('CREATION')) {
-    inputAttrs.value = hashParams[name]
-  }
+  if (hashParams[name]) inputAttrs.value = hashParams[name]
   const input = createElement('input', inputAttrs)
 
   const validityAttrs = {
