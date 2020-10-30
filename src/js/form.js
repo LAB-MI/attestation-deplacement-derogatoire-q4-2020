@@ -11,12 +11,6 @@ const createTitle = () => {
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
   return [h2, p]
 }
-// createElement('div', { className: 'form-group' })
-
-const getCurrentTime = () => {
-  const date = new Date()
-  return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-}
 
 const createFormGroup = ({
   autocomplete = false,
@@ -59,10 +53,6 @@ const createFormGroup = ({
   }
 
   const input = createElement('input', inputAttrs)
-
-  if (name === 'heuresortie') {
-    input.value = getCurrentTime()
-  }
 
   const validityAttrs = {
     className: 'validity',

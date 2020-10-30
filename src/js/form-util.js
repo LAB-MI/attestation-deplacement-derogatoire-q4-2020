@@ -199,10 +199,6 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     })
   })
 
-  $('#formgroup-storedata').addEventListener('click', () => {
-    (storeDataInput.checked) ? storeDataInput.checked = false : storeDataInput.checked = true
-  })
-
   $('#cleardata').addEventListener('click', () => {
     clearSecureLS()
     clearForm()
