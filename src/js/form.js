@@ -8,11 +8,11 @@ import { $, $$, appendTo, createElement } from './dom-utils'
 import { getPreviousFormValue } from './localstorage'
 
 const createTitle = () => {
-  //const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Votre déclaration numérique : ' })
+  // const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Votre déclaration numérique : ' })
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
   const latestReasons = getPreviousFormValue('latest-reasons')
   if (latestReasons) {
-    const pReasons = createElement('p', { className: 'msg-info', innerHTML: 'Motifs récents : ' });
+    const pReasons = createElement('p', { className: 'msg-info', innerHTML: 'Motifs récents : ' })
     const reasonsStrings = latestReasons.split('|')
     reasonsStrings.forEach((reasonsString, i) => {
       appendTo(pReasons)(createElement('a', {
@@ -144,7 +144,7 @@ const createReasonFieldset = (reasonsData) => {
 
   const previousReasons = getPreviousFormValue('reasons')
   const reasonsFields = reasonsData.items.map(
-    createReasonField(previousReasons ? previousReasons.split(', ') : [])
+    createReasonField(previousReasons ? previousReasons.split(', ') : []),
   )
 
   appendToFieldset([legend, textAlert, textSubscribeReason, ...reasonsFields])
