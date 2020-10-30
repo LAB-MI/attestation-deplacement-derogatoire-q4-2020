@@ -15,8 +15,8 @@
     <meta property="og:title" content="Générateur d'attestation de déplacement dérogatoire  - COVID-19" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:description" content="Ce service officiel génère une version numérique de la déclaration de déplacement covid-19 à présenter aux forces de sécurité lors d’un contrôle." />
-    <link rel="canonical" href="https://media.interieur.gouv.fr/attestation-couvre-feu-covid-19/" />
-    <meta property="og:url" content="https://media.interieur.gouv.fr/attestation-couvre-feu-covid-19/" />
+    <link rel="canonical" href="https://media.interieur.gouv.fr{{ PUBLIC_URL || '/deplacement-covid-19' }}" />
+    <meta property="og:url" content="https://media.interieur.gouv.fr{{ PUBLIC_URL || '/deplacement-covid-19' }}" />
     <meta property="og:site_name" content="Générateur d'attestation de déplacement dérogatoire  - COVID-19" />
     <script type='application/ld+json'>{"@context":"http://www.schema.org","@type":"GovernmentOrganization","name":"Générateur d'attestation de déplacement dérogatoire  - COVID-19","description":"Ce service officiel génère une version numérique de la déclaration de déplacement covid-19 à présenter aux forces de sécurité lors d’un contrôle.","address":{"@type":"PostalAddress","addressCountry":"France"}}</script>
 
@@ -46,45 +46,49 @@
                 </span>
             </h1>
             <p class="text-desc">
+<<<<<<< HEAD
                 En application des mesures générales nécessaires pour faire face à l’épidémie de covid-19
                 dans le cadre de l’état d’urgence sanitaire
+=======
+                En application du décret n°2020-1310 du 29 octobre 2020 prescrivant les mesures générales
+                nécessaires pour faire face à l'épidémie de Covid19 dans le cadre de l'état d'urgence sanitaire
+>>>>>>> LAB-MI-main
             </p>
 
         </div>
     </header>
     <main role="main">
-    <p
-        class="alert  alert-danger  d-none"
-        role="alert"
-        id="alert-facebook"
-    ></p>
+        <p
+            class="alert  alert-danger  d-none"
+            role="alert"
+            id="alert-facebook"
+        ></p>
 
-    <div class="wrapper">
-        <p class="text-center mt-5">
-            <button type="button" class="btn btn-primary btn-attestation generate-btn"><span ><i class="fa fa-file-pdf inline-block mr-1"></i>Générer l’attestation</span></button>
-        </p>
-        <form id="form-profile" accept-charset="UTF-8"></form>
-        <p class="text-center mt-5">
-            <button type="button" class="btn btn-primary btn-attestation generate-btn"><span ><i class="fa fa-file-pdf inline-block mr-1"></i>Générer l’attestation</span></button>
-        </p>
+        <div class="wrapper">
+            <p class="text-center mt-5">
+                <button type="button" class="btn btn-primary btn-attestation generate-btn"><span ><i class="fa fa-file-pdf inline-block mr-1"></i>  Générer mon attestation</span></button>
+            </p>
+            <form id="form-profile" accept-charset="UTF-8"></form>
+            <p class="text-center mt-5">
+                <button type="button" class="btn btn-primary btn-attestation generate-btn"><span ><i class="fa fa-file-pdf inline-block mr-1"></i>  Générer mon attestation</span></button>
+            </p>
 
-        <div class="bg-primary  d-none" id="snackbar">
-            L'attestation est téléchargée sur votre appareil.
+            <div class="bg-primary  d-none" id="snackbar">
+                L'attestation est téléchargée sur votre appareil.
+            </div>
         </div>
-    </div>
 
-    <div class="">
-        <p id="footnotes">
-            <span id="footnote1">
+        <div id="footnotes">
+            <p id="footnote1">
                 [1] Les personnes souhaitant bénéficier de l'une de ces exceptions doivent se munir s'il y a lieu, lors de leurs déplacements hors de leur domicile, d'un document leur permettant de justifier que le déplacement considéré entre dans le champ de l'une de ces exceptions.
-            </span><br>
-            <span id="footnote2">
+            </p>
+            <p id="footnote2">
                 [2]  A utiliser par les travailleurs non salariés, lorsqu'ils ne peuvent disposer d'un justificatif de déplacement établi par leur employeur.
-            </span><br>
-            <span id="footnote3">
+            </p>
+            <p id="footnote3">
                 [3] Y compris les acquisitions à titre gratuit (distribution de denrées alimentaires...) et les déplacements liés à la perception de prestations sociales et au retrait d'espèces.
-            </span><br>
-        </p>
+            </p>
+        </div>
         <p class="github">
             Le code source de ce service est consultable sur <a href="https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020" class="github-link">GitHub</a>.
         </p>
@@ -95,7 +99,6 @@
           <source srcset="/logo_dnum_dark.svg" media="(prefers-color-scheme: dark)">
             <img class="center" src="/logo_dnum.svg" alt="logo dnum">
         </picture>
-    </div>
     </main>
     <footer role="contentinfo" class="main-footer">
         <div class="footer-links">
