@@ -143,6 +143,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
         'placeofbirth',
         'zipcode',
       ].forEach(inputName => setPreviousFormValue(inputName, profile[inputName]))
+      setPreviousFormValue('reasons', reasons)
 
       const pdfBlob = await generatePdf(profile, reasons, pdfBase)
 
