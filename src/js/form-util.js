@@ -71,6 +71,14 @@ export function getProfile (formInputs) {
   return fields
 }
 
+function storeProfile (profile) {
+  localStorage.setItem('profile', JSON.stringify(profile))
+}
+export function getStoredProfile () {
+  const storedProfile = localStorage.getItem('profile')
+  return storedProfile ? JSON.parse(storedProfile) : {}
+}
+
 export function getReasons (reasonInputs) {
   const reasons = reasonInputs
     .filter(input => input.checked)
@@ -128,6 +136,8 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     }
 
     console.log(getProfile(formInputs), reasons)
+
+    storeProfile(getProfile(formInputs))
 
     const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
 

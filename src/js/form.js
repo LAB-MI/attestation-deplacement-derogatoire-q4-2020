@@ -6,6 +6,8 @@ import formData from '../form-data.json'
 
 import { $, appendTo, createElement } from './dom-utils'
 
+import { getStoredProfile } from './form-util'
+
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
@@ -41,6 +43,7 @@ const createFormGroup = ({
   const labelEl = createElement('label', labelAttrs)
 
   const inputGroup = createElement('div', { className: 'input-group align-items-center' })
+  const storedProfile = getStoredProfile()
   const inputAttrs = {
     autocomplete,
     autofocus,
@@ -56,6 +59,7 @@ const createFormGroup = ({
     placeholder,
     required: true,
     type,
+    value: storedProfile[name] || '',
   }
 
   const input = createElement('input', inputAttrs)
