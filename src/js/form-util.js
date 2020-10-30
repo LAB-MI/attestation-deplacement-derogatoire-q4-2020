@@ -2,6 +2,7 @@ import { $, $$, downloadBlob } from './dom-utils'
 import { addSlash, getFormattedDate } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
+import { setPreviousFormValue } from './localstorage'
 
 const conditions = {
   '#field-firstname': {
@@ -127,9 +128,19 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
       return
     }
 
-    console.log(getProfile(formInputs), reasons)
+    const profile = getProfile(formInputs)
 
-    const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
+    ;[
+      'address',
+      'birthday',
+      'city',
+      'firstname',
+      'lastname',
+      'placeofbirth',
+      'zipcode',
+    ].forEach(inputName => setPreviousFormValue(inputName, profile[inputName]))
+
+    const pdfBlob = await generatePdf(profile, reasons, pdfBase)
 
     const creationInstant = new Date()
     const creationDate = creationInstant.toLocaleDateString('fr-CA')
