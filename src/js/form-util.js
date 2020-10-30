@@ -2,7 +2,7 @@ import { $, $$, downloadBlob } from './dom-utils'
 import { addSlash, getFormattedDate, getFormattedTime } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
-import { setPreviousFormValue } from './localstorage'
+import { getPreviousFormValue, setPreviousFormValue } from './localstorage'
 
 const conditions = {
   '#field-firstname': {
@@ -144,6 +144,19 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
         'zipcode',
       ].forEach(inputName => setPreviousFormValue(inputName, profile[inputName]))
       setPreviousFormValue('reasons', reasons)
+
+      // Store the 3 latest reasons set used
+      const latestReasons =
+        (getPreviousFormValue('latest-reasons') || '')
+        .split('|')
+        .filter(r => !!r)
+        // Remove currently selected reason
+        .filter(r => r !== reasons)
+        // Keep only the first 2
+        .slice(0, 2)
+      // Prepend currently selected reasons, so they're first in new list
+      latestReasons.unshift(reasons)
+      setPreviousFormValue('latest-reasons', latestReasons.join('|'))
 
       const pdfBlob = await generatePdf(profile, reasons, pdfBase)
 

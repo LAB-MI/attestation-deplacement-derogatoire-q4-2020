@@ -675,3 +675,12 @@ input[type=number] {
     margin-left: 1rem;
   }
 }
+
+.reason-quick-link {
+  background: #ddd;
+  line-height: 2em;
+  border-radius: 5px;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 0.25em 0.5em;
+}

@@ -4,13 +4,36 @@ import '../css/main.css'
 
 import formData from '../form-data.json'
 
-import { $, appendTo, createElement } from './dom-utils'
+import { $, $$, appendTo, createElement } from './dom-utils'
 import { getPreviousFormValue } from './localstorage'
 
 const createTitle = () => {
-  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
+  //const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Votre déclaration numérique : ' })
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
-  return [h2, p]
+  const latestReasons = getPreviousFormValue('latest-reasons')
+  if (latestReasons) {
+    const pReasons = createElement('p', { className: 'msg-info', innerHTML: 'Motifs récents : ' });
+    const reasonsStrings = latestReasons.split('|')
+    reasonsStrings.forEach((reasonsString, i) => {
+      appendTo(pReasons)(createElement('a', {
+        innerText: reasonsString,
+        className: 'reason-quick-link',
+        onclick: () => {
+          const reasons = reasonsString.split(', ')
+          const checkboxes = $$('[name="field-reason"]')
+          for (const checkbox of checkboxes) {
+            checkbox.checked = reasons.includes(checkbox.value)
+          }
+          return false
+        },
+      }))
+      appendTo(pReasons)(createElement('span', {
+        innerText: i === reasonsStrings.length - 1 ? '.' : ', ',
+      }))
+    })
+    return [pReasons, p]
+  }
+  return []
 }
 // createElement('div', { className: 'form-group' })
 
