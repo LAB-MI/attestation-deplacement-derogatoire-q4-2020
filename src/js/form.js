@@ -13,11 +13,6 @@ const createTitle = () => {
 }
 // createElement('div', { className: 'form-group' })
 
-const getCurrentTime = () => {
-  const date = new Date()
-  return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-}
-
 const createFormGroup = ({
   autocomplete = false,
   autofocus = false,
@@ -59,10 +54,6 @@ const createFormGroup = ({
   }
 
   const input = createElement('input', inputAttrs)
-
-  if (name === 'heuresortie') {
-    input.value = getCurrentTime()
-  }
 
   const validityAttrs = {
     className: 'validity',
