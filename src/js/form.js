@@ -13,6 +13,15 @@ const createTitle = () => {
 }
 // createElement('div', { className: 'form-group' })
 
+const setCurrentTime = input => {
+  const date = new Date();
+  const hour = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const time = hour + ':' + minutes;
+
+  input.value = time;
+}
+
 const createFormGroup = ({
   autocomplete = false,
   autofocus = false,
@@ -54,6 +63,10 @@ const createFormGroup = ({
   }
 
   const input = createElement('input', inputAttrs)
+
+  if (name === 'heuresortie') {
+    setCurrentTime(input)
+  }
 
   const validityAttrs = {
     className: 'validity',
