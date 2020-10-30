@@ -1,5 +1,5 @@
 {
-  "name": "attestation-couvre-feu",
+  "name": "attestation-deplacement-derogatoire-q4-2020",
   "version": "1.0.3",
   "description": "Générateur d'attestation de déplacement dérogatoire'",
   "main": "certificate.js",
