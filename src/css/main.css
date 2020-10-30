@@ -31,7 +31,7 @@ html {
 }
 
 body {
-    margin: 20px;
+    margin: 1.25em;
     background: white;
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
@@ -650,10 +650,10 @@ input[type=number] {
 }
 
 .fieldset {
-  margin-left: -2em;
-  margin-right: -2em;
-  padding-left: 2em;
-  padding-right: 2em;
+  margin-left: -1.25em;
+  margin-right: -1.25em;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
   border: 3px solid transparent;
 }
 
