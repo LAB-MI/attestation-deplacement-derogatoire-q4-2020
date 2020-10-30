@@ -5,6 +5,7 @@ import '../css/main.css'
 import formData from '../form-data.json'
 
 import { $, appendTo, createElement } from './dom-utils'
+import { getPreviousFormValue } from './localstorage'
 
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
@@ -51,6 +52,7 @@ const createFormGroup = ({
     placeholder,
     required: true,
     type,
+    value: getPreviousFormValue(name),
   }
 
   const input = createElement('input', inputAttrs)
