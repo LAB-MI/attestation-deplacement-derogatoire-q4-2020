@@ -18,7 +18,6 @@ window.location.hash.substr(1).split('&').forEach(elem => {
   hashParams[parts[0]] = parts[1]
   if (parts[0] === 'auto') hashParams.auto = true
 })
-console.log(hashParams)
 
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
