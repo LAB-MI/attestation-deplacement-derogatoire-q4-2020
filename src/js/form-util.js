@@ -76,6 +76,7 @@ function clearSecureLS () {
 function clearForm () {
   const formProfile = $('#form-profile')
   formProfile.reset()
+  storeDataInput.checked = false
 }
 
 function setCurrentDate (releaseDateInput, releaseTimeInput) {
