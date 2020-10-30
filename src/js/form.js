@@ -8,16 +8,7 @@ import { $, appendTo, createElement } from './dom-utils'
 
 // Nettoie les URI fragments
 // eslint-disable-next-line prefer-const
-let hashParams = {}
-window.location.hash.substr(1).split('&').forEach(elem => {
-  elem = decodeURI(elem)
-  const parts = elem.split('=')
-  if (parts[0] === 'raisons') {
-    parts[1] = parts[1].split(',')
-  }
-  hashParams[parts[0]] = parts[1]
-  if (parts[0] === 'auto') hashParams.auto = true
-})
+let params = new URLSearchParams(window.location.hash.substr(1))
 
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
@@ -68,7 +59,9 @@ const createFormGroup = ({
     type,
   }
 
-  if (hashParams[name]) inputAttrs.value = hashParams[name]
+  // Remplit en fonction des params
+  if (params.has(name)) inputAttrs.value = params.get(name)
+
   const input = createElement('input', inputAttrs)
 
   const validityAttrs = {
@@ -101,10 +94,12 @@ const createReasonField = (reasonData) => {
     value: reasonData.code,
   }
   const inputReason = createElement('input', inputReasonAttrs)
-  const reasonName = reasonData.alias || reasonData.code
-  if (hashParams.raisons?.includes(reasonName) && !inputReason.checked) inputReason.click()
   const labelAttrs = { innerHTML: reasonData.label, className: 'form-checkbox-label', for: id }
   const label = createElement('label', labelAttrs)
+
+  // Remplit en fonction des params
+  const reasonName = reasonData.alias || reasonData.code
+  if (params.get('raisons')?.split(',').includes(reasonName) && !inputReason.checked) inputReason.click()
 
   appendToReason([inputReason, label])
   return formReason
@@ -173,6 +168,6 @@ export function createForm () {
 }
 
 export function autoDownload () {
-  if (!hashParams.auto) return
+  if (!params.get('auto')) return
   document.getElementById('generate-btn').click()
 }
