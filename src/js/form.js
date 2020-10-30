@@ -103,7 +103,7 @@ const createReasonFieldset = (reasonsData) => {
   const appendToFieldset = appendTo(fieldset)
 
   const legendAttrs = {
-    className: 'legend titre 3 ',
+    className: 'legend titre-3 ',
     innerHTML: 'Choisissez un motif de déplacement',
   }
   const legend = createElement('legend', legendAttrs)
