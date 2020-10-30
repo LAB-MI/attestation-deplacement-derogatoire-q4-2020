@@ -650,10 +650,10 @@ input[type=number] {
 }
 
 .fieldset {
-  margin-left: -2em;
-  margin-right: -2em;
-  padding-left: 2em;
-  padding-right: 2em;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
   border: 3px solid transparent;
 }
 
