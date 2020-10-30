@@ -73,7 +73,7 @@ const createFormGroup = ({
   return formGroup
 }
 
-const createReasonField = (reasonData) => {
+const createReasonField = (reasons) => (reasonData) => {
   const formReasonAttrs = { className: 'form-checkbox align-items-center' }
   const formReason = createElement('div', formReasonAttrs)
   const appendToReason = appendTo(formReason)
@@ -85,6 +85,7 @@ const createReasonField = (reasonData) => {
     id,
     name: 'field-reason',
     value: reasonData.code,
+    checked: reasons.includes(reasonData.code),
   }
   const inputReason = createElement('input', inputReasonAttrs)
   const labelAttrs = { innerHTML: reasonData.label, className: 'form-checkbox-label', for: id }
@@ -118,7 +119,10 @@ const createReasonFieldset = (reasonsData) => {
 
   const textSubscribeReason = createElement('p', textSubscribeReasonAttrs)
 
-  const reasonsFields = reasonsData.items.map(createReasonField)
+  const previousReasons = getPreviousFormValue('reasons')
+  const reasonsFields = reasonsData.items.map(
+    createReasonField(previousReasons ? previousReasons.split(', ') : [])
+  )
 
   appendToFieldset([legend, textAlert, textSubscribeReason, ...reasonsFields])
   // Créer un form-checkbox par motif
