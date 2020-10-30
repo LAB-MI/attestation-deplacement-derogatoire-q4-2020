@@ -6,6 +6,8 @@ import formData from '../form-data.json'
 
 import { $, appendTo, createElement } from './dom-utils'
 
+const params = new URLSearchParams(window.location.search)
+
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
@@ -53,6 +55,11 @@ const createFormGroup = ({
     type,
   }
 
+  if (params.get(name)) {
+    inputAttrs.value = params.get(name)
+    if (name.includes('date') || name.includes('heure')) inputAttrs.value = new Date(params.get(name)).toISOString().slice(0, 10)
+  }
+  console.log(inputAttrs.value)
   const input = createElement('input', inputAttrs)
 
   const validityAttrs = {
@@ -141,10 +148,12 @@ export function createForm () {
     .filter(field => !field.isHidden)
     .map((field,
       index) => {
+      // Permet de changer la clé devant être présente dans l'URI en ajoutant la propriété 'alias'
+      const name = field.alias || field.key
       const formGroup = createFormGroup({
         autofocus: index === 0,
         ...field,
-        name: field.key,
+        name,
       })
 
       return formGroup
