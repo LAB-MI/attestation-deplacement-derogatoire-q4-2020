@@ -6,7 +6,16 @@ import formData from '../form-data.json'
 
 import { $, appendTo, createElement } from './dom-utils'
 
-const params = new URLSearchParams(window.location.search)
+// Nettoie les URI fragments
+// eslint-disable-next-line prefer-const
+let hashParams = {}
+window.location.hash.substr(1).split(';').forEach(elem => {
+  elem = decodeURI(elem)
+  const I = elem.indexOf(':')
+  const parts = [elem.slice(0, I), elem.slice(I + 1)]
+  hashParams[parts[0]] = parts[1]
+})
+console.log(hashParams)
 
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
@@ -55,11 +64,9 @@ const createFormGroup = ({
     type,
   }
 
-  if (params.get(name)) {
-    inputAttrs.value = params.get(name)
-    if (name.includes('date') || name.includes('heure')) inputAttrs.value = new Date(params.get(name)).toISOString().slice(0, 10)
+  if (hashParams[name]) {
+    inputAttrs.value = hashParams[name]
   }
-  console.log(inputAttrs.value)
   const input = createElement('input', inputAttrs)
 
   const validityAttrs = {

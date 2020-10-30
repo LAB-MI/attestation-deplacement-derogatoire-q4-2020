@@ -20,6 +20,7 @@
     },
     {
       "key": "birthday",
+      "alias": "date-de-naissance",
       "type": "text",
       "contentType": "birthday",
       "label": "Date de naissance",
@@ -32,6 +33,7 @@
   [
     {
       "key": "placeofbirth",
+      "alias": "lieu-de-naissance",
       "type": "text",
       "contentType": "cityofbirth",
       "label": "Lieu de naissance",
@@ -40,6 +42,7 @@
     },
     {
       "key": "address",
+      "alias": "adresse",
       "type": "text",
       "contentType": "address",
       "label": "Adresse",
@@ -48,6 +51,7 @@
     },
     {
       "key": "city",
+      "alias": "ville",
       "type": "text",
       "contentType": "city",
       "label": "Ville",
@@ -56,6 +60,7 @@
     },
     {
       "key": "zipcode",
+      "alias": "code-postal",
       "type": "number",
       "contentType": "zipcode",
       "label": "Code Postal",
@@ -86,6 +91,7 @@
     },
     {
       "key": "datesortie",
+      "alias": "date",
       "type": "date",
       "contentType": "datesortie",
       "label": "Date de sortie",
@@ -94,6 +100,7 @@
     },
     {
       "key": "heuresortie",
+      "alias": "heure",
       "type": "time",
       "contentType": "heuresortie",
       "label": "Heure de sortie",
@@ -101,6 +108,7 @@
     },
     {
       "key": "reason",
+      "alias": "raison",
       "type": "list",
       "items": [
         {
