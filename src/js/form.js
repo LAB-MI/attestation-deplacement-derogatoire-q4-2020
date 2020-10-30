@@ -4,12 +4,36 @@ import '../css/main.css'
 
 import formData from '../form-data.json'
 
-import { $, appendTo, createElement } from './dom-utils'
+import { $, $$, appendTo, createElement } from './dom-utils'
+import { getPreviousFormValue } from './localstorage'
 
 const createTitle = () => {
-  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
+  // const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Votre déclaration numérique : ' })
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
-  return [h2, p]
+  const latestReasons = getPreviousFormValue('latest-reasons')
+  if (latestReasons) {
+    const pReasons = createElement('p', { className: 'msg-info', innerHTML: 'Motifs récents : ' })
+    const reasonsStrings = latestReasons.split('|')
+    reasonsStrings.forEach((reasonsString, i) => {
+      appendTo(pReasons)(createElement('a', {
+        innerText: reasonsString,
+        className: 'reason-quick-link',
+        onclick: () => {
+          const reasons = reasonsString.split(', ')
+          const checkboxes = $$('[name="field-reason"]')
+          for (const checkbox of checkboxes) {
+            checkbox.checked = reasons.includes(checkbox.value)
+          }
+          return false
+        },
+      }))
+      appendTo(pReasons)(createElement('span', {
+        innerText: i === reasonsStrings.length - 1 ? '.' : ', ',
+      }))
+    })
+    return [pReasons, p]
+  }
+  return []
 }
 // createElement('div', { className: 'form-group' })
 
@@ -51,6 +75,7 @@ const createFormGroup = ({
     placeholder,
     required: true,
     type,
+    value: getPreviousFormValue(name),
   }
 
   const input = createElement('input', inputAttrs)
@@ -71,7 +96,7 @@ const createFormGroup = ({
   return formGroup
 }
 
-const createReasonField = (reasonData) => {
+const createReasonField = (reasons) => (reasonData) => {
   const formReasonAttrs = { className: 'form-checkbox align-items-center' }
   const formReason = createElement('div', formReasonAttrs)
   const appendToReason = appendTo(formReason)
@@ -83,6 +108,7 @@ const createReasonField = (reasonData) => {
     id,
     name: 'field-reason',
     value: reasonData.code,
+    checked: reasons.includes(reasonData.code),
   }
   const inputReason = createElement('input', inputReasonAttrs)
 
@@ -103,7 +129,7 @@ const createReasonFieldset = (reasonsData) => {
   const appendToFieldset = appendTo(fieldset)
 
   const legendAttrs = {
-    className: 'legend titre 3 ',
+    className: 'legend titre-3 ',
     innerHTML: 'Choisissez un motif de déplacement',
   }
   const legend = createElement('legend', legendAttrs)
@@ -112,14 +138,17 @@ const createReasonFieldset = (reasonsData) => {
   const textAlert = createElement('p', textAlertAttrs)
 
   const textSubscribeReasonAttrs = {
-    innerHTML: `certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé en application des 
-    mesures générales nécessaires pour faire face à l'épidémie de Covid19 dans le cadre de l'état 
+    innerHTML: `certifie que mon déplacement est lié au motif suivant (cocher la case) autorisé en application des
+    mesures générales nécessaires pour faire face à l'épidémie de Covid19 dans le cadre de l'état
     d'urgence sanitaire <a class="footnote" id="footnote1" href="#footnote1">[1]</a>&nbsp;:`,
   }
 
   const textSubscribeReason = createElement('p', textSubscribeReasonAttrs)
 
-  const reasonsFields = reasonsData.items.map(createReasonField)
+  const previousReasons = getPreviousFormValue('reasons')
+  const reasonsFields = reasonsData.items.map(
+    createReasonField(previousReasons ? previousReasons.split(', ') : []),
+  )
 
   appendToFieldset([legend, textAlert, textSubscribeReason, ...reasonsFields])
   // Créer un form-checkbox par motif

@@ -1,7 +1,8 @@
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate } from './util'
+import { addSlash, getFormattedDate, getFormattedTime } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
+import { getPreviousFormValue, setPreviousFormValue } from './localstorage'
 
 const conditions = {
   '#field-firstname': {
@@ -53,9 +54,11 @@ function validateAriaFields () {
     .includes(true)
 }
 
-export function setReleaseDateTime (releaseDateInput) {
+export function setReleaseDateTime (releaseDateInput, releaseTimeInput) {
   const loadedDate = new Date()
+  loadedDate.setMinutes(loadedDate.getMinutes() + 5)
   releaseDateInput.value = getFormattedDate(loadedDate)
+  releaseTimeInput.value = getFormattedTime(loadedDate)
 }
 
 export function getProfile (formInputs) {
@@ -111,42 +114,68 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     })
   })
 
-  $('#generate-btn').addEventListener('click', async (event) => {
-    event.preventDefault()
+  const generateBtns = $$('.generate-btn')
+  for (const generateBtn of generateBtns) {
+    generateBtn.addEventListener('click', async (event) => {
+      event.preventDefault()
 
-    const reasons = getReasons(reasonInputs)
-    if (!reasons) {
-      reasonFieldset.classList.add('fieldset-error')
-      reasonAlert.classList.remove('hidden')
-      reasonFieldset.scrollIntoView && reasonFieldset.scrollIntoView()
-      return
-    }
+      const reasons = getReasons(reasonInputs)
+      if (!reasons) {
+        reasonFieldset.classList.add('fieldset-error')
+        reasonAlert.classList.remove('hidden')
+        reasonFieldset.scrollIntoView && reasonFieldset.scrollIntoView()
+        return
+      }
 
-    const invalid = validateAriaFields()
-    if (invalid) {
-      return
-    }
+      const invalid = validateAriaFields()
+      if (invalid) {
+        return
+      }
 
-    console.log(getProfile(formInputs), reasons)
+      const profile = getProfile(formInputs)
 
-    const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
+      ;[
+        'address',
+        'birthday',
+        'city',
+        'firstname',
+        'lastname',
+        'placeofbirth',
+        'zipcode',
+      ].forEach(inputName => setPreviousFormValue(inputName, profile[inputName]))
+      setPreviousFormValue('reasons', reasons)
 
-    const creationInstant = new Date()
-    const creationDate = creationInstant.toLocaleDateString('fr-CA')
-    const creationHour = creationInstant
-      .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-      .replace(':', '-')
+      // Store the 3 latest reasons set used
+      const latestReasons = (getPreviousFormValue('latest-reasons') || '')
+        .split('|')
+        .filter(r => !!r)
+        // Remove currently selected reason
+        .filter(r => r !== reasons)
+        // Keep only the first 2
+        .slice(0, 2)
+      // Prepend currently selected reasons, so they're first in new list
+      latestReasons.unshift(reasons)
+      setPreviousFormValue('latest-reasons', latestReasons.join('|'))
 
-    downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
+      const pdfBlob = await generatePdf(profile, reasons, pdfBase)
 
-    snackbar.classList.remove('d-none')
-    setTimeout(() => snackbar.classList.add('show'), 100)
+      const creationInstant = new Date()
+      const creationDate = creationInstant.toLocaleDateString('fr-CA')
+      const creationHour = creationInstant
+        .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+        .replace(':', '-')
 
-    setTimeout(function () {
-      snackbar.classList.remove('show')
-      setTimeout(() => snackbar.classList.add('d-none'), 500)
-    }, 6000)
-  })
+      downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
+
+      snackbar.classList.remove('d-none')
+      setTimeout(() => snackbar.classList.add('show'), 100)
+
+      setTimeout(function () {
+        snackbar.classList.remove('show')
+        setTimeout(() => snackbar.classList.add('d-none'), 500)
+      }, 6000)
+    })
+  }
 }
 
 export function prepareForm () {
@@ -156,6 +185,7 @@ export function prepareForm () {
   const reasonFieldset = $('#reason-fieldset')
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
-  setReleaseDateTime(releaseDateInput)
+  const releaseTimeInput = $('#field-heuresortie')
+  setReleaseDateTime(releaseDateInput, releaseTimeInput)
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
 }
