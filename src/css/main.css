@@ -265,7 +265,7 @@ input[type=number] {
 }
 
 .logo {
-  width: 50%;
+  width: 30%;
   float: left;
 }
 
@@ -294,7 +294,7 @@ input[type=number] {
 .covid-subtitle {
   display: inline-flex;
   align-items: center;
-  font-size: 0.40em;
+  font-size: 0.2em;
   padding: 0.3em;
   background-color: #e1000f;
   text-transform:uppercase ;
