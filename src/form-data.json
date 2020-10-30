@@ -103,23 +103,23 @@
       "items": [
         {
           "code": "travail",
-          "label": "Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un établissement d’enseignement ou de formation, déplacements professionnels ne pouvant être différés <a class=\"footnote\" href=\"#footnote2\">[2]</a> , déplacements pour un concours ou un examen."
+          "label": "Déplacements à destination ou en provenance du lieu d'exercice ou de recherche d'une activité professionnelle et déplacements professionnels ne pouvant être différés <a class=\"footnote\" href=\"#footnote2\">[2]</a> ;"
         },
         {
           "code": "achats",
-          "label": "Déplacements pour effectuer des achats de fournitures nécessaires à l'activité professionnelle, des achats de première nécessité <a class=\"footnote\" href=\"#footnote3\">[3]</a> dans des établissements dont les activités demeurent autorisées, le retrait de commande et les livraisons à domicile ;"
+          "label": "Déplacements pour effectuer des achats de fournitures nécessaires à l'activité professionnelle, des achats de première nécessité <a class=\"footnote\" href=\"#footnote3\">[3]</a>, des retraits de commandes et des livraisons à domicile ;"
         },
         {
           "code": "sante",
-          "label": "Consultations, examens et soins ne pouvant être assurés à distance et l’achat de médicaments ;"
+          "label": "Déplacements pour effectuer des consultations, examens et soins ne pouvant être assurés à distance et pour l’achat de médicaments ;"
         },
         {
           "code": "famille",
-          "label": " Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables et précaires ou la garde d'enfants ;"
+          "label": "Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables et précaires, pour la garde d'enfants, ainsi que pour les déménagements ;"
         },
         {
           "code": "handicap",
-          "label": "Déplacement des personnes en situation de handicap et leur accompagnant ;"
+          "label": "Déplacements des personnes en situation de handicap et leur accompagnant ;"
         },
         {
           "code": "sport_animaux",
@@ -127,7 +127,7 @@
         },
         {
           "code": "convocation",
-          "label": " Convocation judiciaire ou administrative et pour se rendre dans un service public ;"
+          "label": "Déplacements pour répondre à une convocation judiciaire ou administrative ou pour se rendre dans un service public ou chez un professionnel du droit, pour un acte ou une démarche qui ne peuvent être réalisés à distance ;"
         },
         {
           "code": "missions",
@@ -135,7 +135,7 @@
         },
         {
           "code": "enfants",
-          "label": "Déplacement pour chercher les enfants à l’école et à l’occasion de leurs activités périscolaires ;"
+          "label": "Déplacements à destination ou en provenance des établissements ou services d'accueil de mineurs, d'enseignement ou de formation pour adultes <a class=\"footnote\" href=\"#footnote4\">[4]</a> ou du lieu d'organisation d'un examen ou d'un concours ;"
         }
       ]
     }
