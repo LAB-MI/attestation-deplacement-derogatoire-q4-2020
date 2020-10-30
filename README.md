@@ -33,7 +33,7 @@ Le code à déployer sera le contenu du dossier `dist`
 
 ## Crédits
 
-Ce projet a été réalisé à partir d'un fork du dépôt [deplacement-covid-19](https://github.com/nesk/deplacement-covid-19) de lui-même réalisé à partir d'un fork du dépôt [covid-19-certificate](https://github.com/nesk/covid-19-certificate) de [Johann Pardanaud](https://github.com/nesk). Le générateur d'attestation pour le [couvre-feu](https://github.com/LAB-MI/attestation-couvre-feu-covid-19) est postérieur à [deplacement-covid-19](https://github.com/nesk/deplacement-covid-19) et antérieur au dépôt actuel, il ne doit plus être utilisé.
+Ce projet a été réalisé à partir d'un fork du dépôt [deplacement-covid-19](https://github.com/nesk/deplacement-covid-19) lui-même réalisé à partir d'un fork du dépôt [covid-19-certificate](https://github.com/nesk/covid-19-certificate) de [Johann Pardanaud](https://github.com/nesk). Le générateur d'attestation pour le [couvre-feu](https://github.com/LAB-MI/attestation-couvre-feu-covid-19) est postérieur à [deplacement-covid-19](https://github.com/nesk/deplacement-covid-19) et antérieur au dépôt actuel, il ne doit plus être utilisé.
 
 Ce générateur est par ailleurs utilisable [en ligne](https://media.interieur.gouv.fr/deplacement-covid-19).
 
