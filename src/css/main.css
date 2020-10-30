@@ -266,6 +266,7 @@ input[type=number] {
 
 .logo {
   width: 50%;
+  float: left;
 }
 
 .covid-title {
@@ -327,8 +328,8 @@ input[type=number] {
 }
 
 .text-desc {
-  font-style :italic;
-  font-size: 0.8em;
+  font-style: italic;
+  font-size: 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -344,7 +345,7 @@ input[type=number] {
 }
 
 .btn-attestation {
-  padding: 0.9em;
+  padding: 0.3rem 0.75rem;
   font-size: 1.2em;
   font-weight: bold;
   color: white;
@@ -522,7 +523,7 @@ input[type=number] {
 
 .titre-2 {
   text-align: left;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #000191;
 }
@@ -663,4 +664,14 @@ input[type=number] {
 
 .fieldset-error {
   border: 3px solid red;
+}
+
+/* fix checkbox alignment */
+@media screen and (max-width: 640px) {
+  .form-check-input {
+    margin-left: inherit;
+  }
+  .form-checkbox-label {
+    margin-left: 1rem;
+  }
 }
