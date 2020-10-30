@@ -15,7 +15,6 @@ window.location.hash.substr(1).split(';').forEach(elem => {
   const parts = [elem.slice(0, I), elem.slice(I + 1)]
   hashParams[parts[0]] = parts[1]
 })
-console.log(hashParams)
 
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
@@ -64,7 +63,7 @@ const createFormGroup = ({
     type,
   }
 
-  if (hashParams[name]) {
+  if (hashParams[name] && !name.toUpperCase().includes('CREATION')) {
     inputAttrs.value = hashParams[name]
   }
   const input = createElement('input', inputAttrs)
