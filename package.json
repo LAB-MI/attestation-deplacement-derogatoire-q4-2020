@@ -1,6 +1,6 @@
 {
-  "name": "attestation-couvre-feu",
-  "version": "1.0.3",
+  "name": "attestation-derogatoire-de-deplacement",
+  "version": "1.0.5",
   "description": "Générateur d'attestation de déplacement dérogatoire'",
   "main": "certificate.js",
   "scripts": {
@@ -51,6 +51,7 @@
     "postcss-nested": "^4.2.3",
     "postcss-nested-ancestors": "^2.0.0",
     "postcss-preset-env": "^6.7.0",
+    "posthtml-expressions": "^1.6.0",
     "prettier": "^2.1.2",
     "react-snap": "^1.23.0",
     "rimraf": "^3.0.2",
