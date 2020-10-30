@@ -35,15 +35,17 @@ const createFormGroup = ({
   min,
   maxlength,
   minlength,
-  name,
+  key,
+  alias,
   pattern,
   placeholder = '',
   type = 'text',
 }) => {
+  const name = alias || key
   const formGroup = createElement('div', { className: 'form-group' })
   const labelAttrs = {
-    for: `field-${name}`,
-    id: `field-${name}-label`,
+    for: `field-${key}`,
+    id: `field-${key}-label`,
     innerHTML: label,
   }
   const labelEl = createElement('label', labelAttrs)
@@ -53,13 +55,13 @@ const createFormGroup = ({
     autocomplete,
     autofocus,
     className: 'form-control',
-    id: `field-${name}`,
+    id: `field-${key}`,
     inputmode,
     min,
     max,
     minlength,
     maxlength,
-    name,
+    name: key,
     pattern,
     placeholder,
     required: true,
@@ -154,12 +156,9 @@ export function createForm () {
     .filter(field => !field.isHidden)
     .map((field,
       index) => {
-      // Permet de changer la clé devant être présente dans l'URI en ajoutant la propriété 'alias'
-      const name = field.alias || field.key
       const formGroup = createFormGroup({
         autofocus: index === 0,
         ...field,
-        name,
       })
 
       return formGroup
