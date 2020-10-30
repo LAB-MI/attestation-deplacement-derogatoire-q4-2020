@@ -2,6 +2,7 @@ import { $, $$, downloadBlob } from './dom-utils'
 import { addSlash, getFormattedDate, getFormattedTime, setParam, getParam } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
+import { setPreviousFormValue } from './localstorage'
 
 const formData = require('../form-data')
 
