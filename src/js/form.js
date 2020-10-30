@@ -9,15 +9,16 @@ import { $, appendTo, createElement } from './dom-utils'
 // Nettoie les URI fragments
 // eslint-disable-next-line prefer-const
 let hashParams = {}
-window.location.hash.substr(1).split(';').forEach(elem => {
+window.location.hash.substr(1).split('&').forEach(elem => {
   elem = decodeURI(elem)
-  const I = elem.indexOf(':')
-  const parts = [elem.slice(0, I), elem.slice(I + 1)]
+  const parts = elem.split('=')
   if (parts[0] === 'raisons') {
     parts[1] = parts[1].split(',')
   }
   hashParams[parts[0]] = parts[1]
+  if (parts[0] === 'auto') hashParams.auto = true
 })
+console.log(hashParams)
 
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
