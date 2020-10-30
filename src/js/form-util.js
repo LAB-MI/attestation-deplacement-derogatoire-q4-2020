@@ -1,5 +1,5 @@
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate } from './util'
+import { addSlash, getFormattedDate, getFormattedTime } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 
@@ -53,9 +53,11 @@ function validateAriaFields () {
     .includes(true)
 }
 
-export function setReleaseDateTime (releaseDateInput) {
+export function setReleaseDateTime (releaseDateInput, releaseTimeInput) {
   const loadedDate = new Date()
+  loadedDate.setMinutes(loadedDate.getMinutes() + 5)
   releaseDateInput.value = getFormattedDate(loadedDate)
+  releaseTimeInput.value = getFormattedTime(loadedDate)
 }
 
 export function getProfile (formInputs) {
@@ -169,6 +171,7 @@ export function prepareForm () {
   const reasonFieldset = $('#reason-fieldset')
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
-  setReleaseDateTime(releaseDateInput)
+  const releaseTimeInput = $('#field-heuresortie')
+  setReleaseDateTime(releaseDateInput, releaseTimeInput)
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
 }

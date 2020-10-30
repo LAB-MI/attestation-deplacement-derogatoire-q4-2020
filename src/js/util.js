@@ -21,6 +21,12 @@ export function getFormattedDate (date) {
   return `${year}-${month}-${day}`
 }
 
+export function getFormattedTime (date) {
+  const hours = pad2Zero(date.getHours())
+  const minutes = pad2Zero(date.getMinutes())
+  return `${hours}:${minutes}`
+}
+
 export function addSlash (str) {
   return str
     .replace(/^(\d{2})$/g, '$1/')
