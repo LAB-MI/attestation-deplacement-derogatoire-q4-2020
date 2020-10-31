@@ -1,0 +1,10 @@
+name: attestation
+org: gjgdserverless
+component: website
+
+inputs:
+  domain: attestation.gjgd.xyz
+  src:
+    src: ./src
+    hook: npm run build:dev
+    dist: ./dist
