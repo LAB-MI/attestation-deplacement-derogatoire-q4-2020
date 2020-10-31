@@ -3,6 +3,8 @@ import { addSlash, getFormattedDate } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 
+const params = new URLSearchParams(window.location.hash.substr(1))
+
 const conditions = {
   '#field-firstname': {
     length: 1,
@@ -53,9 +55,12 @@ function validateAriaFields () {
     .includes(true)
 }
 
-export function setReleaseDateTime (releaseDateInput) {
-  const loadedDate = new Date()
+export function setReleaseDateTime (releaseDateInput, loadedDate = new Date()) {
   releaseDateInput.value = getFormattedDate(loadedDate)
+}
+
+export function setReleaseHourTime (releaseTimeInput, loadedDate = new Date()) {
+  releaseTimeInput.value = loadedDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 }
 
 export function getProfile (formInputs) {
@@ -156,6 +161,34 @@ export function prepareForm () {
   const reasonFieldset = $('#reason-fieldset')
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
+  const releaseHourInput = $('#field-heuresortie')
   setReleaseDateTime(releaseDateInput)
+  setReleaseHourTime(releaseHourInput, new Date(Date.now() + 300_000))
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
+}
+
+export function fill () {
+  const formData = require('../form-data')
+  // Remplit les fields du groupe 1
+  formData.flat(1)
+    .filter(field => field.key !== 'reason')
+    .filter(field => !field.isHidden)
+    .forEach(data => {
+      const name = data.alias || data.key
+      const field = $('#field-' + data.key)
+      if (params.has(name)) field.value = params.get(name)
+    })
+    // Remplit les raisons
+  formData
+    .flat(1)
+    .find(field => field.key === 'reason')
+    .items.forEach(item => {
+      const name = item.alias || item.code
+      const field = $('#checkbox-' + item.code)
+      if (params.get('raisons')?.split(',').includes(name) && !field.checked) field.click()
+    })
+}
+
+export function autoDownload () {
+  if (params.get('auto')) return document.getElementById('generate-btn').click()
 }

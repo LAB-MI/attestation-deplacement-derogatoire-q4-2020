@@ -6,10 +6,6 @@ import formData from '../form-data.json'
 
 import { $, appendTo, createElement } from './dom-utils'
 
-// Nettoie les URI fragments
-// eslint-disable-next-line prefer-const
-let params = new URLSearchParams(window.location.hash.substr(1))
-
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
@@ -32,7 +28,6 @@ const createFormGroup = ({
   placeholder = '',
   type = 'text',
 }) => {
-  const name = alias || key
   const formGroup = createElement('div', { className: 'form-group' })
   const labelAttrs = {
     for: `field-${key}`,
@@ -58,9 +53,6 @@ const createFormGroup = ({
     required: true,
     type,
   }
-
-  // Remplit en fonction des params
-  if (params.has(name)) inputAttrs.value = params.get(name)
 
   const input = createElement('input', inputAttrs)
 
@@ -96,10 +88,6 @@ const createReasonField = (reasonData) => {
   const inputReason = createElement('input', inputReasonAttrs)
   const labelAttrs = { innerHTML: reasonData.label, className: 'form-checkbox-label', for: id }
   const label = createElement('label', labelAttrs)
-
-  // Remplit en fonction des params
-  const reasonName = reasonData.alias || reasonData.code
-  if (params.get('raisons')?.split(',').includes(reasonName) && !inputReason.checked) inputReason.click()
 
   appendToReason([inputReason, label])
   return formReason
@@ -165,9 +153,4 @@ export function createForm () {
 
   const reasonFieldset = createReasonFieldset(reasonsData)
   appendToForm([...createTitle(), ...formFirstPart, reasonFieldset])
-}
-
-export function autoDownload () {
-  if (!params.get('auto')) return
-  document.getElementById('generate-btn').click()
 }
