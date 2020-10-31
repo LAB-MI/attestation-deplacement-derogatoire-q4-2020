@@ -190,5 +190,5 @@ export function fill () {
 }
 
 export function autoDownload () {
-  if (params.get('auto')) return document.getElementById('generate-btn').click()
+  if (params.has('auto')) $('#generate-btn').click()
 }
