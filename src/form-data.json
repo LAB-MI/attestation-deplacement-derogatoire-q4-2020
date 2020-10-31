@@ -108,7 +108,7 @@
     },
     {
       "key": "reason",
-      "alias": "raison",
+      "alias": "raisons",
       "type": "list",
       "items": [
         {
