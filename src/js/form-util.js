@@ -182,14 +182,12 @@ export function followParams () {
       if (params.has(name)) field.value = params.get(name)
     })
 
-  // Définit l'objet contenant les raisons et son nom
-  const reasonsObj = formData.flat(1).find(field => field.key === 'reason')
-  const reasonsObjName = reasonsObj.alias || reasonsObj.key
   // Coche les raisons
+  const reasonsObj = formData.flat(1).find(field => field.key === 'reason')
   reasonsObj.items.forEach(data => {
     const name = data.alias || data.code
     const field = $('#checkbox-' + data.code)
-    if (params.get(reasonsObjName)?.split(',').includes(name) && !field.checked) field.click()
+    if (params.get(reasonsObj.alias || 'raisons' || reasonsObj.key)?.split(',').includes(name) && !field.checked) field.click()
   })
 
   // Génère automatiquement le PDF si besoin
