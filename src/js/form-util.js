@@ -127,7 +127,11 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
       return
     }
 
-    console.log(getProfile(formInputs), reasons)
+    // only register valid form submissions (same firstname and lastname are updated each time otherwise new entry is added)
+    if(window.localStorage) {
+      const { firstname, lastname, birthday, placeofbirth, address, city, zipcode } = getProfile(formInputs);
+      localStorage.setItem(`${ firstname } ${ lastname }`, JSON.stringify({ firstname, lastname, birthday, placeofbirth, address, city, zipcode }));
+    }
 
     const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
 
@@ -149,6 +153,41 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
   })
 }
 
+export function prepareSelectTemplate(selectTemplate) {
+  // if no template choice, leave early
+  if(!selectTemplate) return
+
+  // apply template to form when selection change
+  selectTemplate.addEventListener('change', evt => {
+    const templateKey = evt.target.value;
+    
+    // get data
+    let data
+    try {
+      if(templateKey === "default") {
+        data = { firstname: '', lastname: '', birthday: '', placeofbirth: '', address: '', city: '', zipcode: '' }
+      } else {
+        data = JSON.parse(localStorage.getItem(templateKey))
+      }  
+    } catch {
+      data = null;
+    }
+
+    // wrong data, leave early
+    if(!data) return
+    const { firstname, lastname, birthday, placeofbirth, address, city, zipcode } = data;
+
+
+    $('#field-firstname').value = firstname;
+    $('#field-lastname').value = lastname;
+    $('#field-birthday').value = birthday;
+    $('#field-placeofbirth').value = placeofbirth;
+    $('#field-address').value = address;
+    $('#field-city').value = city;
+    $('#field-zipcode').value = zipcode;
+  })
+}
+
 export function prepareForm () {
   const formInputs = $$('#form-profile input')
   const snackbar = $('#snackbar')
@@ -156,6 +195,8 @@ export function prepareForm () {
   const reasonFieldset = $('#reason-fieldset')
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
+  const selectTemplate = $('#field-template-choice')
   setReleaseDateTime(releaseDateInput)
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
+  prepareSelectTemplate(selectTemplate)
 }

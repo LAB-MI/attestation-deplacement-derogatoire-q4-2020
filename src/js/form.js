@@ -6,12 +6,60 @@ import formData from '../form-data.json'
 
 import { $, appendTo, createElement } from './dom-utils'
 
+const createTemplateSelector = () => {
+  // no local storage, leave early
+  if(!window.localStorage) return
+
+  // retrieve templates data for integrity check
+  const tplDataOptions = Object.keys(localStorage)
+    .map(key => {
+      // check options readability
+      let data
+      try {
+        JSON.parse(localStorage.getItem(key))
+
+        // we don't actually need the soraged data there
+        data = { 
+          label: key, 
+          value: key
+        }
+      } catch {
+        data = null;
+      } finally {
+        return data
+      }
+    })
+    .filter(opt => (opt !== null))
+
+  // if no templates exist, leave early
+  if(tplDataOptions.length === 0) return
+
+  // default value - no template
+  const defaultTplDataOption = { label: 'je ne veux pas de saisie antérieure', value: 'default' }
+
+  const name = 'template-choice'
+  const formGroup = createElement('div', { className: 'form-group' })
+  const tplLabel = createElement('label', { for: `field-${name}`, id: `field-${name}-label`, innerHTML: 'Choix d\'une saisie antérieure' })
+  const tplSelect = createElement('select', { className: 'form-control', id: `field-${name}`, name })
+  const tplOptions = [defaultTplDataOption, ...tplDataOptions].map(({ label, value }) => createElement('option', { value, innerHTML: label }))
+
+  // build select
+  appendTo(tplSelect)(tplOptions)
+
+  // build form group
+  appendTo(formGroup)([tplLabel, tplSelect])
+
+  return formGroup
+}
+
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
-  const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
-  return [h2, p]
+  const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs ci-dessous sont obligatoires.' })
+  const templateChoice = createTemplateSelector();
+  return templateChoice
+    ? [h2, templateChoice, p]
+    : [h2, p]
 }
-// createElement('div', { className: 'form-group' })
 
 const getCurrentTime = () => {
   const date = new Date();
