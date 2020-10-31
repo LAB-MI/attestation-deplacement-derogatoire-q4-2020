@@ -166,10 +166,13 @@ export function prepareForm () {
   setReleaseHourTime(releaseHourInput, new Date(Date.now() + 300_000))
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
 }
-
-export function fill () {
+/**
+ * Modifie les entrées du formulaire en fonction des paramètres spécifiés sous forme d'URI fragments
+ */
+export function followParams () {
   const formData = require('../form-data')
-  // Remplit les fields du groupe 1
+
+  // Remplit les entrées du formulaire
   formData.flat(1)
     .filter(field => field.key !== 'reason')
     .filter(field => !field.isHidden)
@@ -178,17 +181,17 @@ export function fill () {
       const field = $('#field-' + data.key)
       if (params.has(name)) field.value = params.get(name)
     })
-    // Remplit les raisons
-  formData
-    .flat(1)
-    .find(field => field.key === 'reason')
-    .items.forEach(item => {
-      const name = item.alias || item.code
-      const field = $('#checkbox-' + item.code)
-      if (params.get('raisons')?.split(',').includes(name) && !field.checked) field.click()
-    })
-}
 
-export function autoDownload () {
+  // Définit l'objet contenant les raisons et son nom
+  const reasonsObj = formData.flat(1).find(field => field.key === 'reason')
+  const reasonsObjName = reasonsObj.alias || reasonsObj.key
+  // Coche les raisons
+  reasonsObj.items.forEach(data => {
+    const name = data.alias || data.code
+    const field = $('#checkbox-' + data.code)
+    if (params.get(reasonsObjName)?.split(',').includes(name) && !field.checked) field.click()
+  })
+
+  // Génère automatiquement le PDF si besoin
   if (params.has('auto')) $('#generate-btn').click()
 }
