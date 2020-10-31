@@ -33,7 +33,7 @@ const conditions = {
   },
 }
 
-function validateAriaFields() {
+function validateAriaFields () {
   return Object.keys(conditions)
     .map((field) => {
       const fieldData = conditions[field]
@@ -53,12 +53,12 @@ function validateAriaFields() {
     .includes(true)
 }
 
-export function setReleaseDateTime(releaseDateInput) {
+export function setReleaseDateTime (releaseDateInput) {
   const loadedDate = new Date()
   releaseDateInput.value = getFormattedDate(loadedDate)
 }
 
-export function getProfile(formInputs) {
+export function getProfile (formInputs) {
   const fields = {}
   for (const field of formInputs) {
     let value = field.value
@@ -71,7 +71,7 @@ export function getProfile(formInputs) {
   return fields
 }
 
-export function getReasons(reasonInputs) {
+export function getReasons (reasonInputs) {
   const reasons = reasonInputs
     .filter((input) => input.checked)
     .map((input) => input.value)
@@ -79,12 +79,12 @@ export function getReasons(reasonInputs) {
   return reasons
 }
 
-export function prepareInputs(
+export function prepareInputs (
   formInputs,
   reasonInputs,
   reasonFieldset,
   reasonAlert,
-  snackbar
+  snackbar,
 ) {
   formInputs.forEach((input) => {
     const exempleElt = input.parentNode.parentNode.querySelector('.exemple')
@@ -146,8 +146,9 @@ export function prepareInputs(
           'city',
           'zipcode',
         ].includes(element)
-      )
+      ) {
         localStorage.setItem(`genattest_${element}`, profile[element])
+      }
     }
     const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
 
@@ -169,7 +170,7 @@ export function prepareInputs(
   })
 }
 
-export function prepareForm() {
+export function prepareForm () {
   const formInputs = $$('#form-profile input')
   const snackbar = $('#snackbar')
   const reasonInputs = [...$$('input[name="field-reason"]')]
