@@ -22,16 +22,15 @@ const createFormGroup = ({
   min,
   maxlength,
   minlength,
-  key,
-  alias,
+  name, // here the 'key' value
   pattern,
   placeholder = '',
   type = 'text',
 }) => {
   const formGroup = createElement('div', { className: 'form-group' })
   const labelAttrs = {
-    for: `field-${key}`,
-    id: `field-${key}-label`,
+    for: `field-${name}`,
+    id: `field-${name}-label`,
     innerHTML: label,
   }
   const labelEl = createElement('label', labelAttrs)
@@ -41,13 +40,13 @@ const createFormGroup = ({
     autocomplete,
     autofocus,
     className: 'form-control',
-    id: `field-${key}`,
+    id: `field-${name}`,
     inputmode,
     min,
     max,
     minlength,
     maxlength,
-    name: key,
+    name,
     pattern,
     placeholder,
     required: true,
@@ -142,6 +141,7 @@ export function createForm () {
       const formGroup = createFormGroup({
         autofocus: index === 0,
         ...field,
+        name: field.key,
       })
 
       return formGroup
