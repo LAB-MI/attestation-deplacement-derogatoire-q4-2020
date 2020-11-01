@@ -160,6 +160,6 @@ export function prepareForm () {
   const releaseDateInput = $('#field-datesortie')
   const releaseHourInput = $('#field-heuresortie')
   setReleaseDateTime(releaseDateInput)
-  setReleaseHourTime(releaseHourInput)
+  setReleaseHourTime(releaseHourInput, new Date(Date.now() + 300_000))
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
 }
