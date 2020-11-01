@@ -57,12 +57,9 @@ function validateAriaFields () {
     .includes(true)
 }
 
-export function setReleaseDateTime (releaseDateInput, loadedDate = new Date()) {
+export function setReleaseDateTime (releaseDateInput) {
+  const loadedDate = new Date()
   releaseDateInput.value = getFormattedDate(loadedDate)
-}
-
-export function setReleaseHourTime (releaseTimeInput, loadedDate = new Date()) {
-  releaseTimeInput.value = loadedDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 }
 
 export function getProfile (formInputs) {
@@ -163,9 +160,7 @@ export function prepareForm () {
   const reasonFieldset = $('#reason-fieldset')
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
-  const releaseHourInput = $('#field-heuresortie')
   setReleaseDateTime(releaseDateInput)
-  setReleaseHourTime(releaseHourInput, new Date(Date.now() + 300_000))
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
 }
 /**
