@@ -2,6 +2,7 @@
   [
     {
       "key": "datesortie",
+      "alias": "date",
       "type": "date",
       "contentType": "datesortie",
       "label": "Date de sortie",
@@ -10,6 +11,7 @@
     },
     {
       "key": "heuresortie",
+      "alias": "heure",
       "type": "time",
       "contentType": "heuresortie",
       "label": "Heure de sortie",
@@ -17,6 +19,7 @@
     },
     {
       "key": "reason",
+      "alias": "raisons",
       "type": "list",
       "items": [
         {
@@ -41,6 +44,7 @@
         },
         {
           "code": "sport_animaux",
+          "alias": "sport-animaux",
           "label": "Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie ;"
         },
         {
@@ -58,14 +62,8 @@
       ]
     },
     {
-      "key": "creationHour",
-      "type": "time",
-      "contentType": "creationHour",
-      "label": "Heure de création",
-      "isHidden": true
-    },
-    {
       "key": "firstname",
+      "alias": "prenom",
       "type": "text",
       "contentType": "firstname",
       "label": "Prénom",
@@ -74,6 +72,7 @@
     },
     {
       "key": "lastname",
+      "alias": "nom",
       "type": "text",
       "contentType": "lastname",
       "label": "Nom",
@@ -82,6 +81,7 @@
     },
     {
       "key": "birthday",
+      "alias": "date-de-naissance",
       "type": "text",
       "contentType": "birthday",
       "label": "Date de naissance",
@@ -94,6 +94,7 @@
   [
     {
       "key": "placeofbirth",
+      "alias": "lieu-de-naissance",
       "type": "text",
       "contentType": "cityofbirth",
       "label": "Lieu de naissance",
@@ -102,6 +103,7 @@
     },
     {
       "key": "address",
+      "alias": "adresse",
       "type": "text",
       "contentType": "address",
       "label": "Adresse",
@@ -110,6 +112,7 @@
     },
     {
       "key": "city",
+      "alias": "ville",
       "type": "text",
       "contentType": "city",
       "label": "Ville",
@@ -118,6 +121,7 @@
     },
     {
       "key": "zipcode",
+      "alias": "code-postal",
       "type": "number",
       "contentType": "zipcode",
       "label": "Code Postal",

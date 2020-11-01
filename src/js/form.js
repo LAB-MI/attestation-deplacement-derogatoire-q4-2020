@@ -51,7 +51,7 @@ const createFormGroup = ({
   min,
   maxlength,
   minlength,
-  name,
+  name, // here the 'key' value
   pattern,
   placeholder = '',
   type = 'text',
@@ -120,7 +120,6 @@ const createReasonField = (reasons) => (reasonData) => {
     checked: reasons.includes(reasonData.code),
   }
   const inputReason = createElement('input', inputReasonAttrs)
-
   const labelAttrs = { innerHTML: reasonData.label, className: 'form-checkbox-label', for: id }
   const label = createElement('label', labelAttrs)
 
