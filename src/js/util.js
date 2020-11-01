@@ -33,3 +33,38 @@ export function addVersion (version) {
     'version',
   ).innerHTML = `${new Date().getFullYear()} - ${version}`
 }
+
+export function setParam (key, value) {
+  const oldParams = window.location.hash.substr(1)
+
+  // Remplace les params si existants
+  let newParams = oldParams.split('&').map(part => {
+    if (part.startsWith(`${key}=`)) {
+      return (key + '=' + value)
+    }
+    return part
+  })
+
+  // Crée un param si inexistant
+  if (!newParams.includes(key + '=' + value)) {
+    newParams.push(key + '=' + value)
+  }
+
+  // Supprime les doublons de l'URI
+  let alreadySet = false
+  newParams = newParams.filter((val) => {
+    if (val.startsWith(key + '=')) {
+      if (alreadySet) return false
+      alreadySet = true
+    }
+    return true
+  })
+
+  // Supprime elem 0 si nul (pour éviter les #& au lieu de #)
+  while (newParams[0] === '') newParams.shift()
+
+  if (!value) newParams = newParams.filter(param => (!param.startsWith(key)))
+
+  window.location.hash = '#' + newParams.join('&')
+  return newParams
+}

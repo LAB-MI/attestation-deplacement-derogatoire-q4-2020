@@ -1,7 +1,9 @@
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate } from './util'
+import { addSlash, getFormattedDate, setParam } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
+
+const formData = require('../form-data')
 
 const params = new URLSearchParams(window.location.hash.substr(1))
 
@@ -170,8 +172,6 @@ export function prepareForm () {
  * Modifie les entrées du formulaire en fonction des paramètres spécifiés sous forme d'URI fragments
  */
 export function followParams () {
-  const formData = require('../form-data')
-
   // Remplit les entrées du formulaire
   formData.flat(1)
     .filter(field => field.key !== 'reason')
@@ -192,4 +192,17 @@ export function followParams () {
 
   // Génère automatiquement le PDF si besoin
   if (params.has('auto')) $('#generate-btn').click()
+}
+
+export function listenToInputChanges () {
+  const keys = Object.keys(conditions).map(value => value.substr('#field-'.length))
+  keys.forEach(key => {
+    const data = formData.flat(1)
+      .filter(field => field.key !== 'reason')
+      .filter(field => !field.isHidden)
+      .find(field => field.key === key)
+    const name = data.alias || data.key
+    const input = document.getElementById('field-' + data.key)
+    input.addEventListener('input', (e) => setParam(name, e.target.value))
+  })
 }
