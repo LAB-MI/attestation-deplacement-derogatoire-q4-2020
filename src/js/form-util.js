@@ -216,7 +216,7 @@ export function followParams () {
   })
 
   // Génère automatiquement le PDF si besoin
-  if (params.has('auto')) $('#generate-btn').click()
+  if (params.has('auto')) $('.generate-btn').click()
 }
 
 export function listenToInputChanges () {
