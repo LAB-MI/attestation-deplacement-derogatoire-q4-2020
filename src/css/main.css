@@ -678,9 +678,21 @@ input[type=number] {
 
 .reason-quick-link {
   background: #ddd;
+  color: #00008b;
   line-height: 2em;
   border-radius: 5px;
   text-decoration: none;
   white-space: nowrap;
   padding: 0.25em 0.5em;
+  cursor: pointer;
+}
+.reason-quick-link:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 640px) {
+  .disclaimer strong {
+    display: block;
+  }
 }
