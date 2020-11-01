@@ -245,10 +245,10 @@ export function followParams (watch = true) {
     if (params.get(reasonsObj.alias || 'raisons' || reasonsObj.key)?.split(',').includes(name) && !field.checked) field.click()
   })
 
-  // Génère automatiquement le PDF si besoin
-  if (params.has('auto')) $('.generate-btn').click()
-
   if (watch) {
+    // Génère automatiquement le PDF si besoin, mais seulement au chargement
+    if (params.has('auto')) $('.generate-btn').click()
+    // Surveiller les modifications d'URL après le chargement
     window.addEventListener('hashchange', () => {
       params = new URLSearchParams(window.location.hash.substr(1))
       followParams(false)
