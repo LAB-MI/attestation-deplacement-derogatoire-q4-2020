@@ -129,12 +129,12 @@ a {
   }
 }
 
-p {
+p, li {
   color: black;
 }
 
 @media (prefers-color-scheme: dark) {
-  p {
+  p, li {
     color: white;
   }
 }
@@ -689,6 +689,16 @@ input[type=number] {
 .reason-quick-link:hover {
   color: #000;
   text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .reason-quick-link {
+    color: #A3A3FF;
+    background-color: #333;
+  }
+  .reason-quick-link:hover {
+    background-color: #666;
+  }
 }
 
 @media screen and (max-width: 640px) {
