@@ -37,6 +37,7 @@
             <ul>
               <li>Quelques modifications d'ergonomie (bouton de génération en haut,
                 date/heure remontée, suppression de contenu en haut de page…).</li>
+              <li>Heure de sortie par défaut = dans 5 minutes.</li>
               <li>Tous les champs sont mémorisés, lorsque vous visitez la page
                 vous retrouvez les informations que vous avez saisies pour la
                 précédente attestation que vous avez généré.</li>
@@ -50,6 +51,10 @@
                 aux bricoleurs de se faire des raccourcis vers plusieurs versions
                 différentes pré-remplies. Voir <a href="https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020/pull/50">PR
                 50</a>.</li>
+              <li>En plus des valeurs directes dans l'URL, on peut également définir
+                une valeur relative pour l'heure, comme "+10m" ou "-15m". Vous pouvez
+                par exemple ainsi ajouter <code>#heure=+0m</code> pour retrouver
+                l'heure actuelle comme heure de sortie par défaut.</li>
             </ul>
             <h3 class="titre-3">Avertissement</h3>
             <p>

@@ -1,5 +1,5 @@
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate, getFormattedTime, setParam, getParam } from './util'
+import { addSlash, getFormattedDate, getFormattedTime, setParam, getParam, pad2Zero } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 import { getPreviousFormValue, setPreviousFormValue } from './localstorage'
@@ -193,6 +193,36 @@ export function prepareForm () {
   setReleaseDateTime(releaseDateInput, releaseTimeInput)
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
 }
+
+/**
+ * Modifie un champ de formulaire, en gérant quelques formats utiles
+ */
+function setField (input, name, value) {
+  if (name === 'heuresortie' || name === 'heure') {
+    // Accepter les valeurs relatives comme "-10m" ou "+1h"
+    // Note: "+" sera converti en espace, d'où le "|\s" ci-dessous
+    const match = value.match(/^(-|\+|\s)(\d+)(m|h)(\d+)?$/i)
+    if (match) {
+      const sign = match[1] === '-' ? -1 : +1
+      const val1 = sign * Number(match[2])
+      const unit = match[3]
+      const val2 = sign * Number(match[4] || '0')
+      let date = new Date()
+      if (unit === 'm' || unit === 'M') {
+        date.setMinutes(date.getMinutes() + val1)
+        date.setSeconds(date.getSeconds() + val2)
+      } else {
+        date.setHours(date.getHours() + val1)
+        date.setMinutes(date.getMinutes() + val2)
+      }
+      input.value = `${pad2Zero(date.getHours())}:${pad2Zero(date.getMinutes())}`
+      return
+    }
+  }
+  // Cas général: prendre la valeur tel quel
+  input.value = value
+}
+
 /**
  * Modifie les entrées du formulaire en fonction des paramètres spécifiés sous forme d'URI fragments
  */
@@ -204,7 +234,7 @@ export function followParams (watch = true) {
     .forEach(data => {
       const name = data.alias || data.key
       const field = $('#field-' + data.key)
-      if (params.has(name)) field.value = params.get(name)
+      if (params.has(name)) setField(field, name, params.get(name))
     })
 
   // Coche les raisons
