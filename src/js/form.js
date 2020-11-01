@@ -6,6 +6,7 @@ import formData from '../form-data.json'
 
 import { $, $$, appendTo, createElement } from './dom-utils'
 import { getPreviousFormValue } from './localstorage'
+import { setParam } from './util'
 
 const createTitle = () => {
   // const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Votre déclaration numérique : ' })
@@ -13,24 +14,44 @@ const createTitle = () => {
   const latestReasons = getPreviousFormValue('latest-reasons')
   if (latestReasons) {
     const pReasons = createElement('p', { className: 'msg-info', innerHTML: 'Motifs récents : ' })
+    const append = appendTo(pReasons)
     const reasonsStrings = latestReasons.split('|')
+    const reasonsData = getReasonsData()
     reasonsStrings.forEach((reasonsString, i) => {
-      appendTo(pReasons)(createElement('a', {
-        innerText: reasonsString,
+      const reasons = reasonsString.split(', ')
+      const reasonsAlias = reasons.map(r => {
+        const item = reasonsData.items.find(i => i.code === r)
+        return item.alias || item.code
+      })
+      append(createElement('a', {
+        innerText: reasonsAlias.join(', '),
         className: 'reason-quick-link',
         onclick: () => {
-          const reasons = reasonsString.split(', ')
           const checkboxes = $$('[name="field-reason"]')
           for (const checkbox of checkboxes) {
             checkbox.checked = reasons.includes(checkbox.value)
           }
+          setParam('raisons', reasonsAlias.join(','))
           return false
         },
       }))
-      appendTo(pReasons)(createElement('span', {
-        innerText: i === reasonsStrings.length - 1 ? '.' : ', ',
-      }))
+      append(createElement('span', { innerText: ', ' }))
     })
+    append(createElement('span', { innerText: ' ou ' }))
+    append(createElement('a', {
+      innerText: 'nouveau',
+      className: 'reason-quick-link',
+      onclick: () => {
+        const checkboxes = $$('[name="field-reason"]')
+        for (const checkbox of checkboxes) {
+          checkbox.checked = false
+        }
+        setParam('raisons', '')
+        $('#reason-fieldset').scrollIntoView(true)
+        return false
+      },
+    }))
+    append(createElement('span', { innerText: '.' }))
     return [pReasons, p]
   }
   return []
@@ -185,10 +206,12 @@ export function createForm () {
       return formGroup
     })
 
-  const reasonsData = formData
-    .flat(1)
-    .find(field => field.key === 'reason')
+  const reasonsData = getReasonsData()
 
   const reasonFieldset = createReasonFieldset(reasonsData)
   appendToForm([...createTitle(), ...formFirstPart, reasonFieldset])
 }
+
+const getReasonsData = () => formData
+  .flat(1)
+  .find(field => field.key === 'reason')
