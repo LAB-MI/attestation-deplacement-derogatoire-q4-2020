@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="msapplication-TileColor" content="#603cba" />
+    <meta name="msapplication-config" content="./favicons/browserconfig.xml" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicons/favicon-16x16.png" />
+    <link rel="manifest" href="./favicons/site.webmanifest" />
+    <link rel="mask-icon" href="./favicons/safari-pinned-tab.svg" color="#21bf73" />
+
+    <title>COVID-19 – Générateur d'attestation de déplacement</title>
+</head>
+
+<body class="confidentialite">
+    <div class="container">
+        <header class="wrapper">
+            <div class="header-content">
+                <h1 class="flex flex-wrap">
+                    <div class="covid-title">
+                        COVID-19
+                    </div>
+                    <div class="covid-subtitle">
+                        Générateur d'attestation de&nbsp;déplacement
+                    </div>
+                </h1>
+            </div>
+        </header>
+        <div class="wrapper">
+            <h2 class="titre-2">Application non officielle</h2>
+            <h3 class="titre-3">Ajouts par rapport à la version officielle</h3>
+            <ul>
+              <li>Quelques modifications d'ergonomie (bouton de génération en haut,
+                date/heure remontée, suppression de contenu en haut de page…).</li>
+              <li>Tous les champs sont mémorisés, lorsque vous visitez la page
+                vous retrouvez les informations que vous avez saisies pour la
+                précédente attestation que vous avez généré.</li>
+              <li>Les 3 derniers motifs utilisés sont mémorisés et rappelées en
+                tête de formulaire, cliquer sur l'un d'eux permet de le réutiliser
+                rapidement, sans avoir à "scroller".</li>
+              <li>L'heure de sortie par défaut est l'heure courante + 5 minutes :
+                l'idée est d'avoir le temps de désinfecter ses mains et sortir de
+                chez soi sans avoir à ressortir son smartphone au dernier moment.</li>
+              <li>Les champs peuvent être modifiés par l'URL, ce qui permettra
+                aux bricoleurs de se faire des raccourcis vers plusieurs versions
+                différentes pré-remplies. Voir <a href="https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020/pull/50">PR
+                50</a>.</li>
+            </ul>
+            <h3 class="titre-3">Avertissement</h3>
+            <p>
+                Cette application utilise le code original "open source"
+                disponible sur github, mais n'est pas hébergé sur le site
+                du gouvernement. L'auteur (Nicolas Chambrier) s'engage à
+                suivre les bonnes pratiques de non divulgation de données
+                privées en conservant la ligne directrice du projet:
+                aucune donnée ne transite vers aucun serveur, à part le
+                téléchargement initial de la page.
+            </p>
+            <p>
+                Néanmoins, si vous ne souhaitez pas accorder votre confiance
+                à un tiers, que vous ne disposez pas des connaissances techniques
+                pour vous assurer que vos données sont bien en sécurité, préférez
+                utiliser <a href="https://media.interieur.gouv.fr/deplacement-covid-19/">la version officielle</a>.
+            </p>
+        </div>
+    </div>
+    <div class="btn-wrapper">
+        <a href="./index.html" class="btn-generateur">
+             Retour au générateur
+        </a>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-links">
+            <a class="footer-line footer-link">Confidentialité</a>
+            <a href="https://www.interieur.gouv.fr/Infos-du-site/Mentions-legales" target="_blank" title="Mentions légales - nouvelle page"
+                class="footer-line footer-link">Mentions légales</a>
+            <a href="https://www.gouvernement.fr/info-coronavirus" target="_blank" title="Information du gouvernement sur la Covid-19 - nouvelle page" class="footer-line footer-link">Informations du
+                gouvernement sur la Covid-19</a>
+            <p class="footer-line">
+                Plus d’infos au<a class="num-08" href="tel:0800130000">
+                    0 800 130 000</a>
+            </p>
+        </div>
+    </footer>
+    <script src="./js/confidentialite.js"></script>
+</body>
+</html>
