@@ -79,3 +79,7 @@ export function getParam (key) {
   const param = params?.find((val) => val.startsWith(key + '='))
   return param?.substr((key + '=').length)
 }
+
+export function clearParams () {
+  window.location.hash = ''
+}

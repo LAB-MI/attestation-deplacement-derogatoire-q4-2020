@@ -1,8 +1,8 @@
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate, getFormattedTime, setParam, getParam, pad2Zero } from './util'
+import { addSlash, getFormattedDate, getFormattedTime, setParam, getParam, pad2Zero, clearParams } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
-import { getPreviousFormValue, setPreviousFormValue } from './localstorage'
+import { getPreviousFormValue, setPreviousFormValue, clearPreviousFormValues } from './localstorage'
 
 const formData = require('../form-data')
 
@@ -285,5 +285,16 @@ export function listenToInputChanges () {
       }
       setParam(reasonsObj.alias || 'raisons', reasons.toString())
     })
+  })
+}
+
+export function listenToClearData () {
+  $('.clear-data-btn').addEventListener('click', e => {
+    e.preventDefault()
+    if (confirm('Confirmer la suppression de toutes vos données stockées localement')) {
+      clearPreviousFormValues()
+      clearParams()
+      location.reload()
+    }
   })
 }
