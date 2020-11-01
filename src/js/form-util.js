@@ -195,6 +195,7 @@ export function followParams () {
 }
 
 export function listenToInputChanges () {
+  // Champs
   const keys = Object.keys(conditions).map(value => value.substr('#field-'.length))
   keys.forEach(key => {
     const data = formData.flat(1)
