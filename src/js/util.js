@@ -66,5 +66,10 @@ export function setParam (key, value) {
   if (!value) newParams = newParams.filter(param => (!param.startsWith(key)))
 
   window.location.hash = '#' + newParams.join('&')
-  return newParams
+}
+
+export function getParam (key) {
+  const params = window.location.hash.substr(1).split('&')
+  const param = params?.find((val) => val.startsWith(key + '='))
+  return param?.substr((key + '=').length)
 }

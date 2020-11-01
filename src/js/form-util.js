@@ -1,11 +1,11 @@
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate, setParam } from './util'
+import { addSlash, getFormattedDate, setParam, getParam } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 
 const formData = require('../form-data')
 
-const params = new URLSearchParams(window.location.hash.substr(1))
+let params = new URLSearchParams(window.location.hash.substr(1))
 
 const conditions = {
   '#field-firstname': {
@@ -191,14 +191,32 @@ export function followParams () {
 
 export function listenToInputChanges () {
   // Champs
-  const keys = Object.keys(conditions).map(value => value.substr('#field-'.length))
-  keys.forEach(key => {
-    const data = formData.flat(1)
-      .filter(field => field.key !== 'reason')
-      .filter(field => !field.isHidden)
-      .find(field => field.key === key)
-    const name = data.alias || data.key
-    const input = document.getElementById('field-' + data.key)
-    input.addEventListener('input', (e) => setParam(name, e.target.value))
+  formData.flat(1)
+    .filter(field => field.key !== 'reason')
+    .filter(field => !field.isHidden)
+    .forEach(data => {
+      const name = data.alias || data.key
+      const input = document.getElementById('field-' + data.key)
+      input.addEventListener('input', (e) => {
+        setParam(name, e.target.value)
+        params = new URLSearchParams(window.location.hash.substr(1))
+      })
+    })
+
+  // Raisons
+  const reasonsObj = formData.flat(1).find(field => field.key === 'reason')
+  reasonsObj.items.forEach(data => {
+    const name = data.alias || data.code
+    const checkbox = $('#checkbox-' + data.code)
+    checkbox.addEventListener('click', (e) => {
+      let reasons = getParam(reasonsObj.alias || 'raisons')?.split(',')
+      if (!reasons) return setParam(reasonsObj.alias || 'raisons', name)
+      if (checkbox.checked && !reasons.includes(name)) {
+        reasons.push(name)
+      } else if (!checkbox.checked && reasons.includes(name)) {
+        reasons = reasons.filter(elem => elem !== name)
+      }
+      setParam(reasonsObj.alias || 'raisons', reasons.toString())
+    })
   })
 }
