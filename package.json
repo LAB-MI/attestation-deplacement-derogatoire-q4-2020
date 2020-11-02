@@ -62,7 +62,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "bootstrap": "^4.5.3",
     "pdf-lib": "^1.11.2",
-    "qrcode": "^1.4.4"
+    "qrcode": "^1.4.4",
+    "remove-accents": "^0.4.2"
   },
   "browserslist": [
     "last 5 versions"
