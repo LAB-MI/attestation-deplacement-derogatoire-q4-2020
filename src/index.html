@@ -46,8 +46,8 @@
                 </span>
             </h1>
             <p class="text-desc">
-                En application du décret n°2020-1310 du 29 octobre 2020 prescrivant les mesures générales 
-                nécessaires pour faire face à l'épidémie de Covid19 dans le cadre de l'état d'urgence sanitaire 
+                En application du décret n°2020-1310 du 29 octobre 2020 prescrivant les mesures générales
+                nécessaires pour faire face à l'épidémie de Covid19 dans le cadre de l'état d'urgence sanitaire
             </p>
 
         </div>
@@ -59,16 +59,43 @@
             id="alert-facebook"
         ></p>
 
-        <div class="wrapper">
-            <form id="form-profile" accept-charset="UTF-8"></form>
-            <p class="text-center mt-5">
-                <button type="button" id="generate-btn" class="btn btn-primary btn-attestation"><span ><i class="fa fa-file-pdf inline-block mr-1"></i>  Générer mon attestation</span></button>
-            </p>
+    <div class="wrapper">
+        <form id="form-profile" accept-charset="UTF-8"></form>
+        <p class="text-center mt-5">
+            <button type="button" id="generate-btn" class="btn btn-primary btn-attestation">
+              <span>
+                <i class="fa fa-file-pdf inline-block mr-1"></i>
+                Générer mon attestation
+              </span>
+            </button>
+        </p>
 
             <div class="bg-primary  d-none" id="snackbar">
                 L'attestation est téléchargée sur votre appareil.
             </div>
+
+          <div id="formgroup-storedata"
+               class="form-check text-center">
+            <input class="form-check-input"
+                   type="checkbox"
+                   name="storedata"
+                   id="field-storedata"
+                   value="storedata">
+            <label class="form-check-label"
+                   for="field-storedata">
+              Stocker mes données sur l'appareil afin de remplir automatiquement mes futures attestations
+            </label>
+          </div>
+
+        <a id="cleardata"
+           class="center delete-data-link"
+           href="javascript:void(0)">Effacer les données du formulaire</a>
+        <div class="bg-primary  d-none"
+             id="snackbar-cleardata">
+          Les données du formulaire ont été effacées.
         </div>
+    </div>
+
 
         <div id="footnotes">
             <p id="footnote1">
