@@ -166,7 +166,8 @@ export function prepareForm () {
 /**
  * Modifie les entrées du formulaire en fonction des paramètres spécifiés sous forme d'URI fragments
  */
-export function followParams () {
+export function followParams (watch = true) {
+  const auto = params.has('auto')
   // Remplit les entrées du formulaire
   formData.flat(1)
     .filter(field => field.key !== 'reason')
@@ -186,7 +187,14 @@ export function followParams () {
   })
 
   // Génère automatiquement le PDF si besoin
-  if (params.has('auto')) $('#generate-btn').click()
+  if (auto) $('#generate-btn').click()
+
+  if (!watch || auto) return false
+
+  window.addEventListener('hashchange', () => {
+    params = new URLSearchParams(window.location.hash.substr(1))
+    followParams(false)
+  })
 }
 
 export function listenToInputChanges () {
@@ -219,4 +227,5 @@ export function listenToInputChanges () {
       setParam(reasonsObj.alias || 'raisons', reasons.toString())
     })
   })
+  params = new URLSearchParams(window.location.hash.substr(1))
 }
