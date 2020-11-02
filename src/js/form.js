@@ -29,6 +29,7 @@ const createFormGroup = ({
   minlength,
   name,
   pattern,
+  value,
   placeholder = '',
   type = 'text',
 }) => {
@@ -53,6 +54,7 @@ const createFormGroup = ({
     maxlength,
     name,
     pattern,
+    value,
     placeholder,
     required: true,
     type,
@@ -141,6 +143,12 @@ export function createForm () {
   }
 
   const appendToForm = appendTo(form)
+  
+  let savedProfile = null
+  try {
+    savedProfile = JSON.parse(window.localStorage.getItem('savedProfile'))
+  } catch (e) {
+  }
 
   const formFirstPart = formData
     .flat(1)
@@ -152,6 +160,7 @@ export function createForm () {
         autofocus: index === 0,
         ...field,
         name: field.key,
+        value: savedProfile && savedProfile[field.key] ? savedProfile[field.key] : '',
       })
 
       return formGroup
