@@ -1,4 +1,5 @@
 import QRCode from 'qrcode'
+const formData = require('../form-data.json')
 
 export function generateQR (text) {
   const opts = {
@@ -38,7 +39,7 @@ export function setParam (key, value) {
   const oldParams = window.location.hash.substr(1)
 
   // Remplace les params si existants
-  let newParams = oldParams.split('&').map(part => {
+  const newParams = oldParams.split('&').map(part => {
     if (part.startsWith(`${key}=`)) {
       return (key + '=' + value)
     }
@@ -50,26 +51,53 @@ export function setParam (key, value) {
     newParams.push(key + '=' + value)
   }
 
-  // Supprime les doublons de l'URI
-  let alreadySet = false
-  newParams = newParams.filter((val) => {
-    if (val.startsWith(key + '=')) {
-      if (alreadySet) return false
-      alreadySet = true
-    }
-    return true
-  })
+  // Nettoie les paramètres
+  const newParamsStr = cleanParams('#' + newParams.join('&'))
 
-  // Supprime elem 0 si nul (pour éviter les #& au lieu de #)
-  while (newParams[0] === '') newParams.shift()
-
-  if (!value) newParams = newParams.filter(param => (!param.startsWith(key)))
-
-  window.location.hash = '#' + newParams.join('&')
+  // Définit
+  window.location.hash = newParamsStr
+  return newParamsStr
 }
 
 export function getParam (key) {
   const params = window.location.hash.substr(1).split('&')
   const param = params?.find((val) => val.startsWith(key + '='))
   return param?.substr((key + '=').length)
+}
+
+export function cleanParams (params = window.location.hash) {
+  const oldParams = params.substr(1)
+  let newParams = oldParams.split('&')
+
+  // Supprime les doublons
+  const alreadySeen = []
+  newParams = newParams.filter(param => {
+    if (!param?.includes('=')) return false
+    const split = param.split('=')
+    const key = split[0]
+    const value = split[1]
+    if (!value) return false
+    if (alreadySeen.includes(key)) return false
+    alreadySeen.push(key)
+    return true
+  })
+
+  // Met dans l'ordre
+  const rightOrder = formData.flat(1).filter(data => !data.isHidden).map(data => data.alias || data.key)
+  console.log(rightOrder)
+  newParams = rightOrder.map((elem, index) => {
+    const peer = newParams.find((param) => {
+      return param.split('=')[0] === elem
+    })
+    if (!peer) return false
+    console.log('peer', peer)
+    return elem + '=' + peer.split('=')[1]
+  })
+
+  // Supprime les cadavres
+  newParams = newParams.filter((elem) => elem)
+
+  // Retourne les params nettoyés
+  console.log(newParams)
+  return '#' + newParams.join('&')
 }

@@ -1,5 +1,5 @@
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate, setParam, getParam } from './util'
+import { addSlash, getFormattedDate, setParam, getParam, cleanParams } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 
@@ -206,6 +206,7 @@ export function listenToInputChanges () {
       const name = data.alias || data.key
       const input = document.getElementById('field-' + data.key)
       input.addEventListener('input', (e) => {
+        window.location.hash = cleanParams()
         setParam(name, e.target.value)
         params = new URLSearchParams(window.location.hash.substr(1))
       })
