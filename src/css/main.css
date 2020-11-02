@@ -154,6 +154,10 @@ p {
   transform: translateY(-2px);
 }
 
+#form-profile #formgroup-storedata {
+  user-select: none;
+}
+
 @media (prefers-color-scheme: dark) {
   #form-profile .form-radio-label .form-check-label {
     color: #ddd;
@@ -350,6 +354,10 @@ input[type=number] {
   color: white;
   background-color: #000191;
   border-radius: 0.5em;
+}
+
+.delete-data-link {
+  text-align: center;
 }
 
 .btn-attestation:hover {
@@ -581,7 +589,7 @@ input[type=number] {
   }
 }
 
-#snackbar {
+#snackbar, #snackbar-cleardata {
   min-width: 250px;
   color: #fff;
   text-align: center;
@@ -598,7 +606,7 @@ input[type=number] {
   transition: all 0.5s ease-in-out;
 }
 
-#snackbar.show {
+#snackbar.show, #snackbar-cleardata.show {
   opacity: 1;
 }
 
