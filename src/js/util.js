@@ -84,13 +84,11 @@ export function cleanParams (params = window.location.hash) {
 
   // Met dans l'ordre
   const rightOrder = formData.flat(1).filter(data => !data.isHidden).map(data => data.alias || data.key)
-  console.log(rightOrder)
   newParams = rightOrder.map((elem, index) => {
     const peer = newParams.find((param) => {
       return param.split('=')[0] === elem
     })
     if (!peer) return false
-    console.log('peer', peer)
     return elem + '=' + peer.split('=')[1]
   })
 
@@ -98,6 +96,5 @@ export function cleanParams (params = window.location.hash) {
   newParams = newParams.filter((elem) => elem)
 
   // Retourne les params nettoyés
-  console.log(newParams)
   return '#' + newParams.join('&')
 }
