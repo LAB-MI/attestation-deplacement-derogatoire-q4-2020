@@ -14,12 +14,6 @@ const ys = {
 }
 
 export async function generatePdf (profile, reasons, pdfBase) {
-  const creationInstant = new Date()
-  const creationDate = creationInstant.toLocaleDateString('fr-FR')
-  const creationHour = creationInstant
-    .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-    .replace(':', 'h')
-
   const {
     lastname,
     firstname,
@@ -31,6 +25,11 @@ export async function generatePdf (profile, reasons, pdfBase) {
     datesortie,
     heuresortie,
   } = profile
+
+  // Disable creation date "tracking"
+  // const creationInstant = new Date()
+  const creationDate = datesortie
+  const creationHour = heuresortie.replace(':', 'h')
 
   const data = [
     `Cree le: ${creationDate} a ${creationHour}`,
