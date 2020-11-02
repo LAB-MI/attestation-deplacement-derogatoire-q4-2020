@@ -15,7 +15,7 @@ npm start
 
 ### Tester le code de production en local
 
-#### Générer le code de production pour tester que le build fonctionne en entier
+#### Générer le code de preproduction pour tester que le build fonctionne en entier
 
 ```console
 npm run build:dev
@@ -26,6 +26,13 @@ npm run build:dev
 ```console
 npx serve dist
 ```
+
+#### Générer le code de production
+
+```console
+npm run build:dist
+```
+
 
 Et visiter http://localhost:5000
 
