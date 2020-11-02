@@ -7,7 +7,7 @@ const swName = `${window.location}sw.js`
 window.isUpdateAvailable = new Promise(function (resolve, reject) {
   // lazy way of disabling service workers while developing
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorkers
+    navigator.serviceWorker
       .register(swName, { scope: path })
       .then((registration) => {
         registration.onupdatefound = () => {
