@@ -74,11 +74,9 @@ export async function generatePdf (profile, reasons, pdfBase) {
   drawText(placeofbirth, 297, 674)
   drawText(`${address} ${zipcode} ${city}`, 133, 652)
 
-  reasons
-    .split(', ')
-    .forEach(reason => {
-      drawText('x', 78, ys[reason], 18)
-    })
+  reasons.split(', ').forEach((reason) => {
+    drawText('x', 78, ys[reason], 18)
+  })
 
   let locationSize = getIdealFontSize(font, profile.city, 83, 7, 11)
 
