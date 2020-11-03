@@ -72,7 +72,7 @@ export function cleanParams (params = window.location.hash) {
   // Supprime les doublons
   const alreadySeen = []
   newParams = newParams.filter(param => {
-    if (!param?.includes('=')) return false
+    if (!param?.includes('=') && param !== 'auto') return false
     const split = param.split('=')
     const key = split[0]
     const value = split[1]
@@ -93,7 +93,7 @@ export function cleanParams (params = window.location.hash) {
   })
 
   // Supprime les cadavres
-  newParams = newParams.filter((elem) => elem)
+  newParams = newParams.filter((elem) => !!elem)
 
   // Retourne les params nettoyés
   return '#' + newParams.join('&')
