@@ -1,12 +1,14 @@
 import { $ } from './dom-utils'
 
 // Ce fichier est généré au build par le plugin parcel-plugin-sw-cache
-const swName = '../sw.js'
+const path = window.location.pathname
+const swName = `${window.location}sw.js`
+
 window.isUpdateAvailable = new Promise(function (resolve, reject) {
   // lazy way of disabling service workers while developing
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register(swName)
+      .register(swName, { scope: path })
       .then((registration) => {
         registration.onupdatefound = () => {
           const installingWorker = registration.installing
