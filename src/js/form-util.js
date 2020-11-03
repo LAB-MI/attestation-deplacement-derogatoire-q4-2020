@@ -193,13 +193,17 @@ export function followParams (watch = true) {
   reasonsObj.items.forEach(data => {
     const name = data.alias || data.code
     const field = $('#checkbox-' + data.code)
-    if (params.get(reasonsObj.alias || 'raisons' || reasonsObj.key)?.split(',').includes(name) && !field.checked) field.click()
+    if (params.get(reasonsObj.alias || 'raisons' || reasonsObj.key)?.split(',').includes(name)) {
+      if (!field.checked) field.click()
+    } else {
+      if (field.checked) field.click()
+    }
   })
 
   // Génère automatiquement le PDF si besoin
   if (auto) $('#generate-btn').click()
 
-  if (!watch || auto) return false
+  if (!watch /* || auto */) return false
 
   window.addEventListener('hashchange', () => {
     params = new URLSearchParams(window.location.hash.substr(1))
