@@ -69,11 +69,7 @@ Dimanche après-midi après une belle conversation Samedi nuit
 
 ## Utilisation
 
-
-URL TEST github pages
-
-
-URL youtube raccourci iOs alice
+https://www.youtube.com/watch?v=rcnnnzAEvkQ
 
 
-URL youtube raccourci Android bob
+https://www.youtube.com/watch?v=te3kC5Y8lrc
