@@ -2,7 +2,7 @@ version: '3'
 
 services:
   node:
-    image: node:10
+    image: node:14
     user: node
     volumes:
       - ./:/srv/app
