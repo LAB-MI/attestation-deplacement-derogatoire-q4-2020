@@ -5,6 +5,9 @@ import { addSlash, getFormattedDate } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 
+// Les types d'input qu'on peut sauvegarder dans le storage
+const savableInputsTypes = ['text', 'number']
+
 const conditions = {
   '#field-firstname': {
     length: 1,
@@ -90,10 +93,16 @@ export function getReasons (reasonInputs) {
   return reasons
 }
 
-export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar) {
+export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, storage) {
   formInputs.forEach((input) => {
     const exempleElt = input.parentNode.parentNode.querySelector('.exemple')
     const validitySpan = input.parentNode.parentNode.querySelector('.validity')
+    input.addEventListener('change', event => {
+      const { value, name, type } = event.target
+      if (savableInputsTypes.includes(type)) {
+        storage.setItem(name, value)
+      }
+    })
     if (input.placeholder && exempleElt) {
       input.addEventListener('input', (event) => {
         if (input.value) {
@@ -159,7 +168,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
   })
 }
 
-export function prepareForm () {
+export function prepareForm (storage) {
   const formInputs = $$('#form-profile input')
   const snackbar = $('#snackbar')
   const reasonInputs = [...$$('input[name="field-reason"]')]
@@ -167,5 +176,5 @@ export function prepareForm () {
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
   setReleaseDateTime(releaseDateInput)
-  prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
+  prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, storage)
 }

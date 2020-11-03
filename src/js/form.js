@@ -31,6 +31,7 @@ const createFormGroup = ({
   pattern,
   placeholder = '',
   type = 'text',
+  value = '',
 }) => {
   const formGroup = createElement('div', { className: 'form-group' })
   const labelAttrs = {
@@ -56,6 +57,7 @@ const createFormGroup = ({
     placeholder,
     required: true,
     type,
+    value,
   }
 
   const input = createElement('input', inputAttrs)
@@ -133,7 +135,7 @@ const createReasonFieldset = (reasonsData) => {
   return fieldset
 }
 
-export function createForm () {
+export function createForm (storage) {
   const form = $('#form-profile')
   // Évite de recréer le formulaire s'il est déjà créé par react-snap (ou un autre outil de prerender)
   if (form.innerHTML !== '') {
@@ -141,7 +143,6 @@ export function createForm () {
   }
 
   const appendToForm = appendTo(form)
-
   const formFirstPart = formData
     .flat(1)
     .filter(field => field.key !== 'reason')
@@ -152,6 +153,7 @@ export function createForm () {
         autofocus: index === 0,
         ...field,
         name: field.key,
+        value: storage.getItem(field.key),
       })
 
       return formGroup
