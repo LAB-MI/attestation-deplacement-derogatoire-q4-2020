@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  node:
+    image: node:10
+    user: node
+    volumes:
+      - ./:/srv/jmleroux
+      - ~/.npm:/home/node/.npm
+    working_dir: /srv/jmleroux
+    ports:
+      - '1234:1234'
+    command: "npm start"

@@ -11,6 +11,15 @@ npm i
 npm start
 ```
 
+#### Docker
+
+Vous pouvez installer l'application dans un container Docker:
+
+```console
+docker-compose run -rm node npm i
+docker-compose up
+```
+
 ## Générer et tester le code de production
 
 ### Tester le code de production en local
