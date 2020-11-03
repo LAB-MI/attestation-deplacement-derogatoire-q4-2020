@@ -1,0 +1,9 @@
+{
+	"lastname": "Smith",
+	"firstname": "Bob",
+	"birthday": "02/01/1970",
+	"placeofbirth": "Bob's hometown",
+	"address": "2 that street",
+	"zipcode": "75000",
+	"city": "Bob's city"
+}

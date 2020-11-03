@@ -1,44 +1,50 @@
-# Générateur de certificat de déplacement
+# Générateur de cluster
+fork LAB-MI/attestation-deplacement-derogatoire-q4-2020
 
-## Développer
+## Exemples :
+*Bob va faire ses courses*
+https://monserveur/covid_rapide/bob/achats
 
-### Installer le projet
+*Alice va au travail car c'est plus ou moins la seule activité autorisée*
+https://monserveur/covid_rapide/alice/travail
 
-```console
-git clone https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020.git
-cd attestation-deplacement-derogatoire-q4-2020
-npm i
-npm start
-```
+## Informations
+Ce patch permet de générer des attestations, sans perdre de temps à remplir ce satané formulaire.
+Le qrcode contient l'heure de création du fichier, remplacée par l'heure de sortie - 5 minutes.
+Les attestions générées sont donc prêtes à l'emploi et valables.
 
-## Générer et tester le code de production
+## Exemples ne respectant pas les règles :
+*Eve se promène avec une personne qui lui plaît depuis presque une heure
+et souhaite prolonger cet instant de liberté de 45 minutes*
+https://monserveur/covid_rapide/eve/sport_animaux/15
 
-### Tester le code de production en local
+*M. Dupont aperçoit des agents de police en pleine frénésie de contrôle et n'a pas son attestation.*
+Pas de panique ! Il clique sur le raccourci et l'attestation valable s'affiche instantanément à l'écran.
 
-#### Générer le code de production pour tester que le build fonctionne en entier
+## Installation
+fork de la version officielle +
+- antidatage
+- petit décalage de texte très irritant
+- dépendances non minifiées
+- une icône tricolore
+- pour gagner encore du temps on a zappé l'étape de compilation
+- prêt à l'emploi
+- copier le dossier dans un serveur web
+- créer des profils dans le dossier patch/profiles (voir default.json)
+- naviguer vers http(s)://monserveur/covid_rapide/{profil}/{motif}/{minutes}
+- {motif} et {minutes} facultatifs
+- valeurs par défaut : {motif} = "achats" && {minutes} = 10
+- {motif} : travail  / achats  / sante / famille / handicap / sport_animaux / convocation / missions / enfants
+- {minutes} : heure de sortie = heure du navigateur - {minutes} ;;; heure du qrcode = heure de sortie - 5
+- debug && tests baclés, ok avec navigateur desktop récent, peut-être non fonctionnel sur iOs < 12, semble ok sur Android
 
-```console
-npm run build:dev
-```
+## Responsabilité
+Version o.0 MIT
+Dimanche après-midi après une belle conversation Samedi nuit
 
-#### Tester le code de production en local
+À vos risques et périls, respect des distances sociales, maintenir l'économie, etc...
 
-```console
-npx serve dist
-```
-
-Et visiter http://localhost:5000
-
-Le code à déployer sera le contenu du dossier `dist`
-
-## Crédits
-
-Ce projet a été réalisé à partir d'un fork du dépôt [deplacement-covid-19](https://github.com/nesk/deplacement-covid-19) de lui-même réalisé à partir d'un fork du dépôt [covid-19-certificate](https://github.com/nesk/covid-19-certificate) de [Johann Pardanaud](https://github.com/nesk).
-
-Les projets open source suivants ont été utilisés pour le développement de ce
-service :
-
-- [PDF-LIB](https://pdf-lib.js.org/)
-- [qrcode](https://github.com/soldair/node-qrcode)
-- [Bootstrap](https://getbootstrap.com/)
-- [Font Awesome](https://fontawesome.com/license)
+## Utilisation
+URL TEST github pages
+URL youtube raccourci iOs alice
+URL youtube raccourci Android bob
