@@ -15,7 +15,7 @@ npm start
 
 Vous pouvez installer l'application dans un container Docker:
 
-```console
+```shell
 docker-compose run -rm node npm i
 docker-compose up
 ```

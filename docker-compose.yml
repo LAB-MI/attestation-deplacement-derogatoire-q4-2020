@@ -5,9 +5,9 @@ services:
     image: node:10
     user: node
     volumes:
-      - ./:/srv/jmleroux
+      - ./:/srv/app
       - ~/.npm:/home/node/.npm
-    working_dir: /srv/jmleroux
+    working_dir: /srv/app
     ports:
       - '1234:1234'
     command: "npm start"
