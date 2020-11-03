@@ -2,10 +2,10 @@ import {generatePdf} from "../src/js/pdf-util.js"
 
 window.addEventListener("load", async () => {
 
-	let params = window.location.search.substring(1).split("&").map(val => val.split("=")).map(val => val[1]), 
-		[who = "default", motif = "achats", minutes = 10] = params, 
+	let params = window.location.search.substring(1).split("&").map(val => val.split("=")).reduce((acc, val) => ({...acc, [val[0]]: val[1]}), {}), 
+		{name = "default", motif = "achats", minutes = 10} = params, 
 		date = moment().subtract(minutes, "minutes"), 
-		conf = await fetch("patch/profiles/" + who + ".json");
+		conf = await fetch("patch/profiles/" + name + ".json");
 
 	if(!conf.ok) conf = await fetch("patch/profiles/default.json"); 
 

@@ -1,7 +1,9 @@
 # Générateur de cluster
+
 fork LAB-MI/attestation-deplacement-derogatoire-q4-2020
 
 ## Exemples :
+
 *Bob va faire ses courses*
 
 
@@ -14,11 +16,17 @@ https://nicopowa.github.io/covid_rapide?name=bob&motif=achats
 https://nicopowa.github.io/covid_rapide?name=alice&motif=travail
 
 ## Informations
+
 Ce patch permet de générer des attestations, sans perdre de temps à remplir ce satané formulaire.
+
+
 Le qrcode contient l'heure de création du fichier, remplacée par l'heure de sortie - 5 minutes.
+
+
 Les attestions générées sont donc prêtes à l'emploi et valables.
 
 ## Exemples ne respectant pas les règles :
+
 *Eve se promène avec une personne qui lui plaît depuis presque une heure
 et souhaite prolonger cet instant de liberté de 45 minutes*
 
@@ -32,6 +40,7 @@ https://nicopowa.github.io/covid_rapide?name=eve&motif=sport_animaux&minutes=15
 Pas de panique ! Il clique sur le raccourci et l'attestation valable s'affiche instantanément à l'écran.
 
 ## Installation
+
 fork de la version officielle +
 - antidatage
 - petit décalage de texte très irritant
@@ -59,6 +68,12 @@ Dimanche après-midi après une belle conversation Samedi nuit
 À vos risques et périls, respect des distances sociales, maintenir l'économie, etc...
 
 ## Utilisation
+
+
 URL TEST github pages
+
+
 URL youtube raccourci iOs alice
+
+
 URL youtube raccourci Android bob
