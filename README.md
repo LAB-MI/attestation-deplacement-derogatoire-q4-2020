@@ -89,6 +89,12 @@ Facile !
 - noter que les informations de profil sont publiques avec cette méthode
 
 
+## Crédits
+
+Voir repo officiel
+
+https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020
+
 ## Responsabilité
 
 Version o.0
