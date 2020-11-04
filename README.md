@@ -77,6 +77,18 @@ iOs
 https://www.youtube.com/watch?v=te3kC5Y8lrc
 
 
+## Hébergement
+
+Facile !
+
+- cliquer fork en haut à droite
+- créer ou éditer des profils
+- activer github pages (settings > options > github pages > source main > save)
+- attendre quelques minutes
+- naviguer vers https://moncompte.github.io/covid_rapide?...
+- noter que les informations de profil sont publiques avec cette méthode
+
+
 ## Responsabilité
 
 Version o.0
