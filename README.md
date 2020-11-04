@@ -95,6 +95,7 @@ Voir repo officiel
 
 https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020
 
+
 ## Responsabilité
 
 Version o.0
@@ -104,3 +105,10 @@ Dimanche après-midi après une belle conversation Samedi nuit
 Licence MIT
 
 À vos risques et périls, respect des distances sociales, maintenir l'économie, etc...
+
+
+## Reportage exclusif
+
+Les courses de Bob
+
+https://www.youtube.com/watch?v=ZD48f-rc59M
