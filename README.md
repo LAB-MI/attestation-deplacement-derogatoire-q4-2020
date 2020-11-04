@@ -52,11 +52,13 @@ fork de la version officielle +
 
 ## Utilisation
 
-- naviguer vers https://nicopowa.github.io/covid_rapide/patch/gen.html
-- remplir les petites cases
+- cliquer sur le lien ci-dessous
+- remplir le formulaire une bonne fois pour toutes
 - cliquer sur ok
 - [iOs] revenir sur la page précédente
 - ajouter un raccourci sur l'écran d'accueil
+
+[c'est par ici](https://nicopowa.github.io/covid_rapide/patch/gen.html)
 
 
 ## Crédits
