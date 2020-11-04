@@ -62,8 +62,7 @@
 						.forEach(motif => {
 
 							let option = document.createElement("option");
-							option.value = motif.value;
-							option.text = motif.name;
+							option.value = option.text = motif;
 							select.appendChild(option);
 
 						});
