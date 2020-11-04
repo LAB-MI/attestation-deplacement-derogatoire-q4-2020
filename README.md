@@ -17,12 +17,12 @@ Les attestions générées sont donc prêtes à l'emploi et valables.
 
 *Bob va faire ses courses*
 
-https://nicopowa.github.io/covid_rapide?name=bob&motif=achats
+[attestation Bob](https://nicopowa.github.io/covid_rapide?lastname=Smith&firstname=Bob&birthday=01/01/1970&placeofbirth=Bob's hometown&address=1 Bob's street&zipcode=75000&city=Bob's city&motif=achats&minutes=5)
 
 
 *Alice va au travail car c'est plus ou moins la seule activité autorisée*
 
-https://nicopowa.github.io/covid_rapide?name=alice&motif=travail
+[attestation Alice](https://nicopowa.github.io/covid_rapide?lastname=Smith&firstname=Alice&birthday=01/01/1970&placeofbirth=Alice's hometown&address=1 Alice's street&zipcode=75000&city=Alice's city&motif=travail&minutes=5)
 
 
 ## Mauvais exemples :
@@ -30,7 +30,7 @@ https://nicopowa.github.io/covid_rapide?name=alice&motif=travail
 *Eve se promène avec une personne qui lui plaît depuis presque une heure
 et souhaite prolonger cet instant de liberté de 45 minutes*
 
-https://nicopowa.github.io/covid_rapide?name=eve&motif=sport_animaux&minutes=15
+[attestation Eve](https://nicopowa.github.io/covid_rapide?lastname=Smith&firstname=Eve&birthday=01/01/1970&placeofbirth=Eve's hometown&address=1 Eve's street&zipcode=75000&city=Eve's city&motif=sport_animaux&minutes=15)
 
 
 *M. Dupont aperçoit des agents de police en pleine frénésie de contrôle et n'a pas son attestation.*
@@ -40,53 +40,23 @@ https://nicopowa.github.io/covid_rapide?name=eve&motif=sport_animaux&minutes=15
 
 ## Fonctionnalités
 
-fork de la version officielle +
+fork de la version officielle + 
 
+- automatisation
 - antidatage
 - petit décalage de texte très irritant
 - dépendances non minifiées
 - une icône tricolore
-- pas trop testé, fonctionne avec navigateurs récents
-
-
-## Installation
-
-- pour gagner encore du temps on a zappé l'étape de build
-- copier le dossier dans un serveur web
-- créer des profils dans le dossier patch/profiles (voir default.json)
+- pas trop testé, navigateurs récents
 
 
 ## Utilisation
 
-- naviguer vers https://monserveur/covid_rapide?name={profil}&motif={motif}&minutes={minutes}
-
-|Paramètre|Description|Défaut|Valeur|
-|--|--|--|--|
-|name|nom du profil|default|alice, bob, eve, ...
-|motif|motif de sortie|achats|travail / achats / sante / famille / handicap / sport_animaux / convocation / missions / enfants|
-|minutes|antidatage|10|entre 0 et beaucoup plus
-
-
-## Raccourcis
-
-Android
-https://www.youtube.com/watch?v=CIsCf97-eiU
-
-
-iOs
-https://www.youtube.com/watch?v=te3kC5Y8lrc
-
-
-## Hébergement
-
-Facile !
-
-- cliquer fork en haut à droite
-- créer ou éditer des profils
-- activer github pages (settings > options > github pages > source main > save)
-- attendre quelques minutes
-- naviguer vers https://moncompte.github.io/covid_rapide?...
-- noter que les informations de profil sont publiques avec cette méthode
+- naviguer vers https://nicopowa.github.io/covid_rapide/patch/gen.html
+- remplir les petites cases
+- cliquer sur ok
+- [iOs] revenir sur la page précédente
+- ajouter un raccourci sur l'écran d'accueil
 
 
 ## Crédits

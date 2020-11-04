@@ -4,22 +4,12 @@ window.addEventListener("load", async () => {
 
 	document.body.innerHTML += "initialisation du cluster ...<br/>";
 
-	let params = window.location.search.substring(1).split("&").map(val => val.split("=")).reduce((acc, val) => ({...acc, [val[0]]: val[1]}), {}), 
-		{name = "default", motif = "achats", minutes = 10} = params, 
-		date = moment().subtract(minutes, "minutes"), 
-		conf = await fetch("patch/profiles/" + name + ".json");
-
-	if(!conf.ok) conf = await fetch("patch/profiles/default.json"); 
-
+	let infos = Object.fromEntries(new URLSearchParams(location.search)), 
+		date = moment().subtract(infos.minutes || 10, "minutes");
+	
 	document.body.innerHTML += "création de l'attestation...<br/>";
 
-	let infos = await conf.json(), 
-		profile = {
-			...infos, 
-			datesortie: date.format("DD[/]MM[/]YYYY"), 
-			heuresortie: date.format("HH[:]mm")
-		}, 
-		blob = new Blob([await generatePdf(profile, motif, "src/certificate.pdf", date)], {type: "application/pdf"}), 
+	let blob = new Blob([await generatePdf({...infos, datesortie: date.format("DD[/]MM[/]YYYY"), heuresortie: date.format("HH[:]mm")}, infos.motif || "achats", "src/certificate.pdf", date)], {type: "application/pdf"}), 
 		link = document.createElement("a");
 
 	document.body.innerHTML += "téléchargement ...";

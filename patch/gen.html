@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<title>covid_rapide</title>
+
+		<link rel="icon" type="image/png" href="icon.png" />
+	
+		<meta http-equiv="Cache-Control" content="no-store" />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="initial-scale=1, user-scalable=no, maximum-scale=1, width=device-width, height=device-height">
+
+		<style>
+
+			input, select {
+
+				display: block;
+				box-sizing: border-box;
+				margin-bottom: 1em;
+				width: 100%;
+				max-width: 240px;
+
+			}
+
+		</style>
+
+		<script>
+
+			window.addEventListener("load", async () => {
+
+				let form = document.createElement("form");
+				form.action = "../";
+				form.method = "get";
+				document.body.appendChild(form);
+
+				[
+					{name: "lastname", prompt: "nom"}, {name: "firstname", prompt: "prénom"}, 
+					{name: "birthday", prompt: "date de naissance"}, {name: "placeofbirth", prompt: "ville de naissance"}, 
+					{name: "address", prompt: "adresse"}, {name: "zipcode", prompt: "code postal"}, {name: "city", prompt: "ville"}, 
+					{name: "motif", prompt: "motif"}, {name: "minutes", prompt: "antidatage"}
+				]
+				.forEach(field => {
+
+					if(field.name === "motif") {
+
+						let select = document.createElement("select");
+						select.setAttribute("name", field.name);
+						select.setAttribute("required", "required");
+						form.appendChild(select);
+
+						let prompt = document.createElement("option");
+						prompt.setAttribute("disabled", "disabled");
+						prompt.setAttribute("selected", "selected");
+						prompt.setAttribute("hidden", "hidden");
+						prompt.value = "";
+						prompt.text = "motif";
+						select.appendChild(prompt);
+
+						["travail", "achats", "sante", "famille", "handicap", "sport_animaux", "convocation", "missions", "enfants"]
+						.forEach(motif => {
+
+							let option = document.createElement("option");
+							option.value = motif.value;
+							option.text = motif.name;
+							select.appendChild(option);
+
+						});
+
+						return;
+					}
+
+					let input = document.createElement("input");
+					input.setAttribute("name", field.name);
+					input.setAttribute("required", "required");
+					input.setAttribute("placeholder", field.prompt);
+					form.appendChild(input);
+					
+				});
+
+				let submit = document.createElement("input");
+				submit.setAttribute("type", "submit");
+				submit.value = "ok";
+				form.appendChild(submit);
+
+			});
+
+		</script>
+		
+	</head>
+
+	<body>
+		
+	</body>
+
+</html>
