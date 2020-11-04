@@ -16,10 +16,12 @@ Les attestions générées sont donc prêtes à l'emploi et valables.
 ## Exemples :
 
 *Bob va faire ses courses*
+
 https://nicopowa.github.io/covid_rapide?name=bob&motif=achats
 
 
 *Alice va au travail car c'est plus ou moins la seule activité autorisée*
+
 https://nicopowa.github.io/covid_rapide?name=alice&motif=travail
 
 
@@ -27,10 +29,12 @@ https://nicopowa.github.io/covid_rapide?name=alice&motif=travail
 
 *Eve se promène avec une personne qui lui plaît depuis presque une heure
 et souhaite prolonger cet instant de liberté de 45 minutes*
+
 https://nicopowa.github.io/covid_rapide?name=eve&motif=sport_animaux&minutes=15
 
 
 *M. Dupont aperçoit des agents de police en pleine frénésie de contrôle et n'a pas son attestation.*
+
 *Pas de panique ! Il clique sur le raccourci et l'attestation valable s'affiche instantanément à l'écran.*
 
 
