@@ -149,16 +149,15 @@
 
     <script src="./js/main.js"></script>
     <script>
-        const darkmode = new Darkmode();
-        if (darkmode.isActivated()) {
-            document.getElementById("dark-toggle-switch").checked = true;
-        } else {
-            document.getElementById("dark-toggle-switch").checked = false;
-        }
-        document.getElementById('dark-toggle-switch').onclick=function(){
-          darkmode.toggle()
-        }
+      const darkmode = new Darkmode();
+      if (darkmode.isActivated()) {
+          document.getElementById("dark-toggle-switch").checked = true;
+      } else {
+          document.getElementById("dark-toggle-switch").checked = false;
+      }
+      document.getElementById('dark-toggle-switch').onclick=function(){
+        darkmode.toggle()
+      }
     </script>
-
 </body>
 </html>
