@@ -13,6 +13,23 @@ Le qrcode contient l'heure de création du fichier, remplacée par l'heure de so
 Les attestions générées sont donc prêtes à l'emploi et valables.
 
 
+## Utilisation
+
+- cliquer sur le lien ci-dessous
+- remplir le formulaire une bonne fois pour toutes
+- cliquer sur ok
+- [iOs] page précédente
+- ajouter un raccourci à l'écran d'accueil
+- créer plusieurs raccourcis selon le motif de sortie et l'adresse
+
+iOs affiche l'attestation directement dans Safari
+
+Android télécharge le fichier pdf
+
+
+[c'est par ici](https://nicopowa.github.io/covid_rapide/patch/gen.html)
+
+
 ## Exemples :
 
 *Bob va faire ses courses*
@@ -47,18 +64,11 @@ fork de la version officielle +
 - petit décalage de texte très irritant
 - dépendances non minifiées
 - une icône tricolore
-- pas trop testé, navigateurs récents
-
-
-## Utilisation
-
-- cliquer sur le lien ci-dessous
-- remplir le formulaire une bonne fois pour toutes
-- cliquer sur ok
-- [iOs] revenir sur la page précédente
-- ajouter un raccourci sur l'écran d'accueil
-
-[c'est par ici](https://nicopowa.github.io/covid_rapide/patch/gen.html)
+- formulaire pour les nuls
+- attestation générée par le navigateur
+- pas besoin de build
+- pas trop testé
+- hébergé sur github pages
 
 
 ## Crédits
