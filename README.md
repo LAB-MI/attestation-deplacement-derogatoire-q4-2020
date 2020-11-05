@@ -17,17 +17,20 @@ Les attestions générées sont donc prêtes à l'emploi et valables.
 
 - cliquer sur le lien ci-dessous
 - remplir le formulaire une bonne fois pour toutes
-- cliquer sur ok
+- choisir le motif de sortie
+- choisir le nombre de minutes à retrancher de l'heure actuelle
+- ok
 - [iOs] page précédente
 - ajouter un raccourci à l'écran d'accueil
-- créer plusieurs raccourcis selon le motif de sortie et l'adresse
+- créer d'autres raccourcis selon le motif de sortie et l'adresse
+
+
+[c'est par ici](https://nicopowa.github.io/covid_rapide/patch/gen.html)
+
 
 iOs affiche l'attestation directement dans Safari
 
 Android télécharge le fichier pdf
-
-
-[c'est par ici](https://nicopowa.github.io/covid_rapide/patch/gen.html)
 
 
 ## Exemples :
@@ -66,6 +69,7 @@ fork de la version officielle +
 - une icône tricolore
 - formulaire pour les nuls
 - attestation générée par le navigateur
+- tout petit code, 1k script pdf, 2.7k formulaire
 - pas besoin de build
 - pas trop testé
 - hébergé sur github pages
@@ -82,7 +86,7 @@ https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020
 
 Version o.0
 
-Dimanche après-midi après une belle conversation Samedi nuit
+codé Dimanche après-midi après une belle conversation Samedi nuit, puis quelques mises à jour
 
 Licence MIT
 

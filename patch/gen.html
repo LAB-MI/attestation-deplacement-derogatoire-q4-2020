@@ -43,38 +43,44 @@
 				]
 				.forEach(field => {
 
-					if(field.name === "motif") {
+					switch(field.name) {
 
-						let select = document.createElement("select");
-						select.setAttribute("name", field.name);
-						select.setAttribute("required", "required");
-						form.appendChild(select);
+						case "motif": case "minutes":
+							let select = document.createElement("select");
+							select.setAttribute("name", field.name);
+							select.setAttribute("required", "required");
+							form.appendChild(select);
 
-						let prompt = document.createElement("option");
-						prompt.setAttribute("disabled", "disabled");
-						prompt.setAttribute("selected", "selected");
-						prompt.setAttribute("hidden", "hidden");
-						prompt.value = "";
-						prompt.text = "motif";
-						select.appendChild(prompt);
+							let prompt = document.createElement("option");
+							prompt.setAttribute("disabled", "disabled");
+							prompt.setAttribute("selected", "selected");
+							prompt.setAttribute("hidden", "hidden");
+							prompt.value = "";
+							prompt.text = field.name;
+							select.appendChild(prompt);
 
-						["travail", "achats", "sante", "famille", "handicap", "sport_animaux", "convocation", "missions", "enfants"]
-						.forEach(motif => {
+							let options = field.name === "motif" ?
+							["travail", "achats", "sante", "famille", "handicap", "sport_animaux", "convocation", "missions", "enfants"]
+							: [1, 2, 5, 10, 20, 30, 45, 60, 90, 120, 180]
+							
+							options.forEach(motif => {
 
-							let option = document.createElement("option");
-							option.value = option.text = motif;
-							select.appendChild(option);
+								let option = document.createElement("option");
+								option.value = option.text = motif;
+								select.appendChild(option);
 
-						});
+							});
+							break;
 
-						return;
+						default:
+							let input = document.createElement("input");
+							input.setAttribute("name", field.name);
+							input.setAttribute("required", "required");
+							input.setAttribute("placeholder", field.prompt);
+							form.appendChild(input);
+							break;
+
 					}
-
-					let input = document.createElement("input");
-					input.setAttribute("name", field.name);
-					input.setAttribute("required", "required");
-					input.setAttribute("placeholder", field.prompt);
-					form.appendChild(input);
 					
 				});
 
