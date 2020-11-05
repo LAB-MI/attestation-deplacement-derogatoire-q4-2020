@@ -95,6 +95,4 @@ Licence MIT
 
 ## Reportage exclusif
 
-Les courses de Bob
-
-https://www.youtube.com/watch?v=ZD48f-rc59M
+[Les courses de Bob](https://nicopowa.github.io/covid_rapide/patch/bob_va_faire_ses_courses.mp4)
