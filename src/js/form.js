@@ -127,6 +127,23 @@ const createReasonFieldset = (reasonsData) => {
   return fieldset
 }
 
+const createQuickBtns = (reasonData) => {
+  const res = []
+  res.push(createElement('p', {
+    innerHTML: 'Ces boutons rapides remplissent les champs date, heure et motif et génèrent l\'attestation (remplir les autres champs la première fois) :',
+  }))
+  reasonData.items.forEach((reason) => {
+    const p = createElement('p')
+    p.append(createElement('button', {
+      innerHTML: reason.labelShort || reason.code,
+      value: reason.code,
+      className: 'btn btn-primary btn-quick',
+    }))
+    res.push(p)
+  })
+  return res
+}
+
 export function createForm () {
   const form = $('#form-profile')
   // Évite de recréer le formulaire s'il est déjà créé par react-snap (ou un autre outil de prerender)
@@ -143,7 +160,7 @@ export function createForm () {
     .map((field,
       index) => {
       const formGroup = createFormGroup({
-        autofocus: index === 0,
+        // autofocus: index === 0,
         ...field,
         name: field.key,
       })
@@ -156,5 +173,6 @@ export function createForm () {
     .find(field => field.key === 'reason')
 
   const reasonFieldset = createReasonFieldset(reasonsData)
-  appendToForm([...createTitle(), ...formFirstPart, reasonFieldset])
+  const quickBtns = createQuickBtns(reasonsData)
+  appendToForm([...quickBtns, ...createTitle(), ...formFirstPart, reasonFieldset])
 }

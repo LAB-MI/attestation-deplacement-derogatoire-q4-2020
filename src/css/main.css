@@ -356,6 +356,10 @@ input[type=number] {
   background-color: #3031C1;
 }
 
+.btn-quick {
+  width: 100%;
+}
+
 .github {
   font-size: 0.7em;
   text-align: center;
