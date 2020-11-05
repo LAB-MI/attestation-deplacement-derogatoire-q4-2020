@@ -14,14 +14,29 @@
 
 		<style>
 
-			input, select {
+			html, body {
+				height: 100%;
+				margin: 0;
+			}
 
+			form {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: center;
+				margin: 0 auto;
+				width: 450px;
+				max-width: 90%;
+				height: 100%;
+				max-height: 600px;
+			}
+
+			input, select {
 				display: block;
 				box-sizing: border-box;
-				margin-bottom: 1em;
+				margin: 0 auto;
 				width: 100%;
-				max-width: 240px;
-
+				font-size: 1.15em;
 			}
 
 		</style>
@@ -36,10 +51,10 @@
 				document.body.appendChild(form);
 
 				[
-					{name: "lastname", prompt: "nom"}, {name: "firstname", prompt: "prénom"}, 
-					{name: "birthday", prompt: "date de naissance"}, {name: "placeofbirth", prompt: "ville de naissance"}, 
-					{name: "address", prompt: "adresse"}, {name: "zipcode", prompt: "code postal"}, {name: "city", prompt: "ville"}, 
-					{name: "motif", prompt: "motif"}, {name: "minutes", prompt: "antidatage"}
+					{name: "lastname", prompt: "NOM"}, {name: "firstname", prompt: "PRENOM"}, 
+					{name: "birthday", prompt: "DATE DE NAISSANCE"}, {name: "placeofbirth", prompt: "VILLE DE NAISSANCE"}, 
+					{name: "address", prompt: "ADRESSE"}, {name: "zipcode", prompt: "CODE POSTAL"}, {name: "city", prompt: "VILLE"}, 
+					{name: "motif", prompt: "MOTIF"}, {name: "minutes", prompt: "ANTIDATAGE"}
 				]
 				.forEach(field => {
 
@@ -56,7 +71,7 @@
 							prompt.setAttribute("selected", "selected");
 							prompt.setAttribute("hidden", "hidden");
 							prompt.value = "";
-							prompt.text = field.name;
+							prompt.text = field.prompt;
 							select.appendChild(prompt);
 
 							let options = field.name === "motif" ?
@@ -86,7 +101,7 @@
 
 				let submit = document.createElement("input");
 				submit.setAttribute("type", "submit");
-				submit.value = "ok";
+				submit.value = "OK";
 				form.appendChild(submit);
 
 			});
