@@ -1,6 +1,6 @@
 {
-  "name": "attestation-derogatoire-de-deplacement",
-  "version": "1.0.5",
+  "name": "attestation-deplacement-derogatoire-q4-2020",
+  "version": "1.0.7",
   "description": "Générateur d'attestation de déplacement dérogatoire'",
   "main": "certificate.js",
   "scripts": {
@@ -62,7 +62,9 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "bootstrap": "^4.5.3",
     "pdf-lib": "^1.11.2",
-    "qrcode": "^1.4.4"
+    "qrcode": "^1.4.4",
+    "remove-accents": "^0.4.2",
+    "secure-ls": "^1.2.6"
   },
   "browserslist": [
     "last 5 versions"
