@@ -1,3 +1,5 @@
+import removeAccents from 'remove-accents'
+
 import { $, $$, downloadBlob } from './dom-utils'
 import { addSlash, getFormattedDate, getFormattedTime, setParam, getParam, pad2Zero, clearParams } from './util'
 import pdfBase from '../certificate.pdf'
@@ -8,6 +10,9 @@ const formData = require('../form-data')
 
 let params = new URLSearchParams(window.location.hash.substr(1))
 
+const secureLS = new SecureLS({ encodingType: 'aes' })
+const clearDataSnackbar = $('#snackbar-cleardata')
+const storeDataInput = $('#field-storedata')
 const conditions = {
   '#field-firstname': {
     length: 1,
@@ -58,11 +63,30 @@ function validateAriaFields () {
     .includes(true)
 }
 
+function showSnackbar (snackbarToShow, showDuration = 6000) {
+  snackbarToShow.classList.remove('d-none')
+  setTimeout(() => snackbarToShow.classList.add('show'), 100)
+
+  setTimeout(function () {
+    snackbarToShow.classList.remove('show')
+    setTimeout(() => snackbarToShow.classList.add('d-none'), 500)
+  }, showDuration)
+}
+
 export function setReleaseDateTime (releaseDateInput, releaseTimeInput) {
   const loadedDate = new Date()
   loadedDate.setMinutes(loadedDate.getMinutes() + 5)
   releaseDateInput.value = getFormattedDate(loadedDate)
   releaseTimeInput.value = getFormattedTime(loadedDate)
+}
+
+export function toAscii (string) {
+  if (typeof string !== 'string') {
+    throw new Error('Need string')
+  }
+  const accentsRemoved = removeAccents(string)
+  const asciiString = accentsRemoved.replace(/[^\x00-\x7F]/g, '') // eslint-disable-line no-control-regex
+  return asciiString
 }
 
 export function getProfile (formInputs) {
@@ -72,6 +96,9 @@ export function getProfile (formInputs) {
     if (field.id === 'field-datesortie') {
       const dateSortie = field.value.split('-')
       value = `${dateSortie[2]}/${dateSortie[1]}/${dateSortie[0]}`
+    }
+    if (typeof value === 'string') {
+      value = toAscii(value)
     }
     fields[field.id.substring('field-'.length)] = value
   }
@@ -85,15 +112,21 @@ export function getReasons (reasonInputs) {
   return reasons
 }
 
-export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar) {
+export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput) {
+  const lsProfile = secureLS.get('profile')
+
+  // Continue to store data if already stored
+  storeDataInput.checked = !!lsProfile
   formInputs.forEach((input) => {
+    if (input.name && lsProfile && input.name !== 'datesortie' && input.name !== 'heuresortie' && input.name !== 'field-reason') {
+      input.value = lsProfile[input.name]
+    }
     const exempleElt = input.parentNode.parentNode.querySelector('.exemple')
-    const validitySpan = input.parentNode.parentNode.querySelector('.validity')
     if (input.placeholder && exempleElt) {
       input.addEventListener('input', (event) => {
         if (input.value) {
+          updateSecureLS(formInputs)
           exempleElt.innerHTML = 'ex.&nbsp;: ' + input.placeholder
-          validitySpan.removeAttribute('hidden')
         } else {
           exempleElt.innerHTML = ''
         }
@@ -171,13 +204,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
 
       downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
 
-      snackbar.classList.remove('d-none')
-      setTimeout(() => snackbar.classList.add('show'), 100)
-
-      setTimeout(function () {
-        snackbar.classList.remove('show')
-        setTimeout(() => snackbar.classList.add('d-none'), 500)
-      }, 6000)
+      showSnackbar(snackbar, 6000)
     })
   }
 }

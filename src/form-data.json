@@ -107,7 +107,7 @@
       "type": "text",
       "contentType": "address",
       "label": "Adresse",
-      "autocomplete": "adress-line1",
+      "autocomplete": "address-line1",
       "placeholder": "999 avenue de France"
     },
     {

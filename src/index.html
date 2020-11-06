@@ -67,12 +67,31 @@
                 <button type="button" class="btn btn-primary btn-attestation generate-btn"><span ><i class="fa fa-file-pdf inline-block mr-1"></i>Générer l’attestation</span></button>
             </p>
             <form id="form-profile" accept-charset="UTF-8"></form>
+            <div id="formgroup-storedata">
+                <label class="form-check-label" for="field-storedata">
+                    Information : Mon téléphone se souvient de moi
+                </label>
+            </div>
             <p class="text-center">
                 <button type="button" class="btn btn-primary btn-attestation generate-btn"><span ><i class="fa fa-file-pdf inline-block mr-1"></i>Générer l’attestation</span></button>
             </p>
 
             <div class="bg-primary  d-none" id="snackbar">
                 L'attestation est téléchargée sur votre appareil.
+            </div>
+
+            <p class="text-center mt-1">
+                <button type="button" id="cleardata" class="btn  btn-primary  btn-clear-data">
+                    <span>
+                    <i class="fa fa-trash inline-block mr-1"></i>
+                    Effacer le formulaire et son
+                    contenu sauvegardé sur mon téléphone
+                    </span>
+                </button>
+            </p>
+            <div class="bg-primary  d-none"
+                id="snackbar-cleardata">
+                Les données du formulaire et les données sauvegardées ont été effacées.
             </div>
         </div>
 
