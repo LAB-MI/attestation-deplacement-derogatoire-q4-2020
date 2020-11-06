@@ -5,20 +5,18 @@ import '../css/main.css'
 import formData from '../form-data.json'
 
 import { $, $$, appendTo, createElement } from './dom-utils'
-import { getPreviousFormValue } from './localstorage'
+import { getBackup } from './localstorage'
 import { setParam } from './util'
 
 const createTitle = () => {
   // const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Votre déclaration numérique : ' })
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
-  const latestReasons = getPreviousFormValue('latest-reasons')
-  if (latestReasons) {
+  const backup = getBackup()
+  if (backup && backup.latestReasons) {
     const pReasons = createElement('p', { className: 'msg-info', innerHTML: 'Motifs récents : ' })
     const append = appendTo(pReasons)
-    const reasonsStrings = latestReasons.split('|')
     const reasonsData = getReasonsData()
-    reasonsStrings.forEach((reasonsString, i) => {
-      const reasons = reasonsString.split(', ')
+    backup.latestReasons.forEach((reasons, i) => {
       const reasonsAlias = reasons.map(r => {
         const item = reasonsData.items.find(i => i.code === r)
         return item.alias || item.code
@@ -80,6 +78,8 @@ const createFormGroup = ({
   }
   const labelEl = createElement('label', labelAttrs)
 
+  const backup = getBackup()
+
   const inputGroup = createElement('div', { className: 'input-group align-items-center' })
   const inputAttrs = {
     autocomplete,
@@ -96,7 +96,7 @@ const createFormGroup = ({
     placeholder,
     required: true,
     type,
-    value: getPreviousFormValue(name),
+    value: backup && backup.profile && backup.profile[name],
   }
 
   const input = createElement('input', inputAttrs)
@@ -166,9 +166,9 @@ const createReasonFieldset = (reasonsData) => {
 
   const textSubscribeReason = createElement('p', textSubscribeReasonAttrs)
 
-  const previousReasons = getPreviousFormValue('reasons')
+  const backup = getBackup()
   const reasonsFields = reasonsData.items.map(
-    createReasonField(previousReasons ? previousReasons.split(', ') : []),
+    createReasonField((backup && backup.latestReasons) || []),
   )
 
   appendToFieldset([legend, textAlert, textSubscribeReason, ...reasonsFields])

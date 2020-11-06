@@ -4,15 +4,12 @@ import { $, $$, downloadBlob } from './dom-utils'
 import { addSlash, getFormattedDate, getFormattedTime, setParam, getParam, pad2Zero, clearParams } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
-import { getPreviousFormValue, setPreviousFormValue, clearPreviousFormValues } from './localstorage'
+import { getBackup, saveBackup, clearBackup, restoreBackup, updateBackup } from './localstorage'
 
 const formData = require('../form-data')
 
-let params = new URLSearchParams(window.location.hash.substr(1))
-
-const secureLS = new SecureLS({ encodingType: 'aes' })
 const clearDataSnackbar = $('#snackbar-cleardata')
-const storeDataInput = $('#field-storedata')
+
 const conditions = {
   '#field-firstname': {
     length: 1,
@@ -105,27 +102,44 @@ export function getProfile (formInputs) {
   return fields
 }
 
-export function getReasons (reasonInputs) {
+export function getReasons (reasonInputs, asArray = false) {
   const reasons = reasonInputs
     .filter(input => input.checked)
-    .map(input => input.value).join(', ')
-  return reasons
+    .map(input => input.value)
+  return asArray ? reasons : reasons.join(', ')
 }
 
 export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput) {
-  const lsProfile = secureLS.get('profile')
-
-  // Continue to store data if already stored
-  storeDataInput.checked = !!lsProfile
+  // Restore backup
+  const backup = getBackup()
   formInputs.forEach((input) => {
-    if (input.name && lsProfile && input.name !== 'datesortie' && input.name !== 'heuresortie' && input.name !== 'field-reason') {
-      input.value = lsProfile[input.name]
+    if (!input.name || input.name === 'datesortie' || input.name === 'heuresortie') return;
+    // Restore, then listen to changes
+    if (input.name === 'field-reason') {
+      if (backup && backup.reasons) {
+        input.checked = backup.reasons.includes(input.value)
+      }
+      input.addEventListener('click', (event) => {
+        updateBackup(null, getReasons(reasonInputs, true))
+      })
+    } else {
+      if (backup && backup.profile) {
+        input.value = backup.profile[input.name]
+      }
+      input.addEventListener('input', (event) => {
+        if (input.value) {
+          updateBackup(getProfile(formInputs), null)
+        }
+      })
     }
+  })
+
+  // Example spans
+  formInputs.forEach((input) => {
     const exempleElt = input.parentNode.parentNode.querySelector('.exemple')
     if (input.placeholder && exempleElt) {
       input.addEventListener('input', (event) => {
         if (input.value) {
-          updateSecureLS(formInputs)
           exempleElt.innerHTML = 'ex.&nbsp;: ' + input.placeholder
         } else {
           exempleElt.innerHTML = ''
@@ -151,7 +165,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     })
   })
 
-  const generateBtns = $$('.generate-btn')
+  const generateBtns = $$('.btn-attestation')
   for (const generateBtn of generateBtns) {
     generateBtn.addEventListener('click', async (event) => {
       event.preventDefault()
@@ -171,28 +185,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
 
       const profile = getProfile(formInputs)
 
-      ;[
-        'address',
-        'birthday',
-        'city',
-        'firstname',
-        'lastname',
-        'placeofbirth',
-        'zipcode',
-      ].forEach(inputName => setPreviousFormValue(inputName, profile[inputName]))
-      setPreviousFormValue('reasons', reasons)
-
-      // Store the 3 latest reasons set used
-      const latestReasons = (getPreviousFormValue('latest-reasons') || '')
-        .split('|')
-        .filter(r => !!r)
-        // Remove currently selected reason
-        .filter(r => r !== reasons)
-        // Keep only the first 2
-        .slice(0, 2)
-      // Prepend currently selected reasons, so they're first in new list
-      latestReasons.unshift(reasons)
-      setPreviousFormValue('latest-reasons', latestReasons.join('|'))
+      saveBackup(profile, getReasons(reasonInputs, true))
 
       const pdfBlob = await generatePdf(profile, reasons, pdfBase)
 
@@ -254,6 +247,8 @@ function setField (input, name, value) {
  * Modifie les entrées du formulaire en fonction des paramètres spécifiés sous forme d'URI fragments
  */
 export function followParams (watch = true) {
+  const params = new URLSearchParams(window.location.hash.substr(1))
+
   // Remplit les entrées du formulaire
   formData.flat(1)
     .filter(field => field.key !== 'reason')
@@ -277,7 +272,6 @@ export function followParams (watch = true) {
     if (params.has('auto')) $('.generate-btn').click()
     // Surveiller les modifications d'URL après le chargement
     window.addEventListener('hashchange', () => {
-      params = new URLSearchParams(window.location.hash.substr(1))
       followParams(false)
     })
   }
@@ -292,8 +286,16 @@ export function listenToInputChanges () {
       const name = data.alias || data.key
       const input = document.getElementById('field-' + data.key)
       input.addEventListener('input', (e) => {
-        setParam(name, e.target.value)
-        params = new URLSearchParams(window.location.hash.substr(1))
+        if (name === 'date' || name === 'datesortie' || name === 'heure' || name === 'heuresortie') {
+          // Set this one ONLY if it was already manually set in URL
+          const previous = getParam(name)
+          if (previous) {
+            setParam(name, e.target.value)
+          }
+        } else {
+          // Other fields always saved
+          setParam(name, e.target.value)
+        }
       })
     })
 
@@ -316,12 +318,13 @@ export function listenToInputChanges () {
 }
 
 export function listenToClearData () {
-  $('.clear-data-btn').addEventListener('click', e => {
+  $('.btn-clear-data').addEventListener('click', e => {
     e.preventDefault()
     if (confirm('Confirmer la suppression de toutes vos données stockées localement')) {
-      clearPreviousFormValues()
+      clearBackup()
       clearParams()
-      location.reload()
+      showSnackbar(clearDataSnackbar, 6000)
+      setTimeout(() => location.reload(), 6000)
     }
   })
 }
