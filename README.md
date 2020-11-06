@@ -42,3 +42,5 @@ service :
 - [qrcode](https://github.com/soldair/node-qrcode)
 - [Bootstrap](https://getbootstrap.com/)
 - [Font Awesome](https://fontawesome.com/license)
+- [Leaflet](https://github.com/Leaflet/Leaflet/blob/master/LICENSE)
+- [OpenStreetMap](https://www.openstreetmap.org/copyright)

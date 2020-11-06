@@ -79,6 +79,10 @@ svg {
   height: 1em;
 }
 
+#osm-zone svg {
+    height: initial;
+}
+
 h1.flex.flex-wrap {
   display: flex;
   flex-wrap: wrap;
