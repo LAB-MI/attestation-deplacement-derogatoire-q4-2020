@@ -30,6 +30,7 @@ if (window.localStorage && window.localStorage.getItem('form-value-reasons')) {
     .forEach(k => window.localStorage.removeItem(k))
 }
 
+const reasonsAsComparableString = rs => rs.slice().sort().join('|')
 
 export function getBackup () {
   return ls.get('backup')
@@ -46,9 +47,10 @@ export function saveBackup (profile, reasons) {
   const backup = getBackup()
 
   // Store the 3 latest reasons set used
+  const reasonsString = reasonsAsComparableString(reasons)
   const latestReasons = (backup && backup.latestReasons || [])
     // Remove currently selected reason
-    .filter(r => r !== reasons)
+    .filter(rs => reasonsAsComparableString(rs) !== reasonsString)
     // Keep only the first 2
     .slice(0, 2)
   // Prepend currently selected reasons, so they're first in new list
