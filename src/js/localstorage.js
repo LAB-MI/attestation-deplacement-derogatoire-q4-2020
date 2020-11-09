@@ -33,7 +33,22 @@ if (window.localStorage && window.localStorage.getItem('form-value-reasons')) {
 const reasonsAsComparableString = rs => rs.slice().sort().join('|')
 
 export function getBackup () {
-  return ls.get('backup')
+  const backup = ls.get('backup')
+  if (backup && backup.latestReasons) {
+    // Dedupe (may be needed due to previous bug)
+    // To be removed in a few days
+    let dedupedStrings = []
+    let dedupedArrays = []
+    backup.latestReasons.forEach(rs => {
+      const rsString = reasonsAsComparableString(rs)
+      if (!dedupedStrings.includes(rsString)) {
+        dedupedArrays.push(rs)
+        dedupedStrings.push(rsString)
+      }
+    })
+    backup.latestReasons = dedupedArrays
+  }
+  return backup
 }
 
 export function getPreviousFormValue (name) {
