@@ -676,8 +676,13 @@ input[type=number] {
 /* Override default darkmode library colors */
 .darkmode--activated {
   .dark-toggle {
-    color: black;
-    font-weight: bold;
+    color: #d9d9d9;
+  }
+
+  input, select, textarea, .form-control, .form-control:focus {
+    background: #202327;
+    color: #d9d9d9;
+    border: 1px solid white;
   }
 
   h2 {
@@ -688,8 +693,17 @@ input[type=number] {
     background: #2929ff;
   }
 
-  #cleardata {
+  footer {
     isolation: isolate;
+  }
+
+  #cleardata {
+    background-color: #d9d9d9;
+    color: black;
+  }
+
+  .form-check-label {
+    color: #d9d9d9;
   }
 
   .validity {
