@@ -40,7 +40,8 @@ export async function generatePdf (profile, reasons, pdfBase) {
     `Adresse: ${address} ${zipcode} ${city}`,
     `Sortie: ${datesortie} a ${heuresortie}`,
     `Motifs: ${reasons}`,
-  ].join(';\n ')
+    ''
+  ].join(';\n')
 
   const existingPdfBytes = await fetch(pdfBase).then((res) => res.arrayBuffer())
 
