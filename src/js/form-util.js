@@ -269,7 +269,7 @@ export function followParams (watch = true) {
 
   if (watch) {
     // Génère automatiquement le PDF si besoin, mais seulement au chargement
-    if (params.has('auto')) $('.generate-btn').click()
+    if (params.has('auto')) $('.btn-attestation').click()
     // Surveiller les modifications d'URL après le chargement
     window.addEventListener('hashchange', () => {
       followParams(false)
