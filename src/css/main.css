@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'marianne-bold';
   src: url('../fonts/marianne-bold-webfont.woff2') format('woff2'),
-       url('../fonts/marianne-bold-webfont.woff') format('woff');
+    url('../fonts/marianne-bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -9,7 +9,7 @@
 @font-face {
   font-family: 'marianne-regular';
   src: url('../fonts/marianne-regular-webfont.woff2') format('woff2'),
-       url('../fonts/marianne-regular-webfont.woff') format('woff');
+    url('../fonts/marianne-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -31,24 +31,26 @@ html {
 }
 
 body {
-    margin: 1.25em;
-    background: white;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  margin: 1.25em;
+  background: white;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background: #222;
-    }
+  body {
+    background: #222;
+  }
 }
 
-form, #alert-print {
-    margin: 30px auto;
-    max-width: 400px;
+form,
+#alert-print {
+  margin: 30px auto;
+  max-width: 400px;
 }
 
 h1 {
-	font-size: 2em;
+  font-size: 2em;
   color: black;
 }
 
@@ -59,7 +61,6 @@ h1 {
     background: #222;
   }
 }
-
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
@@ -106,7 +107,6 @@ footer {
   background: white;
 }
 
-
 @media (prefers-color-scheme: dark) {
   footer {
     background: #222;
@@ -115,7 +115,7 @@ footer {
 
 canvas {
   border: 1px solid #ced4da;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
 a {
@@ -125,7 +125,7 @@ a {
 
 @media (prefers-color-scheme: dark) {
   a {
-    color: #A3A3FF;
+    color: #a3a3ff;
   }
 }
 
@@ -169,7 +169,11 @@ p {
     color: #aaa;
   }
 
-  input, select, textarea, .form-control, .form-control:focus {
+  input,
+  select,
+  textarea,
+  .form-control,
+  .form-control:focus {
     background: #333;
     color: white;
     border: 1px solid white;
@@ -201,8 +205,8 @@ p {
 }
 
 #date-selector-group-sortie {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 #date-selector {
@@ -217,22 +221,22 @@ p {
 }
 
 #date-selector-sortie {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    height: 100%;
-    transform: translateX(-50%); /* center the input to avoid reset buttons */
-    opacity: 0;
-    z-index: 1;
-    cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  transform: translateX(-50%); /* center the input to avoid reset buttons */
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
 }
 
-input:invalid+span:after {
+input:invalid + span:after {
   content: '✖';
   padding-left: 0.3em;
 }
 
-input:valid+span:after {
+input:valid + span:after {
   content: '✓';
   padding-left: 0.3em;
 }
@@ -245,7 +249,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -273,7 +277,7 @@ input[type=number] {
   align-items: center;
   padding: 0.3em;
   font-family: 'marianne-regular', Arial, Helvetica, sans-serif;
-  font-size: 0.50em;
+  font-size: 0.5em;
   color: #ffffff;
   background-color: #000191;
 }
@@ -293,10 +297,10 @@ input[type=number] {
 .covid-subtitle {
   display: inline-flex;
   align-items: center;
-  font-size: 0.40em;
+  font-size: 0.4em;
   padding: 0.3em;
   background-color: #e1000f;
-  text-transform:uppercase ;
+  text-transform: uppercase;
   color: #ffffff;
   flex-grow: 1;
 }
@@ -327,7 +331,7 @@ input[type=number] {
 }
 
 .text-desc {
-  font-style :italic;
+  font-style: italic;
   font-size: 0.8em;
 }
 
@@ -353,12 +357,12 @@ input[type=number] {
 }
 
 .btn-attestation:hover {
-  background-color: #3031C1;
+  background-color: #3031c1;
 }
 
 .btn-clear-data {
-    margin: 30px auto;
-    max-width: 400px;
+  margin: 30px auto;
+  max-width: 400px;
 }
 
 .github {
@@ -369,7 +373,7 @@ input[type=number] {
 
 @media (prefers-color-scheme: dark) {
   .github {
-    color: white
+    color: white;
   }
 }
 
@@ -379,12 +383,12 @@ input[type=number] {
 
 @media (prefers-color-scheme: dark) {
   .github-link {
-    color: #A3A3FF;
+    color: #a3a3ff;
   }
 }
 
 .github-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .label-mi {
@@ -407,7 +411,7 @@ input[type=number] {
 
 @media (prefers-color-scheme: dark) {
   .validity {
-    color: #DDD;
+    color: #ddd;
   }
 }
 
@@ -432,7 +436,7 @@ input[type=number] {
   }
 
   .footer-links {
-      background: #444;
+    background: #444;
   }
 }
 
@@ -458,12 +462,12 @@ input[type=number] {
 }
 
 .num-08:hover {
-    text-decoration: underline;
-    color: #0A81FF;
+  text-decoration: underline;
+  color: #0a81ff;
 }
 
 .stores-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .confidentialite {
@@ -477,10 +481,11 @@ input[type=number] {
     }
 
     @media (prefers-color-scheme: dark) {
-        td, th {
-            border-color: #A3A3FF;
-            color: white;
-        }
+      td,
+      th {
+        border-color: #a3a3ff;
+        color: white;
+      }
     }
 
     .header-row {
@@ -499,7 +504,7 @@ input[type=number] {
 
     @media (prefers-color-scheme: dark) {
       .name-col {
-        color: #A3A3FF;
+        color: #a3a3ff;
       }
     }
   }
@@ -518,10 +523,9 @@ input[type=number] {
       text-decoration: none;
       color: #ffffff;
     }
-
   }
   em {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -545,27 +549,27 @@ input[type=number] {
 }
 
 @media (prefers-color-scheme: dark) {
-    .titre-3 {
-        color: white;
-    }
+  .titre-3 {
+    color: white;
+  }
 
-    .titre-4 {
-        color: white;
-    }
+  .titre-4 {
+    color: white;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   .titre-2 {
-    color: #A3A3FF;
+    color: #a3a3ff;
   }
 }
 
-@media (max-width: 800px){
+@media (max-width: 800px) {
   table thead {
     display: none;
   }
 
-  table tr{
+  table tr {
     display: block;
     margin-bottom: 40px;
   }
@@ -586,7 +590,8 @@ input[type=number] {
   }
 }
 
-#snackbar, #snackbar-cleardata {
+#snackbar,
+#snackbar-cleardata {
   min-width: 250px;
   color: #fff;
   text-align: center;
@@ -603,25 +608,27 @@ input[type=number] {
   transition: all 0.5s ease-in-out;
 }
 
-#snackbar.show, #snackbar-cleardata.show {
+#snackbar.show,
+#snackbar-cleardata.show {
   opacity: 1;
 }
 
-@media only screen and (min-width:600px) {
-    .hide-on-desktop, * [aria-labelledby='hide-on-desktop'] {
-        display: none;
-        max-height: 0;
-        overflow: hidden;
-    }
+@media only screen and (min-width: 600px) {
+  .hide-on-desktop,
+  * [aria-labelledby='hide-on-desktop'] {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+  }
 }
 
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-[id^="footnote"] {
+[id^='footnote'] {
   margin: 30px auto;
   max-width: 400px;
   font-size: 0.8em;
@@ -629,8 +636,8 @@ input[type=number] {
 }
 
 @media (prefers-color-scheme: dark) {
-  [id^="footnote"] {
-    color:white;
+  [id^='footnote'] {
+    color: white;
     background: #222;
   }
 }
@@ -639,6 +646,7 @@ input[type=number] {
   position: fixed;
   bottom: 1em;
   left: 50%;
+  z-index: 999;
   transform: translateX(-50%);
 }
 
