@@ -1,14 +1,15 @@
 import removeAccents from 'remove-accents'
 
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate } from './util'
+import { addSlash, getFormattedDate, getFormattedTime, setParam, getParam, pad2Zero, clearParams } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
-import SecureLS from 'secure-ls'
+import { getBackup, saveBackup, clearBackup, restoreBackup, updateBackup } from './localstorage'
 
-const secureLS = new SecureLS({ encodingType: 'aes' })
+const formData = require('../form-data')
+
 const clearDataSnackbar = $('#snackbar-cleardata')
-const storeDataInput = $('#field-storedata')
+
 const conditions = {
   '#field-firstname': {
     length: 1,
@@ -59,29 +60,6 @@ function validateAriaFields () {
     .includes(true)
 }
 
-function updateSecureLS (formInputs) {
-  if (wantDataToBeStored() === true) {
-    secureLS.set('profile', getProfile(formInputs))
-  } else {
-    clearSecureLS()
-  }
-}
-
-function clearSecureLS () {
-  secureLS.clear()
-}
-
-function clearForm () {
-  const formProfile = $('#form-profile')
-  formProfile.reset()
-  storeDataInput.checked = false
-}
-
-function setCurrentDate (releaseDateInput) {
-  const currentDate = new Date()
-  releaseDateInput.value = getFormattedDate(currentDate)
-}
-
 function showSnackbar (snackbarToShow, showDuration = 6000) {
   snackbarToShow.classList.remove('d-none')
   setTimeout(() => snackbarToShow.classList.add('show'), 100)
@@ -92,13 +70,11 @@ function showSnackbar (snackbarToShow, showDuration = 6000) {
   }, showDuration)
 }
 
-export function wantDataToBeStored () {
-  return storeDataInput.checked
-}
-
-export function setReleaseDateTime (releaseDateInput) {
+export function setReleaseDateTime (releaseDateInput, releaseTimeInput) {
   const loadedDate = new Date()
+  loadedDate.setMinutes(loadedDate.getMinutes() + 5)
   releaseDateInput.value = getFormattedDate(loadedDate)
+  releaseTimeInput.value = getFormattedTime(loadedDate)
 }
 
 export function toAscii (string) {
@@ -126,27 +102,44 @@ export function getProfile (formInputs) {
   return fields
 }
 
-export function getReasons (reasonInputs) {
+export function getReasons (reasonInputs, asArray = false) {
   const reasons = reasonInputs
     .filter(input => input.checked)
-    .map(input => input.value).join(', ')
-  return reasons
+    .map(input => input.value)
+  return asArray ? reasons : reasons.join(', ')
 }
 
 export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput) {
-  const lsProfile = secureLS.get('profile')
-
-  // Continue to store data if already stored
-  storeDataInput.checked = !!lsProfile
+  // Restore backup
+  const backup = getBackup()
   formInputs.forEach((input) => {
-    if (input.name && lsProfile && input.name !== 'datesortie' && input.name !== 'heuresortie' && input.name !== 'field-reason') {
-      input.value = lsProfile[input.name]
+    if (!input.name || input.name === 'datesortie' || input.name === 'heuresortie') return;
+    // Restore, then listen to changes
+    if (input.name === 'field-reason') {
+      if (backup && backup.reasons) {
+        input.checked = backup.reasons.includes(input.value)
+      }
+      input.addEventListener('click', (event) => {
+        updateBackup(null, getReasons(reasonInputs, true))
+      })
+    } else {
+      if (backup && backup.profile) {
+        input.value = backup.profile[input.name]
+      }
+      input.addEventListener('input', (event) => {
+        if (input.value) {
+          updateBackup(getProfile(formInputs), null)
+        }
+      })
     }
+  })
+
+  // Example spans
+  formInputs.forEach((input) => {
     const exempleElt = input.parentNode.parentNode.querySelector('.exemple')
     if (input.placeholder && exempleElt) {
       input.addEventListener('input', (event) => {
         if (input.value) {
-          updateSecureLS(formInputs)
           exempleElt.innerHTML = 'ex.&nbsp;: ' + input.placeholder
         } else {
           exempleElt.innerHTML = ''
@@ -171,42 +164,42 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
       reasonAlert.classList.toggle('hidden', !isInError)
     })
   })
-  $('#cleardata').addEventListener('click', () => {
-    clearSecureLS()
-    clearForm()
-    setCurrentDate(releaseDateInput)
-    showSnackbar(clearDataSnackbar, 3000)
-  })
-  $('#field-storedata').addEventListener('click', () => {
-    updateSecureLS(formInputs)
-  })
-  $('#generate-btn').addEventListener('click', async (event) => {
-    event.preventDefault()
 
-    const reasons = getReasons(reasonInputs)
-    if (!reasons) {
-      reasonFieldset.classList.add('fieldset-error')
-      reasonAlert.classList.remove('hidden')
-      reasonFieldset.scrollIntoView && reasonFieldset.scrollIntoView()
-      return
-    }
+  const generateBtns = $$('.btn-attestation')
+  for (const generateBtn of generateBtns) {
+    generateBtn.addEventListener('click', async (event) => {
+      event.preventDefault()
 
-    const invalid = validateAriaFields()
-    if (invalid) {
-      return
-    }
-    updateSecureLS(formInputs)
-    const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
+      const reasons = getReasons(reasonInputs)
+      if (!reasons) {
+        reasonFieldset.classList.add('fieldset-error')
+        reasonAlert.classList.remove('hidden')
+        reasonFieldset.scrollIntoView && reasonFieldset.scrollIntoView()
+        return
+      }
 
-    const creationInstant = new Date()
-    const creationDate = creationInstant.toLocaleDateString('fr-CA')
-    const creationHour = creationInstant
-      .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-      .replace(':', '-')
+      const invalid = validateAriaFields()
+      if (invalid) {
+        return
+      }
 
-    downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
-    showSnackbar(snackbar, 6000)
-  })
+      const profile = getProfile(formInputs)
+
+      saveBackup(profile, getReasons(reasonInputs, true))
+
+      const pdfBlob = await generatePdf(profile, reasons, pdfBase)
+
+      const creationInstant = new Date()
+      const creationDate = creationInstant.toLocaleDateString('fr-CA')
+      const creationHour = creationInstant
+        .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+        .replace(':', '-')
+
+      downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
+
+      showSnackbar(snackbar, 6000)
+    })
+  }
 }
 
 export function prepareForm () {
@@ -216,6 +209,122 @@ export function prepareForm () {
   const reasonFieldset = $('#reason-fieldset')
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
-  setReleaseDateTime(releaseDateInput)
-  prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput)
+  const releaseTimeInput = $('#field-heuresortie')
+  setReleaseDateTime(releaseDateInput, releaseTimeInput)
+  prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
+}
+
+/**
+ * Modifie un champ de formulaire, en gérant quelques formats utiles
+ */
+function setField (input, name, value) {
+  if (name === 'heuresortie' || name === 'heure') {
+    // Accepter les valeurs relatives comme "-10m" ou "+1h"
+    // Note: "+" sera converti en espace, d'où le "|\s" ci-dessous
+    const match = value.match(/^(-|\+|\s)(\d+)(m|h)(\d+)?$/i)
+    if (match) {
+      const sign = match[1] === '-' ? -1 : +1
+      const val1 = sign * Number(match[2])
+      const unit = match[3]
+      const val2 = sign * Number(match[4] || '0')
+      let date = new Date()
+      if (unit === 'm' || unit === 'M') {
+        date.setMinutes(date.getMinutes() + val1)
+        date.setSeconds(date.getSeconds() + val2)
+      } else {
+        date.setHours(date.getHours() + val1)
+        date.setMinutes(date.getMinutes() + val2)
+      }
+      input.value = `${pad2Zero(date.getHours())}:${pad2Zero(date.getMinutes())}`
+      return
+    }
+  }
+  // Cas général: prendre la valeur tel quel
+  input.value = value
+}
+
+/**
+ * Modifie les entrées du formulaire en fonction des paramètres spécifiés sous forme d'URI fragments
+ */
+export function followParams (watch = true) {
+  const params = new URLSearchParams(window.location.hash.substr(1))
+
+  // Remplit les entrées du formulaire
+  formData.flat(1)
+    .filter(field => field.key !== 'reason')
+    .filter(field => !field.isHidden)
+    .forEach(data => {
+      const name = data.alias || data.key
+      const field = $('#field-' + data.key)
+      if (params.has(name)) setField(field, name, params.get(name))
+    })
+
+  // Coche les raisons
+  const reasonsObj = formData.flat(1).find(field => field.key === 'reason')
+  reasonsObj.items.forEach(data => {
+    const name = data.alias || data.code
+    const field = $('#checkbox-' + data.code)
+    if (params.get(reasonsObj.alias || 'raisons' || reasonsObj.key)?.split(',').includes(name) && !field.checked) field.click()
+  })
+
+  if (watch) {
+    // Génère automatiquement le PDF si besoin, mais seulement au chargement
+    if (params.has('auto')) $('.btn-attestation').click()
+    // Surveiller les modifications d'URL après le chargement
+    window.addEventListener('hashchange', () => {
+      followParams(false)
+    })
+  }
+}
+
+export function listenToInputChanges () {
+  // Champs
+  formData.flat(1)
+    .filter(field => field.key !== 'reason')
+    .filter(field => !field.isHidden)
+    .forEach(data => {
+      const name = data.alias || data.key
+      const input = document.getElementById('field-' + data.key)
+      input.addEventListener('input', (e) => {
+        if (name === 'date' || name === 'datesortie' || name === 'heure' || name === 'heuresortie') {
+          // Set this one ONLY if it was already manually set in URL
+          const previous = getParam(name)
+          if (previous) {
+            setParam(name, e.target.value)
+          }
+        } else {
+          // Other fields always saved
+          setParam(name, e.target.value)
+        }
+      })
+    })
+
+  // Raisons
+  const reasonsObj = formData.flat(1).find(field => field.key === 'reason')
+  reasonsObj.items.forEach(data => {
+    const name = data.alias || data.code
+    const checkbox = $('#checkbox-' + data.code)
+    checkbox.addEventListener('click', (e) => {
+      let reasons = getParam(reasonsObj.alias || 'raisons')?.split(',')
+      if (!reasons) return setParam(reasonsObj.alias || 'raisons', name)
+      if (checkbox.checked && !reasons.includes(name)) {
+        reasons.push(name)
+      } else if (!checkbox.checked && reasons.includes(name)) {
+        reasons = reasons.filter(elem => elem !== name)
+      }
+      setParam(reasonsObj.alias || 'raisons', reasons.toString())
+    })
+  })
+}
+
+export function listenToClearData () {
+  $('.btn-clear-data').addEventListener('click', e => {
+    e.preventDefault()
+    if (confirm('Confirmer la suppression de toutes vos données stockées localement')) {
+      clearBackup()
+      clearParams()
+      showSnackbar(clearDataSnackbar, 6000)
+      setTimeout(() => location.reload(), 6000)
+    }
+  })
 }
