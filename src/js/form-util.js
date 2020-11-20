@@ -1,7 +1,7 @@
 import removeAccents from 'remove-accents'
 
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate } from './util'
+import { addSlash, getFormattedDate, getFormattedTime } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 import SecureLS from 'secure-ls'
@@ -99,6 +99,11 @@ export function wantDataToBeStored () {
 export function setReleaseDateTime (releaseDateInput) {
   const loadedDate = new Date()
   releaseDateInput.value = getFormattedDate(loadedDate)
+}
+
+export function setReleaseTime (releaseTimeInput) {
+  const loadedDate = new Date()
+  releaseTimeInput.value = getFormattedTime(loadedDate)
 }
 
 export function toAscii (string) {
@@ -216,6 +221,8 @@ export function prepareForm () {
   const reasonFieldset = $('#reason-fieldset')
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
+  const releaseTimeInput = $('#field-heuresortie')
   setReleaseDateTime(releaseDateInput)
+  setReleaseTime(releaseTimeInput)
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput)
 }
