@@ -122,6 +122,11 @@ export function getProfile (formInputs) {
       value = toAscii(value)
     }
     fields[field.id.substring('field-'.length)] = value
+	
+	// Store last reason
+	if (field.id.includes('checkbox-') && field.checked) {
+      fields['last-reason'] = field.id.split('-')[1];
+	}
   }
   return fields
 }
@@ -142,6 +147,13 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     if (input.name && lsProfile && input.name !== 'datesortie' && input.name !== 'heuresortie' && input.name !== 'field-reason') {
       input.value = lsProfile[input.name]
     }
+	
+	// Restore last checked reason
+	if (input.name === 'field-reason'
+        && input.value === lsProfile['last-reason']) {
+      input.checked = true;
+	}
+	
     const exempleElt = input.parentNode.parentNode.querySelector('.exemple')
     if (input.placeholder && exempleElt) {
       input.addEventListener('input', (event) => {
