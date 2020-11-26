@@ -1,18 +1,6 @@
 import { generateQR } from './util'
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
 
-const ys = {
-  travail: 488,
-  achats: 417,
-  sante: 347,
-  famille: 325,
-  handicap: 291,
-  sport_animaux: 269,
-  convocation: 199,
-  missions: 178,
-  enfants: 157,
-}
-
 export async function generatePdf (profile, pdfBase) {
   const creationInstant = new Date()
   const creationDate = creationInstant.toLocaleDateString('fr-FR')
@@ -80,9 +68,9 @@ export async function generatePdf (profile, pdfBase) {
     page1.drawText(text, { x, y, size, font })
   }
 
-  //drawText(`${firstname} ${lastname}`, 107, 657)
-  //drawText(birthday, 107, 627)
-  //drawText(placeofbirth, 240, 627)
+  // drawText(`${firstname} ${lastname}`, 107, 657)
+  // drawText(birthday, 107, 627)
+  // drawText(placeofbirth, 240, 627)
   drawText(`${address} ${zipcode} ${city}`, 162, 702)
   drawText(`le ${datesortie} à ${heuresortie}`, 168, 688)
   drawText(`${agency}`, 179, 674)
@@ -119,15 +107,4 @@ export async function generatePdf (profile, pdfBase) {
   const pdfBytes = await pdfDoc.save()
 
   return new Blob([pdfBytes], { type: 'application/pdf' })
-}
-
-function getIdealFontSize (font, text, maxWidth, minSize, defaultSize) {
-  let currentSize = defaultSize
-  let textWidth = font.widthOfTextAtSize(text, defaultSize)
-
-  while (textWidth > maxWidth && currentSize > minSize) {
-    textWidth = font.widthOfTextAtSize(text, --currentSize)
-  }
-
-  return textWidth > maxWidth ? null : currentSize
 }
