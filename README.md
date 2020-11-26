@@ -6,7 +6,7 @@
 
 ```console
 git clone https://github.com/Proprioo/justificatif-visite-covid.git
-cd bon-de-visite
+cd justificatif-visite-covid
 npm i
 npm start
 ```
