@@ -5,7 +5,7 @@
 ### Installer le projet
 
 ```console
-git clone https://gitlab.com/proprioo/bon-de-visite.git
+git clone https://github.com/Proprioo/justificatif-visite-covid.git
 cd bon-de-visite
 npm i
 npm start
@@ -33,7 +33,7 @@ Le code à déployer sera le contenu du dossier `dist`
 
 ## Crédits
 
-Ce projet a été réalisé à partir d'un fork du dépôt [deplacement-covid-19](https://github.com/nesk/deplacement-covid-19) de lui-même réalisé à partir d'un fork du dépôt [covid-19-certificate](https://github.com/nesk/covid-19-certificate) de [Johann Pardanaud](https://github.com/nesk).
+Ce projet a été réalisé à partir d'un fork du dépôt [attestation-deplacement-derogatoire-q4-2020](https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020) de lui-même réalisé à partir d'un fork du dépôt [deplacement-covid-19](https://github.com/nesk/deplacement-covid-19) de lui-même réalisé à partir d'un fork du dépôt [covid-19-certificate](https://github.com/nesk/covid-19-certificate) de [Johann Pardanaud](https://github.com/nesk).
 
 Les projets open source suivants ont été utilisés pour le développement de ce
 service :
