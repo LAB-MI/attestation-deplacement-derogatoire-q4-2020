@@ -18,10 +18,12 @@
     },
     {
       "key": "tel",
-      "type": "text",
+      "type": "number",
       "contentType": "tel",
       "label": "Numéro du visiteur",
       "autocomplete": "tel",
+      "inputmode": "numeric",
+      "pattern": "[0-9]{10}",
       "maxlength": 10
     },
     {
@@ -42,10 +44,12 @@
     },
     {
       "key": "telAgent",
-      "type": "text",
+      "type": "number",
       "contentType": "tel",
       "label": "Numéro de l'agent",
       "autocomplete": "tel",
+      "inputmode": "numeric",
+      "pattern": "[0-9]{10}",
       "maxlength": 10
     },
     {
