@@ -1,7 +1,7 @@
 import removeAccents from 'remove-accents'
 
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate } from './util'
+import { getFormattedDate } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 import SecureLS from 'secure-ls'
@@ -154,7 +154,6 @@ export function prepareInputs (formInputs, snackbar, releaseDateInput) {
       })
     }
   })
-
 
   $('#cleardata').addEventListener('click', () => {
     clearSecureLS()

@@ -97,5 +97,6 @@ export function createForm () {
 
       return formGroup
     })
+
   appendToForm([...createTitle(), ...formFirstPart])
 }
