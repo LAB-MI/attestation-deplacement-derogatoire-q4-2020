@@ -13,7 +13,7 @@ const ys = {
   enfants: 157,
 }
 
-export async function generatePdf (profile, reasons, pdfBase) {
+export async function generatePdf (profile, pdfBase) {
   const creationInstant = new Date()
   const creationDate = creationInstant.toLocaleDateString('fr-FR')
   const creationHour = creationInstant
@@ -30,8 +30,6 @@ export async function generatePdf (profile, reasons, pdfBase) {
     mandate,
     card,
     agency,
-    birthday,
-    placeofbirth,
     address,
     zipcode,
     city,
@@ -93,27 +91,6 @@ export async function generatePdf (profile, reasons, pdfBase) {
   drawText(`${mandate}`, 177, 630)
   drawText(`${firstname} ${lastname} ${tel}`, 119, 616)
 
-  /*reasons
-    .split(', ')
-    .forEach(reason => {
-      drawText('x', 59, ys[reason], 12)
-    })
-
-  let locationSize = getIdealFontSize(font, profile.city, 83, 7, 11)
-
-  if (!locationSize) {
-    alert(
-      'Le nom de la ville risque de ne pas être affiché correctement en raison de sa longueur. ' +
-        'Essayez d\'utiliser des abréviations ("Saint" en "St." par exemple) quand cela est possible.',
-    )
-    locationSize = 7
-  }
-
-  drawText(profile.city, 93, 122, locationSize)
-  drawText(`${profile.datesortie}`, 76, 92, 11)
-  drawText(`${profile.heuresortie}`, 246, 92, 11)
-*/
-
   // const shortCreationDate = `${creationDate.split('/')[0]}/${
   //   creationDate.split('/')[1]
   // }`
@@ -138,16 +115,6 @@ export async function generatePdf (profile, reasons, pdfBase) {
     width: 92,
     height: 92,
   })
-
-  /*pdfDoc.addPage()
-  const page2 = pdfDoc.getPages()[1]
-  page2.drawText(qrTitle1 + qrTitle2, { x: 50, y: page2.getHeight() - 70, size: 11, font, color: rgb(1, 1, 1) })
-  page2.drawImage(qrImage, {
-    x: 50,
-    y: page2.getHeight() - 390,
-    width: 300,
-    height: 300,
-  })*/
 
   const pdfBytes = await pdfDoc.save()
 

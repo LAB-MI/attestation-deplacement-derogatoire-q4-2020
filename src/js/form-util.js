@@ -22,12 +22,6 @@ const conditions = {
   '#field-lastnameAgent': {
     length: 1,
   },
-  '#field-birthday': {
-    pattern: /^([0][1-9]|[1-2][0-9]|30|31)\/([0][1-9]|10|11|12)\/(19[0-9][0-9]|20[0-1][0-9]|2020)/g,
-  },
-  '#field-placeofbirth': {
-    length: 1,
-  },
   '#field-address': {
     length: 1,
   },
@@ -139,7 +133,7 @@ export function getReasons (reasonInputs) {
   return reasons
 }
 
-export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput) {
+export function prepareInputs (formInputs, snackbar, releaseDateInput) {
   const lsProfile = secureLS.get('profile')
 
   // Continue to store data if already stored
@@ -161,22 +155,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     }
   })
 
-  $('#field-birthday').addEventListener('keyup', function (event) {
-    event.preventDefault()
-    const input = event.target
-    const key = event.keyCode || event.charCode
-    if (key !== 8 && key !== 46) {
-      input.value = addSlash(input.value)
-    }
-  })
 
-  reasonInputs.forEach(radioInput => {
-    radioInput.addEventListener('change', function (event) {
-      const isInError = reasonInputs.every(input => !input.checked)
-      reasonFieldset.classList.toggle('fieldset-error', isInError)
-      reasonAlert.classList.toggle('hidden', !isInError)
-    })
-  })
   $('#cleardata').addEventListener('click', () => {
     clearSecureLS()
     clearForm()
@@ -189,20 +168,12 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
   $('#generate-btn').addEventListener('click', async (event) => {
     event.preventDefault()
 
-    const reasons = getReasons(reasonInputs)
-    if (!reasons) {
-      reasonFieldset.classList.add('fieldset-error')
-      reasonAlert.classList.remove('hidden')
-      reasonFieldset.scrollIntoView && reasonFieldset.scrollIntoView()
-      return
-    }
-
     const invalid = validateAriaFields()
     if (invalid) {
       return
     }
     updateSecureLS(formInputs)
-    const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
+    const pdfBlob = await generatePdf(getProfile(formInputs), pdfBase)
 
     const creationInstant = new Date()
     const creationDate = creationInstant.toLocaleDateString('fr-CA')
@@ -218,10 +189,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
 export function prepareForm () {
   const formInputs = $$('#form-profile input')
   const snackbar = $('#snackbar')
-  const reasonInputs = [...$$('input[name="field-reason"]')]
-  const reasonFieldset = $('#reason-fieldset')
-  const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
   setReleaseDateTime(releaseDateInput)
-  prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput)
+  prepareInputs(formInputs, snackbar, releaseDateInput)
 }
