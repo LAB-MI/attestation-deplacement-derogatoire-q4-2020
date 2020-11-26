@@ -8,7 +8,7 @@ import { $, appendTo, createElement } from './dom-utils'
 
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Saisissez les informations de la visite: ' })
-  const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
+  const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont optionnels.' })
   return [h2, p]
 }
 // createElement('div', { className: 'form-group' })
