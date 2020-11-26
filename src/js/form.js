@@ -49,7 +49,7 @@ const createFormGroup = ({
     name,
     pattern,
     placeholder,
-    required: true,
+    required: false,
     type,
   }
 
