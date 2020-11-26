@@ -7,7 +7,7 @@ import formData from '../form-data.json'
 import { $, appendTo, createElement } from './dom-utils'
 
 const createTitle = () => {
-  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
+  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Saisissez les informations de la visite: ' })
   const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont obligatoires.' })
   return [h2, p]
 }
