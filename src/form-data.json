@@ -4,7 +4,7 @@
       "key": "firstname",
       "type": "text",
       "contentType": "firstname",
-      "label": "Prénom",
+      "label": "Prénom du visiteur",
       "autocomplete": "given-name",
       "placeholder": "Camille"
     },
@@ -12,35 +12,85 @@
       "key": "lastname",
       "type": "text",
       "contentType": "lastname",
-      "label": "Nom",
+      "label": "Nom  du visiteur",
       "autocomplete": "family-name",
       "placeholder": "Dupont"
     },
     {
-      "key": "birthday",
+      "key": "tel",
       "type": "text",
-      "contentType": "birthday",
-      "label": "Date de naissance",
-      "autocomplete": "birthday",
-      "pattern": "^([0][1-9]|[1-2][0-9]|30|31)\/([0][1-9]|10|11|12)\/(19[0-9][0-9]|20[0-1][0-9]|2020)",
-      "maxlength": 10,
-      "placeholder": "01/01/1970"
-    }
+      "contentType": "tel",
+      "label": "Numéro du visiteur",
+      "autocomplete": "tel",
+      "maxlength": 10
+    },
+    {
+      "key": "firstnameAgent",
+      "type": "text",
+      "contentType": "firstname",
+      "label": "Prénom de l'agent",
+      "autocomplete": "given-name",
+      "placeholder": "Camille"
+    },
+    {
+      "key": "lastnameAgent",
+      "type": "text",
+      "contentType": "lastname",
+      "label": "Nom de l'agent",
+      "autocomplete": "family-name",
+      "placeholder": "Dupont"
+    },
+    {
+      "key": "telAgent",
+      "type": "text",
+      "contentType": "tel",
+      "label": "Numéro de l'agent",
+      "autocomplete": "tel",
+      "maxlength": 10
+    },
+    {
+      "key": "mandate",
+      "type": "text",
+      "contentType": "mandate",
+      "label": "Numéro de mandat"
+    },
+    {
+      "key": "card",
+      "type": "text",
+      "contentType": "card",
+      "label": "Numéro de carte professionnelle"
+    },
+    {
+      "key": "agency",
+      "type": "text",
+      "contentType": "agency",
+      "label": "Agence immobilière"
+    },
+    {
+            "key": "birthday",
+             "type": "text",
+            "contentType": "birthday",
+            "label": "Date de naissance",
+            "autocomplete": "birthday",
+            "pattern": "^([0][1-9]|[1-2][0-9]|30|31)\/([0][1-9]|10|11|12)\/(19[0-9][0-9]|20[0-1][0-9]|2020)",
+           "maxlength": 10,
+            "placeholder": "01/01/1970"
+          },
+               {
+                 "key": "placeofbirth",
+                   "type": "text",
+                  "contentType": "cityofbirth",
+                 "label": "Lieu de naissance",
+                  "autocomplete": "off",
+                  "placeholder": "Paris"
+                }
   ],
   [
-    {
-      "key": "placeofbirth",
-      "type": "text",
-      "contentType": "cityofbirth",
-      "label": "Lieu de naissance",
-      "autocomplete": "off",
-      "placeholder": "Paris"
-    },
     {
       "key": "address",
       "type": "text",
       "contentType": "address",
-      "label": "Adresse",
+      "label": "Adresse du bien",
       "autocomplete": "address-line1",
       "placeholder": "999 avenue de France"
     },

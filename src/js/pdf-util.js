@@ -23,6 +23,13 @@ export async function generatePdf (profile, reasons, pdfBase) {
   const {
     lastname,
     firstname,
+    tel,
+    lastnameAgent,
+    firstnameAgent,
+    telAgent,
+    mandate,
+    card,
+    agency,
     birthday,
     placeofbirth,
     address,
@@ -36,10 +43,15 @@ export async function generatePdf (profile, reasons, pdfBase) {
     `Cree le: ${creationDate} a ${creationHour}`,
     `Nom: ${lastname}`,
     `Prenom: ${firstname}`,
-    `Naissance: ${birthday} a ${placeofbirth}`,
+    `Tel: ${tel}`,
+    `Nom de l'agent: ${lastnameAgent}`,
+    `Prenom de l'agent: ${firstnameAgent}`,
+    `Tel de l'agent: ${telAgent}`,
+    `Mandat: ${mandate}`,
+    `Carte: ${card}`,
+    `Agence: ${agency}`,
     `Adresse: ${address} ${zipcode} ${city}`,
     `Sortie: ${datesortie} a ${heuresortie}`,
-    `Motifs: ${reasons}`,
     '', // Pour ajouter un ; aussi au dernier élément
   ].join(';\n')
 
@@ -70,12 +82,18 @@ export async function generatePdf (profile, reasons, pdfBase) {
     page1.drawText(text, { x, y, size, font })
   }
 
-  drawText(`${firstname} ${lastname}`, 107, 657)
-  drawText(birthday, 107, 627)
-  drawText(placeofbirth, 240, 627)
-  drawText(`${address} ${zipcode} ${city}`, 124, 596)
+  //drawText(`${firstname} ${lastname}`, 107, 657)
+  //drawText(birthday, 107, 627)
+  //drawText(placeofbirth, 240, 627)
+  drawText(`${address} ${zipcode} ${city}`, 162, 702)
+  drawText(`le ${datesortie} à ${heuresortie}`, 168, 688)
+  drawText(`${agency}`, 179, 674)
+  drawText(`${card}`, 244, 659)
+  drawText(`${firstnameAgent} ${lastnameAgent} ${telAgent}`, 167, 645)
+  drawText(`${mandate}`, 177, 630)
+  drawText(`${firstname} ${lastname} ${tel}`, 119, 616)
 
-  reasons
+  /*reasons
     .split(', ')
     .forEach(reason => {
       drawText('x', 59, ys[reason], 12)
@@ -94,6 +112,7 @@ export async function generatePdf (profile, reasons, pdfBase) {
   drawText(profile.city, 93, 122, locationSize)
   drawText(`${profile.datesortie}`, 76, 92, 11)
   drawText(`${profile.heuresortie}`, 246, 92, 11)
+*/
 
   // const shortCreationDate = `${creationDate.split('/')[0]}/${
   //   creationDate.split('/')[1]
@@ -120,7 +139,7 @@ export async function generatePdf (profile, reasons, pdfBase) {
     height: 92,
   })
 
-  pdfDoc.addPage()
+  /*pdfDoc.addPage()
   const page2 = pdfDoc.getPages()[1]
   page2.drawText(qrTitle1 + qrTitle2, { x: 50, y: page2.getHeight() - 70, size: 11, font, color: rgb(1, 1, 1) })
   page2.drawImage(qrImage, {
@@ -128,7 +147,7 @@ export async function generatePdf (profile, reasons, pdfBase) {
     y: page2.getHeight() - 390,
     width: 300,
     height: 300,
-  })
+  })*/
 
   const pdfBytes = await pdfDoc.save()
 

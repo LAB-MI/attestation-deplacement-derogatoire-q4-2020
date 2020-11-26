@@ -16,6 +16,12 @@ const conditions = {
   '#field-lastname': {
     length: 1,
   },
+  '#field-firstnameAgent': {
+    length: 1,
+  },
+  '#field-lastnameAgent': {
+    length: 1,
+  },
   '#field-birthday': {
     pattern: /^([0][1-9]|[1-2][0-9]|30|31)\/([0][1-9]|10|11|12)\/(19[0-9][0-9]|20[0-1][0-9]|2020)/g,
   },
