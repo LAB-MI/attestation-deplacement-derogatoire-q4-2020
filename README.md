@@ -1,12 +1,12 @@
-# Générateur de certificat de déplacement
+# Générateur Justificatif de déplacement pour la visite d'un bien immobilier
 
 ## Développer
 
 ### Installer le projet
 
 ```console
-git clone https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020.git
-cd attestation-deplacement-derogatoire-q4-2020
+git clone https://gitlab.com/proprioo/bon-de-visite.git
+cd bon-de-visite
 npm i
 npm start
 ```
