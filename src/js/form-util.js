@@ -126,13 +126,6 @@ export function getProfile (formInputs) {
   return fields
 }
 
-export function getReasons (reasonInputs) {
-  const reasons = reasonInputs
-    .filter(input => input.checked)
-    .map(input => input.value).join(', ')
-  return reasons
-}
-
 export function prepareInputs (formInputs, snackbar, releaseDateInput) {
   const lsProfile = secureLS.get('profile')
 
@@ -167,10 +160,6 @@ export function prepareInputs (formInputs, snackbar, releaseDateInput) {
   $('#generate-btn').addEventListener('click', async (event) => {
     event.preventDefault()
 
-    const invalid = validateAriaFields()
-    if (invalid) {
-      return
-    }
     updateSecureLS(formInputs)
     const pdfBlob = await generatePdf(getProfile(formInputs), pdfBase)
 

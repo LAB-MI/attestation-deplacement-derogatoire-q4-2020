@@ -46,8 +46,8 @@ export async function generatePdf (profile, pdfBase) {
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
 
   // set pdf metadata
-  pdfDoc.setTitle('COVID-19 - Déclaration de déplacement')
-  pdfDoc.setSubject('Attestation de déplacement dérogatoire')
+  pdfDoc.setTitle('COVID-19 - Justificatif de déplacement')
+  pdfDoc.setSubject('Justificatif de déplacement pour la visite d un bien immobilier')
   pdfDoc.setKeywords([
     'covid19',
     'covid-19',
@@ -59,7 +59,7 @@ export async function generatePdf (profile, pdfBase) {
   ])
   pdfDoc.setProducer('DNUM/SDIT')
   pdfDoc.setCreator('')
-  pdfDoc.setAuthor("Ministère de l'intérieur")
+  pdfDoc.setAuthor("Proprioo")
 
   const page1 = pdfDoc.getPages()[0]
 
@@ -68,9 +68,6 @@ export async function generatePdf (profile, pdfBase) {
     page1.drawText(text, { x, y, size, font })
   }
 
-  // drawText(`${firstname} ${lastname}`, 107, 657)
-  // drawText(birthday, 107, 627)
-  // drawText(placeofbirth, 240, 627)
   drawText(`${address} ${zipcode} ${city}`, 162, 702)
   drawText(`le ${datesortie} à ${heuresortie}`, 168, 688)
   drawText(`${agency}`, 179, 674)
@@ -78,15 +75,6 @@ export async function generatePdf (profile, pdfBase) {
   drawText(`${firstnameAgent} ${lastnameAgent} ${telAgent}`, 167, 645)
   drawText(`${mandate}`, 177, 630)
   drawText(`${firstname} ${lastname} ${tel}`, 119, 616)
-
-  // const shortCreationDate = `${creationDate.split('/')[0]}/${
-  //   creationDate.split('/')[1]
-  // }`
-  // drawText(shortCreationDate, 314, 189, locationSize)
-
-  // // Date création
-  // drawText('Date de création:', 479, 130, 6)
-  // drawText(`${creationDate} à ${creationHour}`, 470, 124, 6)
 
   const qrTitle1 = 'QR-code contenant les informations '
   const qrTitle2 = 'de votre attestation numérique'
