@@ -15,7 +15,7 @@ const createTitle = () => {
     className: 'msg-info',
     innerHTML: 'Tous les champs sont optionnels.',
   })
-  return [h2, p]
+  return [h2]
 }
 // createElement('div', { className: 'form-group' })
 
