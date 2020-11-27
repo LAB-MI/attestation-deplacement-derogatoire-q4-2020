@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b431371d-4d3b-4a0d-8879-187e2c8d4d64/deploy-status)](https://app.netlify.com/sites/proprioo-justificatif-visite-covid/deploys)
+
 # Générateur Justificatif de déplacement pour la visite d'un bien immobilier
 
 ## Développer
