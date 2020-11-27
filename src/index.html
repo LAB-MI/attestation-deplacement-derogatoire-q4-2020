@@ -19,7 +19,8 @@
     <title>Justificatif de déplacement pour la visite d'un bien immobilier</title>
 </head>
 <body>
-    <header role="banner" class="wrapper">
+    <header role="banner">
+
         <div>
 
             <h1 class="flex flex-wrap">
@@ -30,14 +31,11 @@
                     Justificatif de déplacement pour la visite d'un bien immobilier
                 </span>
             </h1>
-
-            <p>Proprioo met à disposition des agents immobiliers un générateur de bons pour visite à destination des acheteurs conformément aux préconisations du gouvernement."</p>
-            <p><span class="danger-emoji">⚠️</span> Aucune information n’est collectée ni conservée ni transférée à des tiers.</p>
         </div>
     </header>
     <main role="main">
         <p
-            class="alert  alert-danger  d-none"
+            class="alert alert-danger d-none"
             role="alert"
             id="alert-facebook"
         ></p>
@@ -73,8 +71,7 @@
                 <button type="button" id="cleardata" class="btn  btn-primary  btn-clear-data">
                     <span>
                     <i class="fa fa-trash inline-block mr-1"></i>
-                    Effacer le formulaire et son
-                    contenu sauvegardé sur mon téléphone
+                    Effacer le formulaire et son contenu sauvegardé sur mon téléphone
                     </span>
                 </button>
             </p>
@@ -87,24 +84,23 @@
         <p class="github">
             Le code source de ce service est consultable sur <a href="https://github.com/Proprioo/justificatif-visite-covid" class="github-link">GitHub</a>.
         </p>
-        <p class="label-mi">
-            Proprioo
-        </p>
     </main>
     <footer role="contentinfo" class="main-footer">
         <div class="footer-links">
             <a href="./confidentialite.html" title="Confidentialité - nouvelle page" target="_blank" class="footer-line footer-link">Confidentialité</a>
-            <a href="https://www.interieur.gouv.fr/Infos-du-site/Mentions-legales" title="Mentions légales - nouvelle page" target="_blank" class="footer-line footer-link">Mentions légales</a>
+            <a href="https://www.proprioo.fr/mentions-legales" target="_blank" title="Mentions légales Proprioo"
+            class="footer-line footer-link">Mentions légales</a>
             <a href="https://www.gouvernement.fr/info-coronavirus" title="Information du gouvernement sur le Covid-19 - nouvelle page" target="_blank" class="footer-line footer-link">Informations du gouvernement sur le Covid-19</a>
             <p class="footer-line" id="version"></p>
         </div>
+        <div class="footer-logo">
+            <a href="https://www.proprioo.fr" rel="noreferrer noopener" target="_blank"><img src="./assets/logo.png" alt="Proprioo" width="300" height="52" /></a>
+        </div>
     </footer>
 
-    <div class="alert  alert-info  d-none" id="update-alert">
+    <div class="alert alert-info d-none" id="update-alert">
         Une nouvelle version est disponible. Cliquer sur le bouton pour l'obtenir.
-        <p class="text-right">
-            <button id="reload-btn" class="btn  btn-info">Mettre à jour</button>
-        </p>
+        <button id="reload-btn" class="btn btn-info">Mettre à jour</button>
     </div>
 
     <script src="./js/main.js"></script>

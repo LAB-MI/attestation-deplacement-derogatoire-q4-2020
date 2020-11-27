@@ -15,7 +15,7 @@
 }
 
 html {
-  background: white;
+  background: rgb(249, 249, 249);
 }
 
 @supports (font: -apple-system-body) {
@@ -25,21 +25,21 @@ html {
 }
 
 body {
-  margin: 1.25em;
-  background: white;
+  margin: 0em;
+  background: rgb(249, 249, 249);
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 form,
 #alert-print {
-  margin: 30px auto;
-  max-width: 400px;
+  margin: 20px auto;
+  max-width: 500px;
 }
 
 h1 {
   font-size: 2em;
-  color: black;
+  color: #222;
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -63,11 +63,14 @@ svg {
 h1.flex.flex-wrap {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: #ced4da;
 }
 
 h2 {
   font-size: large;
-  color: black;
+  color: #222;
 }
 
 footer {
@@ -81,12 +84,12 @@ canvas {
 }
 
 a {
-  color: #000191;
+  color: rgb(255, 77, 0);
   text-decoration: underline;
 }
 
 p {
-  color: black;
+  color: #222;
 }
 
 .wrapper {
@@ -151,16 +154,6 @@ p {
   cursor: pointer;
 }
 
-input:invalid + span:after {
-  content: '✖';
-  padding-left: 0.3em;
-}
-
-input:valid + span:after {
-  content: '✓';
-  padding-left: 0.3em;
-}
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -188,29 +181,18 @@ input[type='number'] {
   height: 1em;
 }
 
-.logo {
-  width: 50%;
-}
-
 .covid-title {
-  display: flex;
-  align-items: center;
   padding: 0.3em;
   font-family: 'marianne-regular', Arial, Helvetica, sans-serif;
   font-size: 0.5em;
-  color: #ffffff;
-  background-color: #000191;
+  color: #222;
 }
 
 .covid-subtitle {
-  display: inline-flex;
-  align-items: center;
   font-size: 0.4em;
   padding: 0.3em;
-  background-color: #e1000f;
   text-transform: uppercase;
-  color: #ffffff;
-  flex-grow: 1;
+  color: #222;
 }
 
 .note-title {
@@ -229,12 +211,11 @@ input[type='number'] {
 
 .msg-info {
   text-align: left;
-  color: #000000;
 }
 
 .msg-alert {
   text-align: left;
-  color: red;
+  color: #222;
   font-style: italic;
 }
 
@@ -243,32 +224,55 @@ input[type='number'] {
   font-size: 0.8em;
 }
 
-.btn-attestation {
-  padding: 0.9em;
+.btn-attestation,
+.btn-info {
+  padding: 0.8em;
   font-size: 1.2em;
   font-weight: bold;
   color: white;
-  background-color: #000191;
+  background-color: rgb(255, 77, 0);
   border-radius: 0.5em;
+  border-color: white;
 }
 
-.btn-attestation:hover {
-  background-color: #3031c1;
+.btn-info {
+  margin: 0 auto;
+  padding: 0.5em;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}
+
+.btn-attestation:hover,
+.btn-attestation:focus,
+.btn-info:hover,
+.btn-info:focus {
+  background-color: rgba(255, 77, 0, 0.9);
+  border-color: white;
 }
 
 .btn-clear-data {
   margin: 30px auto;
-  max-width: 400px;
+  max-width: 500px;
+  padding: 0.8em;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #222;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0.5em;
+  border-color: #ccc;
+}
+
+.btn-clear-data:hover,
+.btn-clear-data:focus {
+  color: #222;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-color: #ccc;
 }
 
 .github {
   font-size: 0.7em;
   text-align: center;
-  color: black;
-}
-
-.github-link {
-  color: #000191;
+  color: #222;
 }
 
 .github-link:hover {
@@ -278,7 +282,7 @@ input[type='number'] {
 .label-mi {
   text-align: center;
   font-size: 1em;
-  color: black;
+  color: #222;
 }
 
 .validity {
@@ -290,42 +294,43 @@ input[type='number'] {
 .main-footer {
   display: flex;
   justify-content: center;
-  padding-top: 3em;
-  padding-bottom: 3em;
-  background: #222;
-  color: white;
+  flex-direction: column;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-color: #ccc;
 }
 
 .footer-links {
   margin: 0 auto;
   max-width: 500px;
-  background: #222;
+  background-color: #ccc;
 }
 
 .footer-line {
   display: block;
   margin: 0.75em;
   font-size: 0.9em;
-  color: #ffffff;
 }
 
 .footer-link:hover {
   text-decoration: underline;
-  color: #0a81ff;
+  color: #222;
 }
 
 .footer-link:focus {
-  color: #ffffff;
+  color: #222;
+}
+
+.footer-logo {
+  margin: 20px auto;
 }
 
 .num-08 {
   font-weight: bold;
-  color: #00a94f;
 }
 
 .num-08:hover {
   text-decoration: underline;
-  color: #0a81ff;
 }
 
 .stores-link:hover {
@@ -338,14 +343,14 @@ input[type='number'] {
 
     td,
     th {
-      border: 1px solid #000191;
+      border: 1px solid rgb(255, 77, 0);
       padding: 8px;
     }
 
     .header-row {
       font-weight: bold;
       color: #ffffff;
-      background-color: #000191;
+      background-color: rgb(255, 77, 0);
       text-transform: uppercase;
       text-align: center;
     }
@@ -353,7 +358,7 @@ input[type='number'] {
     .name-col {
       font-weight: bold;
       padding: 8px 16px;
-      color: #000191;
+      color: rgb(255, 77, 0);
     }
   }
 
@@ -366,7 +371,7 @@ input[type='number'] {
       font-size: 1.2em;
       font-weight: bold;
       color: #ffffff;
-      background-color: #000191;
+      background-color: rgb(255, 77, 0);
       border-radius: 0.5em;
       text-decoration: none;
       color: #ffffff;
@@ -381,19 +386,19 @@ input[type='number'] {
   text-align: left;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #000191;
+  color: rgb(255, 77, 0);
 }
 .titre-3 {
   text-align: left;
   font-size: 1.25rem;
   font-weight: bold;
-  color: #000000;
+  color: #222;
 }
 .titre-4 {
   text-align: left;
   font-size: 1rem;
   font-weight: bold;
-  color: #000000;
+  color: #222;
 }
 
 @media (max-width: 800px) {
@@ -415,7 +420,7 @@ input[type='number'] {
   table td:before {
     content: attr(data-label);
     font-weight: bold;
-    color: #000191;
+    color: rgb(255, 77, 0);
     width: 100px;
     margin-right: 8px;
     flex-shrink: 0;
@@ -464,7 +469,7 @@ input[type='number'] {
   margin: 30px auto;
   max-width: 400px;
   font-size: 0.8em;
-  color: #000000;
+  color: #222;
 }
 
 #update-alert {
@@ -475,19 +480,15 @@ input[type='number'] {
 }
 
 .alert-info {
-  color: #030494;
-  background-color: #caf8ff;
-  border-color: #caf8ff;
+  display: flex;
+  flex-direction: column;
+  color: #222;
+  background-color: #ccc;
+  border-color: #ccc;
 }
 
 .basis-100 {
   flex-basis: 100%;
-}
-
-.btn-info {
-  color: #fff;
-  background-color: #030494;
-  border-color: #030494;
 }
 
 .fieldset {
@@ -508,5 +509,7 @@ input[type='number'] {
 
 .danger-emoji {
   font-weight: 400;
-  font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+  font-family: apple color emoji, segoe ui emoji, noto color emoji,
+    android emoji, emojisymbols, emojione mozilla, twemoji mozilla,
+    segoe ui symbol;
 }

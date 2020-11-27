@@ -6,7 +6,7 @@
       "contentType": "firstname",
       "label": "Prénom du visiteur",
       "autocomplete": "given-name",
-      "placeholder": "Camille"
+      "placeholder": "Jean"
     },
     {
       "key": "lastname",
@@ -17,22 +17,12 @@
       "placeholder": "Dupont"
     },
     {
-      "key": "tel",
-      "type": "number",
-      "contentType": "tel",
-      "label": "Numéro du visiteur",
-      "autocomplete": "tel",
-      "inputmode": "numeric",
-      "pattern": "[0-9]{10}",
-      "maxlength": 10
-    },
-    {
       "key": "firstnameAgent",
       "type": "text",
       "contentType": "firstname",
       "label": "Prénom de l'agent",
       "autocomplete": "given-name",
-      "placeholder": "Camille"
+      "placeholder": "Jean"
     },
     {
       "key": "lastnameAgent",
@@ -46,7 +36,7 @@
       "key": "telAgent",
       "type": "number",
       "contentType": "tel",
-      "label": "Numéro de l'agent",
+      "label": "Téléphone de l'agent",
       "autocomplete": "tel",
       "inputmode": "numeric",
       "pattern": "[0-9]{10}",
@@ -99,8 +89,8 @@
       "pattern": "[0-9]{5}",
       "min": 1000,
       "max": 99999,
-      "minlength":4,
-      "maxlength":5
+      "minlength": 4,
+      "maxlength": 5
     }
   ],
   [
@@ -123,7 +113,7 @@
       "type": "date",
       "contentType": "datesortie",
       "label": "Date de la visite",
-      "pattern": "^([0][1-9]|[1-2][0-9]|30|31)\/([0][1-9]|10|11|12)\/(19[0-9][0-9]|20[0-1][0-9]|2020)",
+      "pattern": "^([0][1-9]|[1-2][0-9]|30|31)/([0][1-9]|10|11|12)/(19[0-9][0-9]|20[0-1][0-9]|2020)",
       "autocomplete": ""
     },
     {

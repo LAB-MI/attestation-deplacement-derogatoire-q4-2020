@@ -9,13 +9,14 @@ import { $, appendTo, createElement } from './dom-utils'
 const createTitle = () => {
   const h2 = createElement('h2', {
     className: 'titre-2',
-    innerHTML: 'Saisissez les informations de la visite: ',
+    innerHTML: 'Saisissez les informations de la visite :',
   })
   const p = createElement('p', {
     className: 'msg-info',
-    innerHTML: 'Tous les champs sont optionnels.',
+    innerHTML:
+      'Proprioo met à disposition des agents immobiliers un générateur de bons pour visite à destination des acheteurs conformément aux préconisations du gouvernement.<br /><br /><span class="danger-emoji">⚠️</span> <b>Aucune information n’est collectée ni conservée ni transférée à des tiers.</b>',
   })
-  return [h2]
+  return [p, h2]
 }
 // createElement('div', { className: 'form-group' })
 
@@ -82,7 +83,7 @@ const createFormGroup = ({
   return formGroup
 }
 
-export function createForm () {
+export function createForm() {
   const form = $('#form-profile')
   // Évite de recréer le formulaire s'il est déjà créé par react-snap (ou un autre outil de prerender)
   if (form.innerHTML !== '') {
