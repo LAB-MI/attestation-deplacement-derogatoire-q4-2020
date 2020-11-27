@@ -11,7 +11,6 @@ export async function generatePdf(profile, pdfBase) {
   const {
     lastname,
     firstname,
-    tel,
     lastnameAgent,
     firstnameAgent,
     telAgent,
@@ -76,7 +75,7 @@ export async function generatePdf(profile, pdfBase) {
   drawText(`${card}`, 244, 659)
   drawText(`${firstnameAgent} ${lastnameAgent} ${telAgent}`, 167, 645)
   drawText(`${mandate}`, 177, 630)
-  drawText(`${firstname} ${lastname} ${tel}`, 119, 616)
+  drawText(`${firstname} ${lastname}`, 119, 616)
 
   const pdfBytes = await pdfDoc.save()
 
