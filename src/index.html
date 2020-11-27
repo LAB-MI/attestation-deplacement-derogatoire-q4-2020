@@ -16,7 +16,7 @@
     <link rel="canonical" href="https://media.interieur.gouv.fr{{ PUBLIC_URL || '/deplacement-covid-19' }}" />
     <meta property="og:site_name" content="Générateur de justificatif de déplacement pour la visite d'un bien immobilier  - COVID-19" />
 
-    <title>Justificatif de déplacement pour la visite d'un bien immobilier</title>
+    <title>COVID-19 – Générateur de justificatif de déplacement pour la visite d'un bien immobilier</title>
     <!-- Matomo -->
     <script type="text/javascript">
         var _paq = window._paq = window._paq || [];
@@ -35,20 +35,17 @@
 </head>
 <body>
     <header role="banner">
-
-        <div>
-
-            <h1 class="flex flex-wrap">
-                <span class="covid-title">
-                    COVID-19
-                </span>
-                <span class="covid-subtitle">
-                    Justificatif de déplacement pour la visite d'un bien immobilier
-                </span>
-            </h1>
-        </div>
+        <h1 class="flex flex-wrap">
+            <span class="covid-title">
+                COVID-19
+            </span>
+            <span class="covid-subtitle">
+                Justificatif de déplacement pour la visite d'un bien immobilier
+            </span>
+        </h1>
     </header>
     <main role="main">
+        <div class="main-picture"></div>
         <p
             class="alert alert-danger d-none"
             role="alert"
@@ -69,7 +66,7 @@
                         Mon téléphone se souvient de moi
                 </label>
             </div>
-            <p class="text-center mt-5">
+            <p class="block text-center mt-5">
                 <button type="button" id="generate-btn" class="btn btn-primary btn-attestation">
                   <span>
                     <i class="fa fa-file-pdf inline-block mr-1"></i>
@@ -82,7 +79,7 @@
                 L'attestation est téléchargée sur votre appareil.
             </div>
 
-            <p class="text-center mt-1">
+            <p class="block text-center mt-1">
                 <button type="button" id="cleardata" class="btn  btn-primary  btn-clear-data">
                     <span>
                     <i class="fa fa-trash inline-block mr-1"></i>
