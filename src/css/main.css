@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'marianne-bold';
   src: url('../fonts/marianne-bold-webfont.woff2') format('woff2'),
-       url('../fonts/marianne-bold-webfont.woff') format('woff');
+    url('../fonts/marianne-bold-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -9,7 +9,7 @@
 @font-face {
   font-family: 'marianne-regular';
   src: url('../fonts/marianne-regular-webfont.woff2') format('woff2'),
-       url('../fonts/marianne-regular-webfont.woff') format('woff');
+    url('../fonts/marianne-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -31,24 +31,26 @@ html {
 }
 
 body {
-    margin: 1.25em;
-    background: white;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  margin: 1.25em;
+  background: white;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background: #222;
-    }
+  body {
+    background: #222;
+  }
 }
 
-form, #alert-print {
-    margin: 30px auto;
-    max-width: 400px;
+form,
+#alert-print {
+  margin: 30px auto;
+  max-width: 400px;
 }
 
 h1 {
-	font-size: 2em;
+  font-size: 2em;
   color: black;
 }
 
@@ -59,7 +61,6 @@ h1 {
     background: #222;
   }
 }
-
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
@@ -106,7 +107,6 @@ footer {
   background: white;
 }
 
-
 @media (prefers-color-scheme: dark) {
   footer {
     background: #222;
@@ -115,7 +115,7 @@ footer {
 
 canvas {
   border: 1px solid #ced4da;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
 a {
@@ -125,7 +125,7 @@ a {
 
 @media (prefers-color-scheme: dark) {
   a {
-    color: #A3A3FF;
+    color: #a3a3ff;
   }
 }
 
@@ -154,32 +154,6 @@ p {
   transform: translateY(-2px);
 }
 
-@media (prefers-color-scheme: dark) {
-  #form-profile .form-radio-label .form-check-label {
-    color: #ddd;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  label {
-    color: white;
-  }
-
-  .form-control::placeholder {
-    color: #aaa;
-  }
-
-  input, select, textarea, .form-control, .form-control:focus {
-    background: #333;
-    color: white;
-    border: 1px solid white;
-  }
-
-  .form-control:focus {
-    background: #555;
-  }
-}
-
 #form-generate .form-radio .form-check {
   margin: 10px;
 }
@@ -201,8 +175,8 @@ p {
 }
 
 #date-selector-group-sortie {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 #date-selector {
@@ -217,22 +191,22 @@ p {
 }
 
 #date-selector-sortie {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    height: 100%;
-    transform: translateX(-50%); /* center the input to avoid reset buttons */
-    opacity: 0;
-    z-index: 1;
-    cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  transform: translateX(-50%); /* center the input to avoid reset buttons */
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
 }
 
-input:invalid+span:after {
+input:invalid + span:after {
   content: '✖';
   padding-left: 0.3em;
 }
 
-input:valid+span:after {
+input:valid + span:after {
   content: '✓';
   padding-left: 0.3em;
 }
@@ -245,7 +219,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -273,30 +247,18 @@ input[type=number] {
   align-items: center;
   padding: 0.3em;
   font-family: 'marianne-regular', Arial, Helvetica, sans-serif;
-  font-size: 0.50em;
+  font-size: 0.5em;
   color: #ffffff;
   background-color: #000191;
-}
-
-@media (prefers-color-scheme: dark) {
-  .covid-title {
-    background: #2929ff;
-  }
-}
-
-@media (min-width: 992px) {
-  .covid-title {
-    flex-grow: 0;
-  }
 }
 
 .covid-subtitle {
   display: inline-flex;
   align-items: center;
-  font-size: 0.40em;
+  font-size: 0.4em;
   padding: 0.3em;
   background-color: #e1000f;
-  text-transform:uppercase ;
+  text-transform: uppercase;
   color: #ffffff;
   flex-grow: 1;
 }
@@ -327,20 +289,8 @@ input[type=number] {
 }
 
 .text-desc {
-  font-style :italic;
+  font-style: italic;
   font-size: 0.8em;
-}
-
-@media (prefers-color-scheme: dark) {
-  .covid-subtitle {
-    background: #ad000c;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .msg-info {
-    color: white;
-  }
 }
 
 .btn-attestation {
@@ -353,12 +303,12 @@ input[type=number] {
 }
 
 .btn-attestation:hover {
-  background-color: #3031C1;
+  background-color: #3031c1;
 }
 
 .btn-clear-data {
-    margin: 30px auto;
-    max-width: 400px;
+  margin: 30px auto;
+  max-width: 400px;
 }
 
 .github {
@@ -367,24 +317,12 @@ input[type=number] {
   color: black;
 }
 
-@media (prefers-color-scheme: dark) {
-  .github {
-    color: white
-  }
-}
-
 .github-link {
   color: #000191;
 }
 
-@media (prefers-color-scheme: dark) {
-  .github-link {
-    color: #A3A3FF;
-  }
-}
-
 .github-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .label-mi {
@@ -393,22 +331,10 @@ input[type=number] {
   color: black;
 }
 
-@media (prefers-color-scheme: dark) {
-  .label-mi {
-    color: white;
-  }
-}
-
 .validity {
   display: inline-flex;
   justify-content: center;
   width: 2em;
-}
-
-@media (prefers-color-scheme: dark) {
-  .validity {
-    color: #DDD;
-  }
 }
 
 .main-footer {
@@ -424,16 +350,6 @@ input[type=number] {
   margin: 0 auto;
   max-width: 500px;
   background: #222;
-}
-
-@media (prefers-color-scheme: dark) {
-  .main-footer {
-    background: #444;
-  }
-
-  .footer-links {
-      background: #444;
-  }
 }
 
 .footer-line {
@@ -458,12 +374,12 @@ input[type=number] {
 }
 
 .num-08:hover {
-    text-decoration: underline;
-    color: #0A81FF;
+  text-decoration: underline;
+  color: #0a81ff;
 }
 
 .stores-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .confidentialite {
@@ -474,13 +390,6 @@ input[type=number] {
     th {
       border: 1px solid #000191;
       padding: 8px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        td, th {
-            border-color: #A3A3FF;
-            color: white;
-        }
     }
 
     .header-row {
@@ -495,12 +404,6 @@ input[type=number] {
       font-weight: bold;
       padding: 8px 16px;
       color: #000191;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .name-col {
-        color: #A3A3FF;
-      }
     }
   }
 
@@ -518,10 +421,9 @@ input[type=number] {
       text-decoration: none;
       color: #ffffff;
     }
-
   }
   em {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -544,28 +446,12 @@ input[type=number] {
   color: #000000;
 }
 
-@media (prefers-color-scheme: dark) {
-    .titre-3 {
-        color: white;
-    }
-
-    .titre-4 {
-        color: white;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-  .titre-2 {
-    color: #A3A3FF;
-  }
-}
-
-@media (max-width: 800px){
+@media (max-width: 800px) {
   table thead {
     display: none;
   }
 
-  table tr{
+  table tr {
     display: block;
     margin-bottom: 40px;
   }
@@ -586,7 +472,8 @@ input[type=number] {
   }
 }
 
-#snackbar, #snackbar-cleardata {
+#snackbar,
+#snackbar-cleardata {
   min-width: 250px;
   color: #fff;
   text-align: center;
@@ -603,36 +490,31 @@ input[type=number] {
   transition: all 0.5s ease-in-out;
 }
 
-#snackbar.show, #snackbar-cleardata.show {
+#snackbar.show,
+#snackbar-cleardata.show {
   opacity: 1;
 }
 
-@media only screen and (min-width:600px) {
-    .hide-on-desktop, * [aria-labelledby='hide-on-desktop'] {
-        display: none;
-        max-height: 0;
-        overflow: hidden;
-    }
+@media only screen and (min-width: 600px) {
+  .hide-on-desktop,
+  * [aria-labelledby='hide-on-desktop'] {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+  }
 }
 
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-[id^="footnote"] {
+[id^='footnote'] {
   margin: 30px auto;
   max-width: 400px;
   font-size: 0.8em;
   color: #000000;
-}
-
-@media (prefers-color-scheme: dark) {
-  [id^="footnote"] {
-    color:white;
-    background: #222;
-  }
 }
 
 #update-alert {
