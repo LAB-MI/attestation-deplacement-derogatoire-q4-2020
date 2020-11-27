@@ -24,23 +24,11 @@ html {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    background: #222;
-  }
-}
-
 body {
   margin: 1.25em;
   background: white;
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left);
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #222;
-  }
 }
 
 form,
@@ -52,14 +40,6 @@ form,
 h1 {
   font-size: 2em;
   color: black;
-}
-
-@media (prefers-color-scheme: dark) {
-  h1 {
-    color: white;
-    background-color: white;
-    background: #222;
-  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -85,32 +65,14 @@ h1.flex.flex-wrap {
   flex-wrap: wrap;
 }
 
-@media (prefers-color-scheme: dark) {
-  h1.flex.flex-wrap {
-    border: 1px solid white;
-  }
-}
-
 h2 {
   font-size: large;
   color: black;
 }
 
-@media (prefers-color-scheme: dark) {
-  h2 {
-    color: white;
-  }
-}
-
 footer {
   margin-top: 40px;
   background: white;
-}
-
-@media (prefers-color-scheme: dark) {
-  footer {
-    background: #222;
-  }
 }
 
 canvas {
@@ -123,20 +85,8 @@ a {
   text-decoration: underline;
 }
 
-@media (prefers-color-scheme: dark) {
-  a {
-    color: #a3a3ff;
-  }
-}
-
 p {
   color: black;
-}
-
-@media (prefers-color-scheme: dark) {
-  p {
-    color: white;
-  }
 }
 
 .wrapper {
