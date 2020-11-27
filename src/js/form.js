@@ -34,7 +34,7 @@ const createFormGroup = ({
   placeholder = '',
   type = 'text',
 }) => {
-  const formGroup = createElement('div', { className: 'form-group' })
+  const formGroup = createElement('div', { className: 'form-group' , className: 'column'})
   const labelAttrs = {
     for: `field-${name}`,
     id: `field-${name}-label`,
@@ -92,10 +92,13 @@ export function createForm() {
 
   const appendToForm = appendTo(form)
 
+
+
   const formFirstPart = formData
     .flat(1)
     .filter((field) => field.key !== 'reason')
     .filter((field) => !field.isHidden)
+    .filter((field) => field.group == 1)
     .map((field, index) => {
       const formGroup = createFormGroup({
         autofocus: index === 0,
@@ -105,6 +108,144 @@ export function createForm() {
 
       return formGroup
     })
+    
+      const rowFirstPart = createElement('div', {
+        className: 'row',
+      })
+      const appendToRow1 = appendTo(rowFirstPart)
+      appendToRow1(formFirstPart)
 
-  appendToForm([...createTitle(), ...formFirstPart])
+    
+
+    const formSecondPart = formData
+    .flat(1)
+    .filter((field) => field.key !== 'reason')
+    .filter((field) => !field.isHidden)
+    .filter((field) => field.group == 2)
+    .map((field, index) => {
+      const formGroup = createFormGroup({
+        autofocus: false,
+        ...field,
+        name: field.key,
+      })
+      return formGroup
+    })
+    
+    const rowSecondPart = createElement('div', {
+      className: 'row',
+    })
+    const appendToRow2 = appendTo(rowSecondPart)
+    appendToRow2(formSecondPart)
+
+
+
+    const formThirdPart = formData
+    .flat(1)
+    .filter((field) => field.key !== 'reason')
+    .filter((field) => !field.isHidden)
+    .filter((field) => field.group == 3)
+    .map((field, index) => {
+      const formGroup = createFormGroup({
+        autofocus: false,
+        ...field,
+        name: field.key,
+      })
+      return formGroup
+    })
+
+    const rowThirdPart = createElement('div', {
+      className: 'row',
+    })
+    const appendToRow3 = appendTo(rowThirdPart)
+    appendToRow3(formThirdPart)
+
+
+    const formFourPart = formData
+    .flat(1)
+    .filter((field) => field.key !== 'reason')
+    .filter((field) => !field.isHidden)
+    .filter((field) => field.group == 4)
+    .map((field, index) => {
+      const formGroup = createFormGroup({
+        autofocus: false,
+        ...field,
+        name: field.key,
+      })
+      return formGroup
+    })
+
+    const rowFourPart = createElement('div', {
+      className: 'row',
+    })
+    const appendToRow4 = appendTo(rowFourPart)
+    appendToRow4(formFourPart)
+
+    const formFivePart = formData
+    .flat(1)
+    .filter((field) => field.key !== 'reason')
+    .filter((field) => !field.isHidden)
+    .filter((field) => field.group == 5)
+    .map((field, index) => {
+      const formGroup = createFormGroup({
+        autofocus: false,
+        ...field,
+        name: field.key,
+      })
+      return formGroup
+    })
+
+    const rowFivePart = createElement('div', {
+      className: 'row',
+    })
+    const appendToRow5 = appendTo(rowFivePart)
+    appendToRow5(formFivePart)
+
+
+    const formSixPart = formData
+    .flat(1)
+    .filter((field) => field.key !== 'reason')
+    .filter((field) => !field.isHidden)
+    .filter((field) => field.group == 6)
+    .map((field, index) => {
+      const formGroup = createFormGroup({
+        autofocus: false,
+        ...field,
+        name: field.key,
+      })
+      return formGroup
+    })
+
+    const rowSixPart = createElement('div', {
+      className: 'row',
+    })
+    const appendToRow6 = appendTo(rowSixPart)
+    appendToRow6(formSixPart)
+
+
+    const formSevenPart = formData
+    .flat(1)
+    .filter((field) => field.key !== 'reason')
+    .filter((field) => !field.isHidden)
+    .filter((field) => field.group == 7)
+    .map((field, index) => {
+      const formGroup = createFormGroup({
+        autofocus: false,
+        ...field,
+        name: field.key,
+      })
+      return formGroup
+    })
+
+    const rowSevenPart = createElement('div', {
+      className: 'row',
+    })
+    const appendToRow7 = appendTo(rowSevenPart)
+    appendToRow7(formSevenPart)
+
+    appendToForm([...createTitle(), rowFirstPart,  
+      createElement('hr'), rowSecondPart,  
+      createElement('hr'), rowThirdPart,  
+      createElement('hr'), rowFourPart,  
+      createElement('hr'), rowFivePart, rowSixPart, 
+      createElement('hr'), rowSevenPart])
 }
