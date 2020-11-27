@@ -32,9 +32,9 @@ body {
 }
 
 form,
+.block,
 #alert-print {
-  margin: 20px auto;
-  max-width: 500px;
+  margin: 20px;
 }
 
 h1 {
@@ -65,7 +65,9 @@ h1.flex.flex-wrap {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  background-color: #ced4da;
+  background: white;
+  border: 1px solid rgb(242, 243, 244);
+  box-shadow: rgba(51, 51, 51, 0.08) 0px 4px 8px;
 }
 
 h2 {
@@ -74,7 +76,7 @@ h2 {
 }
 
 footer {
-  margin-top: 40px;
+  margin-top: 20px;
   background: white;
 }
 
@@ -93,9 +95,13 @@ p {
 }
 
 .wrapper {
-  max-width: 800px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  box-shadow: rgba(51, 51, 51, 0.08) 0px 10px 24px;
+  background: white;
+  border: 1px solid rgb(242, 243, 244);
+  border-radius: 6px;
 }
 
 #form-profile .form-radio .form-check {
@@ -270,6 +276,7 @@ input[type='number'] {
 }
 
 .github {
+  margin: 0.3em 0;
   font-size: 0.7em;
   text-align: center;
   color: #222;
@@ -297,28 +304,29 @@ input[type='number'] {
   flex-direction: column;
   padding-top: 2em;
   padding-bottom: 2em;
-  background-color: #ccc;
+  background-color: rgb(88, 102, 117);
 }
 
 .footer-links {
   margin: 0 auto;
   max-width: 500px;
-  background-color: #ccc;
+  background-color: rgb(88, 102, 117);
 }
 
 .footer-line {
   display: block;
   margin: 0.75em;
   font-size: 0.9em;
+  color: white;
 }
 
 .footer-link:hover {
   text-decoration: underline;
-  color: #222;
+  color: white;
 }
 
 .footer-link:focus {
-  color: #222;
+  color: white;
 }
 
 .footer-logo {
@@ -365,6 +373,7 @@ input[type='number'] {
   .btn-wrapper {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 
     .btn-generateur {
       padding: 0.8em;
