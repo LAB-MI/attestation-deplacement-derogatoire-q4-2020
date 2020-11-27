@@ -1,7 +1,7 @@
 import { generateQR } from './util'
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
 
-export async function generatePdf (profile, pdfBase) {
+export async function generatePdf(profile, pdfBase) {
   const creationInstant = new Date()
   const creationDate = creationInstant.toLocaleDateString('fr-FR')
   const creationHour = creationInstant
@@ -47,7 +47,9 @@ export async function generatePdf (profile, pdfBase) {
 
   // set pdf metadata
   pdfDoc.setTitle('COVID-19 - Justificatif de déplacement')
-  pdfDoc.setSubject('Justificatif de déplacement pour la visite d un bien immobilier')
+  pdfDoc.setSubject(
+    'Justificatif de déplacement pour la visite d un bien immobilier'
+  )
   pdfDoc.setKeywords([
     'covid19',
     'covid-19',
@@ -59,7 +61,7 @@ export async function generatePdf (profile, pdfBase) {
   ])
   pdfDoc.setProducer('DNUM/SDIT')
   pdfDoc.setCreator('')
-  pdfDoc.setAuthor("Proprioo")
+  pdfDoc.setAuthor('Proprioo')
 
   const page1 = pdfDoc.getPages()[0]
 
@@ -75,22 +77,6 @@ export async function generatePdf (profile, pdfBase) {
   drawText(`${firstnameAgent} ${lastnameAgent} ${telAgent}`, 167, 645)
   drawText(`${mandate}`, 177, 630)
   drawText(`${firstname} ${lastname} ${tel}`, 119, 616)
-
-  const qrTitle1 = 'QR-code contenant les informations '
-  const qrTitle2 = 'de votre attestation numérique'
-
-  const generatedQR = await generateQR(data)
-
-  const qrImage = await pdfDoc.embedPng(generatedQR)
-
-  page1.drawText(qrTitle1 + '\n' + qrTitle2, { x: 415, y: 135, size: 9, font, lineHeight: 10, color: rgb(1, 1, 1) })
-
-  page1.drawImage(qrImage, {
-    x: page1.getWidth() - 156,
-    y: 25,
-    width: 92,
-    height: 92,
-  })
 
   const pdfBytes = await pdfDoc.save()
 
