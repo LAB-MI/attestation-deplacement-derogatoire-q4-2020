@@ -9,55 +9,6 @@ import SecureLS from 'secure-ls'
 const secureLS = new SecureLS({ encodingType: 'aes' })
 const clearDataSnackbar = $('#snackbar-cleardata')
 const storeDataInput = $('#field-storedata')
-const conditions = {
-  '#field-firstname': {
-    length: 1,
-  },
-  '#field-lastname': {
-    length: 1,
-  },
-  '#field-firstnameAgent': {
-    length: 1,
-  },
-  '#field-lastnameAgent': {
-    length: 1,
-  },
-  '#field-address': {
-    length: 1,
-  },
-  '#field-city': {
-    length: 1,
-  },
-  '#field-zipcode': {
-    pattern: /\d{5}/g,
-  },
-  '#field-datesortie': {
-    pattern: /\d{4}-\d{2}-\d{2}/g,
-  },
-  '#field-heuresortie': {
-    pattern: /\d{2}:\d{2}/g,
-  },
-}
-
-function validateAriaFields () {
-  return Object.keys(conditions)
-    .map((field) => {
-      const fieldData = conditions[field]
-      const pattern = fieldData.pattern
-      const length = fieldData.length
-      const isInvalidPattern = pattern && !$(field).value.match(pattern)
-      const isInvalidLength = length && !$(field).value.length
-
-      const isInvalid = !!(isInvalidPattern || isInvalidLength)
-
-      $(field).setAttribute('aria-invalid', isInvalid)
-      if (isInvalid) {
-        $(field).focus()
-      }
-      return isInvalid
-    })
-    .includes(true)
-}
 
 function updateSecureLS (formInputs) {
   if (wantDataToBeStored() === true) {
@@ -132,7 +83,13 @@ export function prepareInputs (formInputs, snackbar, releaseDateInput) {
   // Continue to store data if already stored
   storeDataInput.checked = !!lsProfile
   formInputs.forEach((input) => {
-    if (input.name && lsProfile && input.name !== 'datesortie' && input.name !== 'heuresortie' && input.name !== 'field-reason') {
+    if (
+      input.name &&
+      lsProfile &&
+      input.name !== 'datesortie' &&
+      input.name !== 'heuresortie' &&
+      input.name !== 'field-reason'
+    ) {
       input.value = lsProfile[input.name]
     }
     const exempleElt = input.parentNode.parentNode.querySelector('.exemple')

@@ -7,8 +7,14 @@ import formData from '../form-data.json'
 import { $, appendTo, createElement } from './dom-utils'
 
 const createTitle = () => {
-  const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Saisissez les informations de la visite: ' })
-  const p = createElement('p', { className: 'msg-info', innerHTML: 'Tous les champs sont optionnels.' })
+  const h2 = createElement('h2', {
+    className: 'titre-2',
+    innerHTML: 'Saisissez les informations de la visite: ',
+  })
+  const p = createElement('p', {
+    className: 'msg-info',
+    innerHTML: 'Tous les champs sont optionnels.',
+  })
   return [h2, p]
 }
 // createElement('div', { className: 'form-group' })
@@ -35,7 +41,9 @@ const createFormGroup = ({
   }
   const labelEl = createElement('label', labelAttrs)
 
-  const inputGroup = createElement('div', { className: 'input-group align-items-center' })
+  const inputGroup = createElement('div', {
+    className: 'input-group align-items-center',
+  })
   const inputAttrs = {
     autocomplete,
     autofocus,
@@ -85,10 +93,9 @@ export function createForm () {
 
   const formFirstPart = formData
     .flat(1)
-    .filter(field => field.key !== 'reason')
-    .filter(field => !field.isHidden)
-    .map((field,
-      index) => {
+    .filter((field) => field.key !== 'reason')
+    .filter((field) => !field.isHidden)
+    .map((field, index) => {
       const formGroup = createFormGroup({
         autofocus: index === 0,
         ...field,

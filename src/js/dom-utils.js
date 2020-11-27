@@ -13,7 +13,7 @@ const plainAttributes = [
 
 export const createElement = (tag, attrs) => {
   const el = document.createElement(tag)
-  plainAttributes.forEach(plainAttr => {
+  plainAttributes.forEach((plainAttr) => {
     if (attrs && plainAttr in attrs && attrs[plainAttr]) {
       el.setAttribute(plainAttr, attrs[plainAttr])
     }
@@ -25,7 +25,7 @@ export const createElement = (tag, attrs) => {
   return el
 }
 
-export const appendTo = el => domNodes => {
+export const appendTo = (el) => (domNodes) => {
   if (domNodes[Symbol.iterator]) {
     el.append(...domNodes)
     return
