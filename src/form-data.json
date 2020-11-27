@@ -5,7 +5,7 @@
       "type": "text",
       "contentType": "firstname",
       "label": "Prénom du visiteur",
-      "autocomplete": "given-name",
+      "autocomplete": "visitor-given-name",
       "placeholder": "Jean"
     },
     {
@@ -13,7 +13,7 @@
       "type": "text",
       "contentType": "lastname",
       "label": "Nom  du visiteur",
-      "autocomplete": "family-name",
+      "autocomplete": "visitor-family-name",
       "placeholder": "Dupont"
     },
     {
@@ -21,15 +21,15 @@
       "type": "text",
       "contentType": "firstname",
       "label": "Prénom de l'agent",
-      "autocomplete": "given-name",
-      "placeholder": "Jean"
+      "autocomplete": "agent-given-name",
+      "placeholder": "Martin"
     },
     {
       "key": "lastnameAgent",
       "type": "text",
       "contentType": "lastname",
       "label": "Nom de l'agent",
-      "autocomplete": "family-name",
+      "autocomplete": "agent-family-name",
       "placeholder": "Dupont"
     },
     {
@@ -37,6 +37,7 @@
       "type": "number",
       "contentType": "tel",
       "label": "Téléphone de l'agent",
+      "placeholder": "0600000000",
       "autocomplete": "tel",
       "inputmode": "numeric",
       "pattern": "[0-9]{10}",
@@ -46,19 +47,22 @@
       "key": "mandate",
       "type": "text",
       "contentType": "mandate",
-      "label": "Numéro de mandat"
+      "label": "Numéro de mandat",
+      "placeholder": "123456"
     },
     {
       "key": "card",
       "type": "text",
       "contentType": "card",
-      "label": "Numéro de carte professionnelle"
+      "label": "Numéro de carte professionnelle",
+      "placeholder": "CPIXXXXXXXXXXXXXX"
     },
     {
       "key": "agency",
       "type": "text",
       "contentType": "agency",
-      "label": "Agence immobilière"
+      "label": "Agence immobilière",
+      "placeholder": "Agence immobilière"
     }
   ],
   [
