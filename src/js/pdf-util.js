@@ -28,7 +28,6 @@ export async function generatePdf(profile, pdfBase) {
     `Cree le: ${creationDate} a ${creationHour}`,
     `Nom: ${lastname}`,
     `Prenom: ${firstname}`,
-    `Tel: ${tel}`,
     `Nom de l'agent: ${lastnameAgent}`,
     `Prenom de l'agent: ${firstnameAgent}`,
     `Tel de l'agent: ${telAgent}`,
