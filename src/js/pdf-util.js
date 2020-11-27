@@ -1,5 +1,4 @@
-import { generateQR } from './util'
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
+import { PDFDocument, StandardFonts } from 'pdf-lib'
 
 export async function generatePdf(profile, pdfBase) {
   const creationInstant = new Date()
