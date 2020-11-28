@@ -2,15 +2,15 @@ import { generateQR } from './util'
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
 
 const ys = {
-  travail: 488,
-  achats: 417,
-  sante: 347,
-  famille: 325,
-  handicap: 291,
-  sport_animaux: 269,
-  convocation: 199,
-  missions: 178,
-  enfants: 157,
+  travail: 553,
+  achats_culturel_cultuel: 482,
+  sante: 434,
+  famille: 410,
+  handicap: 373,
+  sport_animaux: 349,
+  convocation: 276,
+  missions: 252,
+  enfants: 228,
 }
 
 export async function generatePdf (profile, reasons, pdfBase) {
@@ -40,7 +40,7 @@ export async function generatePdf (profile, reasons, pdfBase) {
     `Adresse: ${address} ${zipcode} ${city}`,
     `Sortie: ${datesortie} a ${heuresortie}`,
     `Motifs: ${reasons}`,
-    '', // Pour ajouter un ; aussi au dernier élément
+    '', // Pour ajouter un ; aussi au dernier Ã©lÃ©ment
   ].join(';\n')
 
   const existingPdfBytes = await fetch(pdfBase).then((res) => res.arrayBuffer())
@@ -48,20 +48,20 @@ export async function generatePdf (profile, reasons, pdfBase) {
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
 
   // set pdf metadata
-  pdfDoc.setTitle('COVID-19 - Déclaration de déplacement')
-  pdfDoc.setSubject('Attestation de déplacement dérogatoire')
+  pdfDoc.setTitle('COVID-19 - DÃ©claration de dÃ©placement')
+  pdfDoc.setSubject('Attestation de dÃ©placement dÃ©rogatoire')
   pdfDoc.setKeywords([
     'covid19',
     'covid-19',
     'attestation',
-    'déclaration',
-    'déplacement',
+    'dÃ©claration',
+    'dÃ©placement',
     'officielle',
     'gouvernement',
   ])
   pdfDoc.setProducer('DNUM/SDIT')
   pdfDoc.setCreator('')
-  pdfDoc.setAuthor("Ministère de l'intérieur")
+  pdfDoc.setAuthor("MinistÃ¨re de l'intÃ©rieur")
 
   const page1 = pdfDoc.getPages()[0]
 
@@ -70,48 +70,48 @@ export async function generatePdf (profile, reasons, pdfBase) {
     page1.drawText(text, { x, y, size, font })
   }
 
-  drawText(`${firstname} ${lastname}`, 107, 657)
-  drawText(birthday, 107, 627)
-  drawText(placeofbirth, 240, 627)
-  drawText(`${address} ${zipcode} ${city}`, 124, 596)
+  drawText(`${firstname} ${lastname}`, 92, 702)
+  drawText(birthday, 92, 684)
+  drawText(placeofbirth, 214, 684)
+  drawText(`${address} ${zipcode} ${city}`, 104, 665)
 
   reasons
     .split(', ')
     .forEach(reason => {
-      drawText('x', 59, ys[reason], 12)
+      drawText('x', 47, ys[reason], 12)
     })
 
   let locationSize = getIdealFontSize(font, profile.city, 83, 7, 11)
 
   if (!locationSize) {
     alert(
-      'Le nom de la ville risque de ne pas être affiché correctement en raison de sa longueur. ' +
-        'Essayez d\'utiliser des abréviations ("Saint" en "St." par exemple) quand cela est possible.',
+      'Le nom de la ville risque de ne pas Ãªtre affichÃ© correctement en raison de sa longueur. ' +
+        'Essayez d\'utiliser des abrÃ©viations ("Saint" en "St." par exemple) quand cela est possible.',
     )
     locationSize = 7
   }
 
-  drawText(profile.city, 93, 122, locationSize)
-  drawText(`${profile.datesortie}`, 76, 92, 11)
-  drawText(`${profile.heuresortie}`, 246, 92, 11)
+  drawText(profile.city, 78, 76, locationSize)
+  drawText(`${profile.datesortie}`, 63, 58, 11)
+  drawText(`${profile.heuresortie}`, 227, 58, 11)
 
   // const shortCreationDate = `${creationDate.split('/')[0]}/${
   //   creationDate.split('/')[1]
   // }`
   // drawText(shortCreationDate, 314, 189, locationSize)
 
-  // // Date création
-  // drawText('Date de création:', 479, 130, 6)
-  // drawText(`${creationDate} à ${creationHour}`, 470, 124, 6)
+  // // Date crÃ©ation
+  // drawText('Date de crÃ©ation:', 479, 130, 6)
+  // drawText(`${creationDate} Ã  ${creationHour}`, 470, 124, 6)
 
   const qrTitle1 = 'QR-code contenant les informations '
-  const qrTitle2 = 'de votre attestation numérique'
+  const qrTitle2 = 'de votre attestation numÃ©rique'
 
   const generatedQR = await generateQR(data)
 
   const qrImage = await pdfDoc.embedPng(generatedQR)
 
-  page1.drawText(qrTitle1 + '\n' + qrTitle2, { x: 415, y: 135, size: 9, font, lineHeight: 10, color: rgb(1, 1, 1) })
+  page1.drawText(qrTitle1 + '\n' + qrTitle2, { x: 440, y: 130, size: 6, font, lineHeight: 10, color: rgb(1, 1, 1) })
 
   page1.drawImage(qrImage, {
     x: page1.getWidth() - 156,
@@ -145,3 +145,5 @@ function getIdealFontSize (font, text, maxWidth, minSize, defaultSize) {
 
   return textWidth > maxWidth ? null : currentSize
 }
+
+

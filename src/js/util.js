@@ -40,9 +40,13 @@ export function autoFill () {
     'address', 'city', 'zipcode']
 
   fields.forEach((f) => { if (params.has(f) === true) document.getElementById('field-' + f).value = params.get(f) })
-  params.getAll('reason').forEach(function (r) { document.getElementById('checkbox-' + r).checked = true })
+  params.getAll('reason').forEach(function (r) { if (r == 'achats') {r = "achats_culturel_cultuel" ;}; document.getElementById('checkbox-' + r).checked = true })
+
 
   if (params.has('autogenpdf')) {
+    document.getElementById('field-heuresortie').value = ((new Date())
+		  .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }))
+		  .replace('h', ':');
     document.getElementById('generate-btn').click()
   }
 }
