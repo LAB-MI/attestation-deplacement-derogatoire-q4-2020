@@ -137,7 +137,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
   const lsProfile = secureLS.get('profile')
 
   // Continue to store data if already stored
-  storeDataInput.checked = !!lsProfile
+  storeDataInput.checked = true
   formInputs.forEach((input) => {
     if (input.name && lsProfile && input.name !== 'datesortie' && input.name !== 'heuresortie' && input.name !== 'field-reason') {
       input.value = lsProfile[input.name]
@@ -180,7 +180,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
   $('#field-storedata').addEventListener('click', () => {
     updateSecureLS(formInputs)
   })
-  $('#generate-btn').addEventListener('click', async (event) => {
+  const generate = async (event) => {
     event.preventDefault()
 
     const reasons = getReasons(reasonInputs)
@@ -206,6 +206,21 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
 
     downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
     showSnackbar(snackbar, 6000)
+  }
+  $('#generate-btn').addEventListener('click', generate)
+  $$('.btn-quick').forEach(b => {
+    b.addEventListener('click', (event) => {
+      event.preventDefault()
+
+      $$('input[name="field-reason"]').forEach(input => {
+        input.checked = false
+      })
+      $('#checkbox-' + b.getAttribute('value')).checked = true
+      const now = new Date()
+      $('#field-datesortie').valueAsDate = now
+      $('#field-heuresortie').value = now.toTimeString().substring(0, 5)
+      generate(event)
+    })
   })
 }
 
