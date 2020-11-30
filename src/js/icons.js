@@ -1,6 +1,7 @@
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faFilePdf } from '@fortawesome/free-solid-svg-icons/faFilePdf'
+import { faFilePdf, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faFilePdf)
+library.add(faTrash)
 
 dom.watch()

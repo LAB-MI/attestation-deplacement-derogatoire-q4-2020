@@ -258,7 +258,7 @@ input[type=number] {
 }
 
 .exemple {
-  margin-top: 0.2em;
+  margin-bottom: 0;
   font-style: italic;
   color: #999999;
   height: 1em;
@@ -358,6 +358,11 @@ input[type=number] {
 
 .btn-quick {
   width: 100%;
+}
+
+.btn-clear-data {
+    margin: 30px auto;
+    max-width: 400px;
 }
 
 .github {
@@ -585,7 +590,7 @@ input[type=number] {
   }
 }
 
-#snackbar {
+#snackbar, #snackbar-cleardata {
   min-width: 250px;
   color: #fff;
   text-align: center;
@@ -602,7 +607,7 @@ input[type=number] {
   transition: all 0.5s ease-in-out;
 }
 
-#snackbar.show {
+#snackbar.show, #snackbar-cleardata.show {
   opacity: 1;
 }
 
@@ -645,6 +650,10 @@ input[type=number] {
   color: #030494;
   background-color: #caf8ff;
   border-color: #caf8ff;
+}
+
+.basis-100 {
+  flex-basis: 100%;
 }
 
 .btn-info {

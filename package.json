@@ -1,6 +1,6 @@
 {
-  "name": "attestation-deplacement-derogatoire-q4-2020",
-  "version": "1.0.7",
+  "name": "attestation-derogatoire-de-deplacement",
+  "version": "1.1.0",
   "description": "Générateur d'attestation de déplacement dérogatoire'",
   "main": "certificate.js",
   "scripts": {
