@@ -5,6 +5,7 @@ import '../css/main.css'
 import formData from '../form-data.json'
 
 import { $, appendTo, createElement } from './dom-utils'
+import { appendMap } from './osm-zone'
 
 const createTitle = () => {
   const h2 = createElement('h2', { className: 'titre-2', innerHTML: 'Remplissez en ligne votre déclaration numérique : ' })
@@ -157,4 +158,6 @@ export function createForm () {
 
   const reasonFieldset = createReasonFieldset(reasonsData)
   appendToForm([...createTitle(), ...formFirstPart, reasonFieldset])
+
+  appendMap()
 }
