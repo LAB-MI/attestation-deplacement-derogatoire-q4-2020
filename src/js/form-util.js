@@ -155,7 +155,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     }
   })
 
-  $('#field-birthday').addEventListener('keyup', function (event) {
+  $('#field-birthday').addEventListener('input', function (event) {
     event.preventDefault()
     const input = event.target
     const key = event.keyCode || event.charCode
