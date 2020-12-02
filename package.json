@@ -12,6 +12,7 @@
     "clean:dist": "rimraf dist",
     "prebuild": "run-p lint clean:dist",
     "build:simple": "cross-env-shell VERSION=$npm_package_version parcel build --public-url $PUBLIC_URL ./src/index.html ./src/robots.txt ./src/sitemap.xml",
+    "build:dist": "cross-env-shell PUBLIC_URL=/ VERSION=$npm_package_version parcel build --public-url=$PUBLIC_URL --experimental-scope-hoisting --no-source-maps  ./src/index.html ./src/robots.txt ./src/sitemap.xml",
     "build": "cross-env npm run build:simple",
     "postbuild": "cross-env-shell react-snap",
     "prebuild:ci": "run-p lint clean:dist",
