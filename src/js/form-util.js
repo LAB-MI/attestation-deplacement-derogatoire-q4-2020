@@ -207,6 +207,17 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
     showSnackbar(snackbar, 6000)
   })
+
+  // Si on passe un motif en query string, on pré-remplit et on génère eautomatiquement le formulaire.
+  const motifs = ['travail', 'achats', 'sante', 'famille', 'handicap', 'sport_animaux', 'convocation', 'missions', 'enfants']
+  const urlParams = new URLSearchParams(window.location.search)
+  const motif = urlParams.get('motif')
+
+  if (motif && motifs.includes(motif)) {
+    $('#checkbox-' + motif).checked = true
+    $('#field-heuresortie').value = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+    document.getElementById('generate-btn').click()
+  }
 }
 
 export function prepareForm () {
