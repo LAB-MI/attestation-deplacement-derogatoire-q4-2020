@@ -7,6 +7,7 @@
 ```console
 git clone https://github.com/LAB-MI/attestation-deplacement-derogatoire-q4-2020.git
 cd attestation-deplacement-derogatoire-q4-2020
+export PUBLIC_URL=http://localhost:5000
 npm i
 npm start
 ```
