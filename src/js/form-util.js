@@ -9,6 +9,7 @@ import SecureLS from 'secure-ls'
 const secureLS = new SecureLS({ encodingType: 'aes' })
 const clearDataSnackbar = $('#snackbar-cleardata')
 const storeDataInput = $('#field-storedata')
+
 const conditions = {
   '#field-firstname': {
     length: 1,
@@ -77,11 +78,6 @@ function clearForm () {
   storeDataInput.checked = false
 }
 
-function setCurrentDate (releaseDateInput) {
-  const currentDate = new Date()
-  releaseDateInput.value = getFormattedDate(currentDate)
-}
-
 function showSnackbar (snackbarToShow, showDuration = 6000) {
   snackbarToShow.classList.remove('d-none')
   setTimeout(() => snackbarToShow.classList.add('show'), 100)
@@ -96,9 +92,12 @@ export function wantDataToBeStored () {
   return storeDataInput.checked
 }
 
-export function setReleaseDateTime (releaseDateInput) {
-  const loadedDate = new Date()
-  releaseDateInput.value = getFormattedDate(loadedDate)
+function setInputDate (releaseDateInput, date = new Date()) {
+  releaseDateInput.value = getFormattedDate(date)
+}
+
+function setInputHour (releaseHourInput, date = new Date()) {
+  releaseHourInput.value = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 }
 
 export function toAscii (string) {
@@ -133,7 +132,7 @@ export function getReasons (reasonInputs) {
   return reasons
 }
 
-export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput) {
+export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput, releaseHourInput) {
   const lsProfile = secureLS.get('profile')
 
   // Continue to store data if already stored
@@ -174,7 +173,8 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
   $('#cleardata').addEventListener('click', () => {
     clearSecureLS()
     clearForm()
-    setCurrentDate(releaseDateInput)
+    setInputDate(releaseDateInput)
+    setInputHour(releaseHourInput, new Date(Date.now() + 300_000))
     showSnackbar(clearDataSnackbar, 3000)
   })
   $('#field-storedata').addEventListener('click', () => {
@@ -216,6 +216,8 @@ export function prepareForm () {
   const reasonFieldset = $('#reason-fieldset')
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
-  setReleaseDateTime(releaseDateInput)
-  prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput)
+  const releaseHourInput = $('#field-heuresortie')
+  setInputDate(releaseDateInput)
+  setInputHour(releaseHourInput, new Date(Date.now() + 300_000))
+  prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput, releaseHourInput)
 }
