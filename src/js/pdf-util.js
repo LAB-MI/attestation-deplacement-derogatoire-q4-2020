@@ -2,15 +2,16 @@ import { generateQR } from './util'
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
 
 const ys = {
-  travail: 553,
-  achats_culturel_cultuel: 482,
-  sante: 434,
-  famille: 410,
-  handicap: 373,
-  sport_animaux: 349,
-  convocation: 276,
-  missions: 252,
-  enfants: 228,
+  travail: 575,
+  achats_culturel_cultuel: 512,
+  sante: 469,
+  famille: 438,
+  handicap: 408,
+  sport_animaux: 389,
+  convocation: 309,
+  missions: 279,
+  enfants: 260,
+  manifestation: 229,
 }
 
 export async function generatePdf (profile, reasons, pdfBase) {
@@ -70,15 +71,15 @@ export async function generatePdf (profile, reasons, pdfBase) {
     page1.drawText(text, { x, y, size, font })
   }
 
-  drawText(`${firstname} ${lastname}`, 92, 702)
-  drawText(birthday, 92, 684)
-  drawText(placeofbirth, 214, 684)
-  drawText(`${address} ${zipcode} ${city}`, 104, 665)
+  drawText(`${firstname} ${lastname}`, 95, 705)
+  drawText(birthday, 94, 689)
+  drawText(placeofbirth, 211, 689)
+  drawText(`${address} ${zipcode} ${city}`, 112, 674)
 
   reasons
     .split(', ')
     .forEach(reason => {
-      drawText('x', 47, ys[reason], 12)
+      drawText('x', 44, ys[reason], 12)
     })
 
   let locationSize = getIdealFontSize(font, profile.city, 83, 7, 11)
@@ -91,9 +92,9 @@ export async function generatePdf (profile, reasons, pdfBase) {
     locationSize = 7
   }
 
-  drawText(profile.city, 78, 76, locationSize)
-  drawText(`${profile.datesortie}`, 63, 58, 11)
-  drawText(`${profile.heuresortie}`, 227, 58, 11)
+  drawText(profile.city, 82, 106, locationSize)
+  drawText(`${profile.datesortie}`, 65, 92, 11)
+  drawText(`${profile.heuresortie}`, 239, 92, 11)
 
   // const shortCreationDate = `${creationDate.split('/')[0]}/${
   //   creationDate.split('/')[1]
@@ -114,10 +115,10 @@ export async function generatePdf (profile, reasons, pdfBase) {
   page1.drawText(qrTitle1 + '\n' + qrTitle2, { x: 440, y: 130, size: 6, font, lineHeight: 10, color: rgb(1, 1, 1) })
 
   page1.drawImage(qrImage, {
-    x: page1.getWidth() - 156,
-    y: 25,
-    width: 92,
-    height: 92,
+    x: page1.getWidth() - 168,
+    y: 30,
+    width: 120,
+    height: 120,
   })
 
   pdfDoc.addPage()
