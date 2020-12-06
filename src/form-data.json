@@ -136,6 +136,10 @@
         {
           "code": "enfants",
           "label": "Déplacements pour chercher les enfants à l’école et à l’occasion de leurs activités périscolaires."
+        },
+        {
+          "code": "manifestation",
+          "label": "Participation à des rassemblements, réunions ou activités sur la voie publique ou dans un lieu ouvert au public qui ne sont pas interdits en application de l'article 3."
         }
       ]
     }
