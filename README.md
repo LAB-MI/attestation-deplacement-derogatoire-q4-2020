@@ -27,7 +27,7 @@ npm run build:dev
 npx serve dist
 ```
 
-Et visiter http://localhost:5000
+Et visiter http://localhost:1234
 
 Le code à déployer sera le contenu du dossier `dist`
 
