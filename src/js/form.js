@@ -82,7 +82,7 @@ const createReasonField = (reasonData) => {
   const id = `checkbox-${reasonData.code}`
   const inputReasonAttrs = {
     className: 'form-check-input',
-    type: 'checkbox',
+    type: 'radio',
     id,
     name: 'field-reason',
     value: reasonData.code,
