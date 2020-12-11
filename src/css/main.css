@@ -276,6 +276,7 @@ input[type=number] {
   font-size: 0.50em;
   color: #ffffff;
   background-color: #000191;
+  isolation: isolate;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -299,6 +300,7 @@ input[type=number] {
   text-transform:uppercase ;
   color: #ffffff;
   flex-grow: 1;
+  isolation: isolate;
 }
 
 .note-title {
@@ -350,6 +352,7 @@ input[type=number] {
   color: white;
   background-color: #000191;
   border-radius: 0.5em;
+  isolation: isolate;
 }
 
 .btn-attestation:hover {
@@ -672,4 +675,55 @@ input[type=number] {
 
 .fieldset-error {
   border: 3px solid red;
+}
+
+.dark-toggle {
+  font-size: 0.95em;
+  z-index: 0;
+}
+
+/* Override default darkmode library colors */
+.darkmode--activated {
+  .dark-toggle {
+    color: #d9d9d9;
+  }
+
+  input, select, textarea, .form-control, .form-control:focus {
+    background: #202327;
+    color: #d9d9d9;
+    border: 1px solid white;
+  }
+
+  h2 {
+    color: #000;
+  }
+
+  .covid-title {
+    background: #2929ff;
+  }
+
+  footer {
+    isolation: isolate;
+  }
+
+  #cleardata {
+    background-color: #d9d9d9;
+    color: black;
+  }
+
+  .form-check-label {
+    color: #d9d9d9;
+  }
+
+  .validity {
+    color: #DDD;
+  }
+
+  .num-08 {
+    color: #A3A3FF;
+  }
+
+  .logo {
+    filter: invert(40%)
+  }
 }

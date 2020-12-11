@@ -19,6 +19,7 @@
     <meta property="og:url" content="https://media.interieur.gouv.fr{{ PUBLIC_URL || '/deplacement-covid-19' }}" />
     <meta property="og:site_name" content="Générateur d'attestation de déplacement dérogatoire  - COVID-19" />
     <script type='application/ld+json'>{"@context":"http://www.schema.org","@type":"GovernmentOrganization","name":"Générateur d'attestation de déplacement dérogatoire  - COVID-19","description":"Ce service officiel génère une version numérique de la déclaration de déplacement covid-19 à présenter aux forces de sécurité lors d’un contrôle.","address":{"@type":"PostalAddress","addressCountry":"France"}}</script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicons/favicon-32x32.png">
@@ -133,6 +134,12 @@
             <a href="https://www.gouvernement.fr/info-coronavirus" title="Information du gouvernement sur le Covid-19 - nouvelle page" target="_blank" class="footer-line footer-link">Informations du gouvernement sur le Covid-19</a>
             <div class="footer-line" >Plus d’infos au <a class="num-08" href="tel:0800130000" title="Numéro vert - appel gratuit depuis un poste fixe en France">0 800 130 000</a></div>
             <p class="footer-line" id="version"></p>
+            <label class="dark-toggle">
+              <div class="custom-control custom-switch dark-toggle">
+                <input type="checkbox" class="custom-control-input" id="dark-toggle-switch">
+                <label class="custom-control-label" for="dark-toggle-switch">Accessibilité: Activer le mode sombre</label>
+              </div>
+            </label>
         </div>
     </footer>
 
@@ -144,5 +151,16 @@
     </div>
 
     <script src="./js/main.js"></script>
+    <script>
+      const darkmode = new Darkmode();
+      if (darkmode.isActivated()) {
+          document.getElementById("dark-toggle-switch").checked = true;
+      } else {
+          document.getElementById("dark-toggle-switch").checked = false;
+      }
+      document.getElementById('dark-toggle-switch').onclick=function(){
+        darkmode.toggle()
+      }
+    </script>
 </body>
 </html>
